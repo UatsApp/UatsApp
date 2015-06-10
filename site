@@ -1,0 +1,27 @@
+<html>
+<body>
+
+
+<STYLE type="text/css">
+  H3 { text-align: center}
+</STYLE>
+
+
+<h3><form action="action_page.php">
+Username:<br>
+<input type="text" required>
+<br>
+Password:<br>
+<input type="password" required>
+</form>
+
+<a href="forgot_password.html">Do you forgot your password? </a>
+
+<br><br>
+<form action="action_page.php">
+<input type="submit" value="Sign in">
+<input type="submit" value="Sign up" formaction = "sign_up_page.html">
+</form></H3> 
+</form>
+</body>
+</html>
