@@ -10,10 +10,14 @@
 		3F1DD77C1B28A4320081FE34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD77B1B28A4320081FE34 /* AppDelegate.swift */; };
 		3F1DD77F1B28A4320081FE34 /* UatsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD77D1B28A4320081FE34 /* UatsApp.xcdatamodeld */; };
 		3F1DD7811B28A4320081FE34 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD7801B28A4320081FE34 /* ViewController.swift */; };
-		3F1DD7841B28A4320081FE34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7821B28A4320081FE34 /* Main.storyboard */; };
 		3F1DD7861B28A4320081FE34 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7851B28A4320081FE34 /* Images.xcassets */; };
 		3F1DD7891B28A4320081FE34 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7871B28A4320081FE34 /* LaunchScreen.xib */; };
 		3F1DD7951B28A4330081FE34 /* UatsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */; };
+		3FD49D3E1B28BCC80029218E /* enrollment_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */; };
+		3FD49D401B28C9FE0029218E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D3F1B28C9FE0029218E /* LoginVC.swift */; };
+		3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D411B28CBE10029218E /* SignupVC.swift */; };
+		3FD49D441B28D4CA0029218E /* UatsAppVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D431B28D4CA0029218E /* UatsAppVC.swift */; };
+		3FD49D471B28D82D0029218E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD49D451B28D82D0029218E /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,12 +36,16 @@
 		3F1DD77B1B28A4320081FE34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F1DD77E1B28A4320081FE34 /* UatsApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UatsApp.xcdatamodel; sourceTree = "<group>"; };
 		3F1DD7801B28A4320081FE34 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3F1DD7831B28A4320081FE34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3F1DD7851B28A4320081FE34 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3F1DD7881B28A4320081FE34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3F1DD78E1B28A4330081FE34 /* UatsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UatsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1DD7931B28A4330081FE34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UatsAppTests.swift; sourceTree = "<group>"; };
+		3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = enrollment_background.jpg; sourceTree = "<group>"; };
+		3FD49D3F1B28C9FE0029218E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		3FD49D411B28CBE10029218E /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		3FD49D431B28D4CA0029218E /* UatsAppVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UatsAppVC.swift; sourceTree = "<group>"; };
+		3FD49D461B28D82D0029218E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +87,17 @@
 		3F1DD7781B28A4320081FE34 /* UatsApp */ = {
 			isa = PBXGroup;
 			children = (
+				3FD49D3C1B28BC2A0029218E /* Resources */,
 				3F1DD77B1B28A4320081FE34 /* AppDelegate.swift */,
 				3F1DD7801B28A4320081FE34 /* ViewController.swift */,
-				3F1DD7821B28A4320081FE34 /* Main.storyboard */,
 				3F1DD7851B28A4320081FE34 /* Images.xcassets */,
+				3FD49D451B28D82D0029218E /* Main.storyboard */,
 				3F1DD7871B28A4320081FE34 /* LaunchScreen.xib */,
 				3F1DD77D1B28A4320081FE34 /* UatsApp.xcdatamodeld */,
 				3F1DD7791B28A4320081FE34 /* Supporting Files */,
+				3FD49D3F1B28C9FE0029218E /* LoginVC.swift */,
+				3FD49D411B28CBE10029218E /* SignupVC.swift */,
+				3FD49D431B28D4CA0029218E /* UatsAppVC.swift */,
 			);
 			path = UatsApp;
 			sourceTree = "<group>";
@@ -113,6 +125,14 @@
 				3F1DD7931B28A4330081FE34 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3FD49D3C1B28BC2A0029218E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,9 +215,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F1DD7841B28A4320081FE34 /* Main.storyboard in Resources */,
 				3F1DD7891B28A4320081FE34 /* LaunchScreen.xib in Resources */,
 				3F1DD7861B28A4320081FE34 /* Images.xcassets in Resources */,
+				3FD49D3E1B28BCC80029218E /* enrollment_background.jpg in Resources */,
+				3FD49D471B28D82D0029218E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +237,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F1DD7811B28A4320081FE34 /* ViewController.swift in Sources */,
+				3FD49D441B28D4CA0029218E /* UatsAppVC.swift in Sources */,
+				3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */,
 				3F1DD77F1B28A4320081FE34 /* UatsApp.xcdatamodeld in Sources */,
+				3FD49D401B28C9FE0029218E /* LoginVC.swift in Sources */,
 				3F1DD77C1B28A4320081FE34 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,20 +264,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3F1DD7821B28A4320081FE34 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3F1DD7831B28A4320081FE34 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3F1DD7871B28A4320081FE34 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				3F1DD7881B28A4320081FE34 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		3FD49D451B28D82D0029218E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD49D461B28D82D0029218E /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -413,6 +437,7 @@
 				3F1DD79A1B28A4330081FE34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F1DD79B1B28A4330081FE34 /* Build configuration list for PBXNativeTarget "UatsAppTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +446,7 @@
 				3F1DD79D1B28A4330081FE34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
