@@ -15,20 +15,23 @@
      
     <div id="chatbox"></div>
      
-    <form name="message"  method = "post">
-
         <input name="usermsg" type="text" id="usermsg" size="63" />
-
-        <input name="submitmsg" type="submit"  id="submitmsg" value="Send Muie" /> 
-
-    </form>
+    
 </div>
 
-</script>
-<?php 
-$message = $_POST['usermsg'];
-echo $massage;
-?>
+<script src=http://cdn.pubnub.com/pubnub.min.js></script>
+<script>(function(){
+var box = PUBNUB.$('chatbox'), input = PUBNUB.$('usermsg'), channel = 'chat';
+PUBNUB.subscribe({
+    channel  : channel,
+    callback : function(text) { box.innerHTML = (''+text).replace( /[<>]/g, '' ) + '<br>' + box.innerHTML }
+});
+PUBNUB.bind( 'keyup', input, function(e) {
+    (e.keyCode || e.charCode) === 13 && PUBNUB.publish({
+        channel : channel, message : input.value, x : (input.value='')
+    })
+} )
+})()</script>
 
 </body>
 </html>
