@@ -26,7 +26,7 @@ class SignupVC: UIViewController {
     }
     
 
-    @IBAction func signupTapped(sender: AnyObject) {
+    @IBAction func singupTapped(sender: UIButton){
         var username:NSString = txtUsername.text as NSString
         var password:NSString = txtPassword.text as NSString
         var comfirm_password:NSString = txtConfrimPassword.text as NSString
@@ -50,7 +50,7 @@ class SignupVC: UIViewController {
             var post:NSString = "username=\(username)&password=\(password)&c_password=\(comfirm_password)"
             NSLog("Post data: %@",post);
             
-            var url:NSURL = NSURL(string: "https://pulamea.com")!
+            var url:NSURL = NSURL(string: "http://uatsapp.16mb.com/register/jsonsignup.php")!
             var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
             var postLength:NSString = String(postData.length)
             
@@ -74,7 +74,7 @@ class SignupVC: UIViewController {
                     let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
                     let success:NSInteger = jsonData.valueForKey("success") as! NSInteger
                     
-                    NSLog("Success %@", success);
+                    NSLog("Success %ld", success);
                     
                     if(success == 1){
                         NSLog("Sign Up Success");

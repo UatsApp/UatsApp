@@ -35,6 +35,13 @@ class UatsAppVC: UIViewController {
         }
     }
     
+    @IBAction func logoutTapped(sender: UIButton) {
+        let appDomain = NSBundle.mainBundle().bundleIdentifier
+        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+        self.performSegueWithIdentifier("goto_login", sender: self)
+    }
+    
+    
 
     /*
     // MARK: - Navigation
