@@ -3,7 +3,7 @@
 
 <head>
 <title>UatsApp</title>
-<link type="text/css" rel="stylesheet" href="style.css" />
+<link type="text/css" rel="stylesheet" href="stylesheets/style.css" />
 </head>
  
 <div id="wrapper">
