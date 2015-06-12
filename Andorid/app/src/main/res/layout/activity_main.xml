@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:background="@drawable/enrollment_background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login"
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="91dp"
+        android:layout_alignParentEnd="true"
+        android:height="50dp"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:textColor="#FFFFFF"
+        android:hint="Type your name here"
+        android:textColorHint="#FFFFFF"
+        android:gravity="center"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:autoText="false"
+        android:editable="true"
+        android:inputType="text" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword|text"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:hint="Your password"
+        android:textColorHint="#FFFFFF"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:editable="true"
+        android:password="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign In"
+        android:id="@+id/button"
+        android:layout_marginTop="53dp"
+        android:textColor="#ffffffff"
+        android:gravity="center"
+        android:clickable="true"
+        android:background="#ff1f81ff"
+        android:layout_below="@+id/editText2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Don&apos;t have an account? Sign up!"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/button"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="33dp"
+        android:layout_alignEnd="@+id/editText2"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:textColor="#FF1F81FF"
+        android:clickable="true" />
+
+</RelativeLayout>
