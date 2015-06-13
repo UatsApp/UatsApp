@@ -12,11 +12,15 @@ class UatsAppVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.logout.layer.cornerRadius = 5.0
+        self.logout.layer.borderColor = UIColor.whiteColor().CGColor
+        self.logout.layer.borderWidth = 0.2
 
         // Do any additional setup after loading the view.
     }
     @IBOutlet weak var txtusername: UILabel!
 
+    @IBOutlet weak var logout: UIButton!
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

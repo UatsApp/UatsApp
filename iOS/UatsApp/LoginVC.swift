@@ -16,6 +16,10 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.signin.layer.cornerRadius = 15.0
+        self.signin.layer.borderColor = UIColor.whiteColor().CGColor
+        self.signin.layer.borderWidth = 0.2
 
         // Do any additional setup after loading the view.
     }
@@ -24,6 +28,7 @@ class LoginVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBOutlet weak var signin: UIButton!
     
     @IBAction func signinTapped(sender: UIButton) {
         var username:NSString = txtUsername.text
@@ -87,7 +92,12 @@ class LoginVC: UIViewController {
                     if(success == 1)
                     {
                         NSLog("Login SUCCESS");
-                        
+                        var alertView:UIAlertView = UIAlertView()
+                        alertView.title = "Success!"
+                        alertView.message = "You are logged in!"
+                        alertView.delegate = self
+                        alertView.addButtonWithTitle("OK")
+                        alertView.show()
                         var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                         prefs.setObject(username, forKey: "USERNAME")
                         prefs.setInteger(1, forKey: "ISLOGGEDIN")

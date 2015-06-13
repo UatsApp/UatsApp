@@ -13,10 +13,13 @@ class SignupVC: UIViewController {
     @IBOutlet weak var txtUsername: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtConfrimPassword: UITextField!
+    @IBOutlet weak var txtEmail: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.signup.layer.cornerRadius = 5.0
+        self.signup.layer.borderColor = UIColor.whiteColor().CGColor
+        self.signup.layer.borderWidth = 0.2
         // Do any additional setup after loading the view.
     }
 
@@ -25,11 +28,15 @@ class SignupVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    @IBOutlet weak var signup: UIButton!
+
 
     @IBAction func singupTapped(sender: UIButton){
         var username:NSString = txtUsername.text as NSString
         var password:NSString = txtPassword.text as NSString
         var comfirm_password:NSString = txtConfrimPassword.text as NSString
+        var email:NSString = txtEmail.text as NSString
         
         if(username.isEqualToString("") || password.isEqualToString(""))
         {
@@ -47,7 +54,7 @@ class SignupVC: UIViewController {
             alertView.addButtonWithTitle("OK")
             alertView.show()
         } else {
-            var post:NSString = "username=\(username)&password=\(password)&c_password=\(comfirm_password)"
+            var post:NSString = "username=\(username)&password=\(password)&c_password=\(comfirm_password)&email=\(email)"
             NSLog("Post data: %@",post);
             
             var url:NSURL = NSURL(string: "http://uatsapp.16mb.com/register/jsonsignup.php")!
@@ -104,7 +111,7 @@ class SignupVC: UIViewController {
                 }
             }else{
                 var alertView:UIAlertView = UIAlertView()
-                alertView.title = "Sign in Failed!"
+                alertView.title = "Sign Up Failed!"
                 alertView.message = "Connection Failure"
                 if let error = responseError{
                     alertView.message = (error.localizedDescription)
@@ -134,3 +141,4 @@ class SignupVC: UIViewController {
     */
 
 }
+
