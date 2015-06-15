@@ -32,9 +32,10 @@ if($_POST) {
                 error_log("Connect failed: " . mysqli_connect_error());
                 echo '{"success":0,"error_message":"' . mysqli_connect_error() . '"}';
             } else {
-                $stmt = $mysqli->prepare("INSERT INTO users (username, password , email) VALUES (?, ?, ?)");
+                $stmt = $mysqli->prepare("INSERT INTO users (username, password, email, activation) VALUES (?, ?, ?, ?)");
                 $password = md5($password);
-                $stmt->bind_param('sss', $username, $password , $email);
+                $activation=md5($email.time());
+                $stmt->bind_param('ssss', $username, $password, $email, $activation);
  
                 /* execute prepared statement */
                 $stmt->execute();
@@ -51,7 +52,7 @@ if($_POST) {
                 error_log("Success: $success");
  
                 if ($success > 0) {
-                    error_log("User '$username' created.");
+                    error_log("User '$username' created. Please check your inbox for acctivation.");           
                     echo '{"success":1}';
                 } else {
                     echo '{"success":0,"error_message":"Username Exist."}';
