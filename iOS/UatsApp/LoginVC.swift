@@ -48,7 +48,9 @@ class LoginVC: UIViewController {
             
             NSLog("PostData: %@",post);
             
-            var url:NSURL = NSURL(string: "http://uatsapp.16mb.com/register/jsonlogin2.php")!
+           // var url:NSURL = NSURL(string: "http://uatsapp.16mb.com/register/jsonlogin2.php")!
+            var url:NSURL = NSURL(string: "http://uatsapp.tk/register/jsonlogin2.php")!
+            
             
             var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
             
@@ -102,8 +104,9 @@ class LoginVC: UIViewController {
                         prefs.setObject(username, forKey: "USERNAME")
                         prefs.setInteger(1, forKey: "ISLOGGEDIN")
                         prefs.synchronize()
+                        self.performSegueWithIdentifier("goApp", sender: self)
                         
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                      //  self.dismissViewControllerAnimated(true, completion: nil)
                     } else {
                         var error_msg:NSString
                         

@@ -21,6 +21,8 @@ class UatsAppVC: UIViewController {
     @IBOutlet weak var txtusername: UILabel!
 
     @IBOutlet weak var logout: UIButton!
+    @IBOutlet weak var `continue`: UIButton!
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -45,6 +47,9 @@ class UatsAppVC: UIViewController {
         self.performSegueWithIdentifier("goto_login", sender: self)
     }
     
+    @IBAction func continueTapped(sender: UIButton) {
+        self.performSegueWithIdentifier("goInapp", sender: self)
+    }
     
 
     /*

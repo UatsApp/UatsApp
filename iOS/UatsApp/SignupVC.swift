@@ -57,7 +57,7 @@ class SignupVC: UIViewController {
             var post:NSString = "username=\(username)&password=\(password)&c_password=\(comfirm_password)&email=\(email)"
             NSLog("Post data: %@",post);
             
-            var url:NSURL = NSURL(string: "http://uatsapp.16mb.com/register/jsonsignup.php")!
+            var url:NSURL = NSURL(string: "http://uatsapp.tk/register/jsonsignup.php")!
             var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
             var postLength:NSString = String(postData.length)
             
