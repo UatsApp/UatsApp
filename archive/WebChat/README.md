@@ -1,2 +1,0 @@
-# UatsApp
-WhatsApp clone
