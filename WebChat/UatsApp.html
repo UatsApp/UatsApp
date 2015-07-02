@@ -1,13 +1,3 @@
-<?php 
-session_start();
-	if(isset($_SESSION['user'])){
-		echo "user session set";
-	}else{
-		echo "user session NOT set";
-		http_redirect("http://uatsapp.github.io/UatsApp/WebChat/index.php", false, HTTP_REDIRECT_PERM);
-	}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
