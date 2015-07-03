@@ -34,7 +34,7 @@ class UatsAppVC: UIViewController {
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
         
         if(isLoggedin != 1){
-            self.performSegueWithIdentifier("goto_login", sender: self)
+            self.performSegueWithIdentifier("goApp", sender: self)
         }
         else{
             self.txtusername.text = prefs.valueForKey("USERNAME") as? String

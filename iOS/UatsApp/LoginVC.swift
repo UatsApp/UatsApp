@@ -20,6 +20,14 @@ class LoginVC: UIViewController {
         self.signin.layer.cornerRadius = 15.0
         self.signin.layer.borderColor = UIColor.whiteColor().CGColor
         self.signin.layer.borderWidth = 0.2
+        
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
+        
+        if(isLoggedin != 1){
+            self.performSegueWithIdentifier("goApp", sender: self)//////////DE PUS LOGOUT IN APP SI SCBHIMBAT '!=' IN '==';////////////////
+            
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -28,6 +36,19 @@ class LoginVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
+//        
+//        if(isLoggedin == 1){
+//            self.performSegueWithIdentifier("goApp", sender: self)
+//        }
+    }
+    
+    
     @IBOutlet weak var signin: UIButton!
     
     @IBAction func signinTapped(sender: UIButton) {
@@ -49,7 +70,7 @@ class LoginVC: UIViewController {
             NSLog("PostData: %@",post);
             
            // var url:NSURL = NSURL(string: "http://uatsapp.16mb.com/register/jsonlogin2.php")!
-            var url:NSURL = NSURL(string: "http://uatsapp.tk/register/jsonlogin2.php")!
+            var url:NSURL = NSURL(string: "http://uatsapp.tk/register/jsonlogin1.php")!
             
             
             var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
@@ -105,7 +126,7 @@ class LoginVC: UIViewController {
                         prefs.setInteger(1, forKey: "ISLOGGEDIN")
                         prefs.synchronize()
                         self.performSegueWithIdentifier("goApp", sender: self)
-                        
+                    
                       //  self.dismissViewControllerAnimated(true, completion: nil)
                     } else {
                         var error_msg:NSString

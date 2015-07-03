@@ -9,7 +9,7 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="UatsAppVC" customModule="UatsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="enrollment_background.jpg" id="vYt-mk-iSe">
@@ -52,7 +52,6 @@
                                 </state>
                                 <connections>
                                     <action selector="continueTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="VlA-AZ-949"/>
-                                    <segue destination="NEy-BI-WFf" kind="modal" identifier="goInapp" modalTransitionStyle="crossDissolve" id="8wd-6A-Uz8"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -63,14 +62,13 @@
                         <outlet property="continue" destination="T0O-xK-m53" id="Fd4-wk-GNl"/>
                         <outlet property="logout" destination="a8s-hE-eMO" id="OAe-aZ-dbb"/>
                         <outlet property="txtusername" destination="sxL-XY-Acp" id="rAd-Ro-UJ5"/>
-                        <segue destination="C71-eD-UqQ" kind="modal" identifier="goto_login" id="9Pt-3g-XQE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="190.5" y="129.5"/>
+            <point key="canvasLocation" x="1220" y="-87"/>
         </scene>
-        <!--View Controller-->
+        <!--UatsApp-->
         <scene sceneID="Vts-Ff-4Bg">
             <objects>
                 <viewController id="lI0-ya-bhK" sceneMemberID="viewController">
@@ -86,13 +84,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="yvH-qo-jJc"/>
+                    <navigationItem key="navigationItem" title="UatsApp" id="yvH-qo-jJc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uHO-jK-42s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="764.5" y="1022.5"/>
         </scene>
-        <!--LoginVC-->
+        <!--UatsApp-->
         <scene sceneID="f1P-yz-shA">
             <objects>
                 <viewController id="C71-eD-UqQ" customClass="LoginVC" customModule="UatsApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -121,7 +119,6 @@
                                 </state>
                                 <connections>
                                     <action selector="signinTapped:" destination="C71-eD-UqQ" eventType="touchUpInside" id="898-FR-Icz"/>
-                                    <segue destination="NEy-BI-WFf" kind="modal" identifier="goApp" id="sEY-mh-qlE"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PASSWORD" minimumFontSize="17" id="WR5-Yk-rQs">
@@ -151,10 +148,12 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="UatsApp" id="6K1-c6-8zO"/>
                     <connections>
                         <outlet property="signin" destination="28U-Fx-bqN" id="S8v-AM-P4Y"/>
                         <outlet property="txtPassword" destination="WR5-Yk-rQs" id="B00-yw-gDQ"/>
                         <outlet property="txtUsername" destination="gLz-u8-5U3" id="2z1-fo-FCK"/>
+                        <segue destination="NEy-BI-WFf" kind="modal" identifier="goApp" modalTransitionStyle="crossDissolve" id="DrL-8n-ehD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2B-fG-26b" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -239,7 +238,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L3g-tg-bkx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1601.5" y="1339.5"/>
+            <point key="canvasLocation" x="1493.5" y="1022.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vEq-zx-8hc">
@@ -254,12 +253,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="XNW-RJ-zJL"/>
+                        <segue destination="C71-eD-UqQ" kind="relationship" relationship="rootViewController" id="Ocb-iI-cdH"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggo-12-mZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-332.5" y="129.5"/>
+            <point key="canvasLocation" x="75.5" y="129.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="R0n-PN-FVB">
@@ -292,7 +291,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="8wd-6A-Uz8"/>
-    </inferredMetricsTieBreakers>
 </document>

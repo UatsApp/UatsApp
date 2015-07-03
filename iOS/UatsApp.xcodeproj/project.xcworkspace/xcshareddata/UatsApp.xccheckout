@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>238D58AE-0BDD-44DF-87B6-61AAB443B786</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>UatsApp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>0812C1AC660AB7F9EDC355EF5600E8E11AE727E7</key>
 		<string>https://github.com/UatsApp/UatsApp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>iOS/UatsApp.xcodeproj/project.xcworkspace</string>
+	<string>iOS/UatsApp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0812C1AC660AB7F9EDC355EF5600E8E11AE727E7</key>

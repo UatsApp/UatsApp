@@ -28,6 +28,18 @@ class SignupVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func isValidEmail(testStr:String) -> Bool {
+        
+        println("validate emilId: \(testStr)")
+        
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        let range = testStr.rangeOfString(emailRegEx, options:.RegularExpressionSearch)
+        let result = range != nil ? true : false
+        return !result
+
+        
+    }
+    
     
     @IBOutlet weak var signup: UIButton!
 
@@ -53,7 +65,14 @@ class SignupVC: UIViewController {
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
-        } else {
+        }else if (isValidEmail(txtEmail.text)){
+            var alertView:UIAlertView = UIAlertView()
+            alertView.title = "Sign up Failed!"
+            alertView.message = "Invalid email!"
+            alertView.delegate = self
+            alertView.addButtonWithTitle("OK")
+            alertView.show()
+        }else {
             var post:NSString = "username=\(username)&password=\(password)&c_password=\(comfirm_password)&email=\(email)"
             NSLog("Post data: %@",post);
             
