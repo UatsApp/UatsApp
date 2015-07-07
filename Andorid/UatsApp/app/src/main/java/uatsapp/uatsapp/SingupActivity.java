@@ -1,11 +1,8 @@
 package uatsapp.uatsapp;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,8 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.reflect.TypeToken;
 
-public class Activity2 extends Activity {
+import uatsapp.uatsapp.data.data.IBaseCallback;
+import uatsapp.uatsapp.data.data.RegisterResponse;
+
+
+public class SingupActivity extends Activity {
     TextView tv2;
     TextView tv;
     EditText et;
@@ -41,7 +43,7 @@ public class Activity2 extends Activity {
         tv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent launchactivity = new Intent(Activity2.this,MainActivity.class);
+                Intent launchactivity = new Intent(SingupActivity.this,LoginActivity.class);
                 startActivity(launchactivity);
                 setResult(Activity.RESULT_OK);
                 finish();
@@ -75,7 +77,33 @@ public class Activity2 extends Activity {
         else if(!emailcheck(e_mail))
         error="Invalid Email";
         if(!(error==null))
-        DialogHelper.showAlertDialog(Activity2.this, error);
+        DialogHelper.showAlertDialog(SingupActivity.this, error);
+        else
+        {
+            ApiConnection.Register(new IBaseCallback<RegisterResponse>() {
+                @Override
+                public void onResult(final RegisterResponse result) {
+                    if(result.isSuccess()){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SingupActivity.this, "Your account has been successfully registered", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
+
+                    }
+                    else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                DialogHelper.showAlertDialog(SingupActivity.this, result.getError_message());
+                            }
+                        });
+                    }
+                }
+            },id,pass,c_pass,e_mail,new RegisterResponse(),new TypeToken<RegisterResponse>(){}.getType());
+        }
     }
 
     public boolean emailcheck(String s){

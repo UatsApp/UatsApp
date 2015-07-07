@@ -1,10 +1,8 @@
 package uatsapp.uatsapp;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
 
 /**
  * Created by Sergiu on 7/2/2015.
@@ -25,6 +23,28 @@ public class DialogHelper {
         AlertDialog dialog = builder.create();
         dialog.setMessage(error);
         dialog.show();
+    }
+
+    /**
+     * Created by Sergiu on 7/6/2015.
+     */
+    public static class RegisterData {
+        protected String username;
+        protected String password;
+        protected String c_password;
+        protected String email;
+
+        public RegisterData(String username, String password, String c_password, String email){
+            this.username=username;
+            this.password=password;
+            this.c_password=c_password;
+            this.email=email;
+        }
+        public String getUsername(){return username;}
+        public String getPassword(){return password;}
+        public String getC_password(){return c_password;}
+        public String getEmail(){return email;}
+
     }
 }
 

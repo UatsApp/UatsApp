@@ -91,7 +91,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Already have an account? Log in now."
+        android:text="Already have an account? Log in now!"
         android:id="@+id/textView3"
         android:layout_gravity="center_horizontal"
         android:layout_below="@+id/button2"

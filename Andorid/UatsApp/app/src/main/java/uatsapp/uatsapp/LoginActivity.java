@@ -2,20 +2,22 @@ package uatsapp.uatsapp;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.reflect.TypeToken;
 
-public class MainActivity extends Activity {
+import uatsapp.uatsapp.data.data.IBaseCallback;
+import uatsapp.uatsapp.data.data.RegisterResponse;
+
+
+public class LoginActivity extends Activity {
     EditText et;
     EditText et2;
     TextView tv;
@@ -30,7 +32,7 @@ public class MainActivity extends Activity {
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent launchactivity = new Intent(MainActivity.this, Activity2.class);
+                Intent launchactivity = new Intent(LoginActivity.this, SingupActivity.class);
                 startActivity(launchactivity);}
         });
         btn =(Button)findViewById(R.id.button);
@@ -47,7 +49,32 @@ public class MainActivity extends Activity {
                 if(password.matches(""))
                     error = "Please enter your password";
                 if(!(error==null))
-                DialogHelper.showAlertDialog(MainActivity.this, error);
+                DialogHelper.showAlertDialog(LoginActivity.this, error);
+                else
+                {
+                    ApiConnection.Login(new IBaseCallback<RegisterResponse>() {
+                        @Override
+                        public void onResult(final RegisterResponse result) {
+                            if (result.isSuccess()) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(LoginActivity.this, "You have logged in successfully", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+
+                            } else {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        DialogHelper.showAlertDialog(LoginActivity.this, result.getError_message());
+                                    }
+                                });
+                            }
+                        }
+                    }, username, password, new RegisterResponse(), new TypeToken<RegisterResponse>() {
+                    }.getType());
+                }
             }
         });
 
