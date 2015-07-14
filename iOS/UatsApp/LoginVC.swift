@@ -70,7 +70,7 @@ class LoginVC: UIViewController {
             NSLog("PostData: %@",post);
             
            // var url:NSURL = NSURL(string: "http://uatsapp.16mb.com/register/jsonlogin2.php")!
-            var url:NSURL = NSURL(string: "http://uatsapp.tk/register/jsonlogin1.php")!
+            var url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonlogin1.php")!
             
             
             var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!

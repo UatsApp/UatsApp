@@ -35,7 +35,7 @@ class SignupVC: UIViewController {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
         let range = testStr.rangeOfString(emailRegEx, options:.RegularExpressionSearch)
         let result = range != nil ? true : false
-        return !result
+        return  !result
 
         
     }
@@ -76,7 +76,7 @@ class SignupVC: UIViewController {
             var post:NSString = "username=\(username)&password=\(password)&c_password=\(comfirm_password)&email=\(email)"
             NSLog("Post data: %@",post);
             
-            var url:NSURL = NSURL(string: "http://uatsapp.tk/register/jsonsignup.php")!
+            var url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonsignup.php")!
             var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
             var postLength:NSString = String(postData.length)
             
@@ -104,6 +104,12 @@ class SignupVC: UIViewController {
                     
                     if(success == 1){
                         NSLog("Sign Up Success");
+                        var alertView:UIAlertView = UIAlertView()
+                        alertView.title = "Success"
+                        alertView.message = "Sign Up Success!"
+                        alertView.delegate = self
+                        alertView.addButtonWithTitle("OK")
+                        alertView.show()
                         self.dismissViewControllerAnimated(true, completion: nil)
                     }else{
                         var error_msg:NSString
