@@ -229,34 +229,87 @@
             </objects>
             <point key="canvasLocation" x="120.5" y="188.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Users ListVC-->
         <scene sceneID="95H-jp-Fcn">
             <objects>
-                <viewController id="d40-eS-E4c" sceneMemberID="viewController">
+                <viewController id="d40-eS-E4c" customClass="UsersListVC" customModule="UatsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U4C-Yp-ItY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="y4b-NE-FxH">
-                                <rect key="frame" x="-5" y="0.0" width="375" height="667"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="48" sectionHeaderHeight="22" sectionFooterHeight="22" id="y4b-NE-FxH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell_text" textLabel="JoR-g2-Dvd" rowHeight="48" style="IBUITableViewCellStyleDefault" id="tfq-nz-KUs">
+                                        <rect key="frame" x="0.0" y="22" width="375" height="48"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tfq-nz-KUs" id="xLI-M3-RJO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JoR-g2-Dvd">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="d40-eS-E4c" id="01Q-8A-BDb"/>
+                                    <outlet property="delegate" destination="d40-eS-E4c" id="hB5-sM-Y98"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="rVs-On-6Po"/>
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="rVs-On-6Po"/>
+                    <connections>
+                        <outlet property="tableView" destination="y4b-NE-FxH" id="cNH-AG-SwS"/>
+                        <segue destination="dUA-Cd-XAr" kind="push" identifier="call" id="xzk-90-GvR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3z-nE-Ovq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="120.5" y="2037.5"/>
+            <point key="canvasLocation" x="-38.5" y="2008.5"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="JTK-4t-eTa">
+            <objects>
+                <viewController id="dUA-Cd-XAr" customClass="ChatViewController" customModule="UatsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QDZ-LM-KxD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Muie" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ecc-hR-AZM">
+                                <rect key="frame" x="46" y="34" width="283" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VAp-WS-VAM"/>
+                    <connections>
+                        <outlet property="userLabel" destination="ecc-hR-AZM" id="Ccs-mB-Yfv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HtU-Xt-FIT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="492.5" y="2030.5"/>
         </scene>
         <!--Item-->
         <scene sceneID="a0f-f0-bT7">
             <objects>
                 <viewController id="SRi-Eb-x4d" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nDW-33-vX9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -264,7 +317,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vog-is-ndZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="597.5" y="2037.5"/>
+            <point key="canvasLocation" x="1032.5" y="2045.5"/>
         </scene>
         <!--Uats AppVC-->
         <scene sceneID="6QG-Lk-60h">
@@ -319,7 +372,7 @@
                     <navigationItem key="navigationItem" id="ICd-ca-hA4"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0MI-w1-TDh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0MI-w1-TDh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
