@@ -11,17 +11,47 @@ import Alamofire
 
 class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
     
+    var usersList:[Users] = []
+    
     @IBOutlet var tableView: UITableView!
-    
+  
     let cellIdentifier = "cell_text"
-    let someUsers = ["Paul", "Cata", "Boici"]
+    //let someUsers = ["Paul", "Cata", "Boici"]
     
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-
+        self.getUsers()
         // Do any additional setup after loading the view.
+    }
+    
+    func getUsers(){
+        Alamofire.request(.GET, "http://uatsapp.tk/accounts/get_users.php")
+            .responseJSON { _, _, JSON, _ in
+                if let jsonResult = JSON as? Array<Dictionary<String,String>>{
+                    var i = 0
+                    for (i = 0; i < jsonResult.count; i++)
+                    {
+                        let username = jsonResult[i]["username"]
+                        let email = jsonResult[i]["email"]
+                        let id = jsonResult[i]["id"]
+                        
+                        var currentUser = Users()
+                        currentUser.username = username!
+                        currentUser.email = email!
+                        currentUser.user_id = id!.toInt()!
+                        self.usersList.append(currentUser)
+                        println(username)
+                        
+                    }
+                    self.tableView.reloadData()
+                    
+                }
+                println(JSON)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,19 +64,21 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return someUsers.count
+        return usersList.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         let row = indexPath.row
-        cell.textLabel?.text = someUsers[row]
+        let urr = usersList.map({$0.username})
+        cell.textLabel?.text = urr[row]
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let row = indexPath.row
-        println(someUsers[row])
-        performSegueWithIdentifier("call", sender: someUsers[row])
+        println(usersList[row])
+        let urr = usersList.map({$0.username})
+        performSegueWithIdentifier("call", sender: urr[row])
     }
     
     

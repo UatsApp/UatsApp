@@ -18,6 +18,7 @@
 		3F7DE55A1B55884C005954FC /* UatsAppVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE5591B55884C005954FC /* UatsAppVC.swift */; };
 		3F7DE55E1B56B8DF005954FC /* UsersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE55D1B56B8DF005954FC /* UsersListVC.swift */; };
 		3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE55F1B56C518005954FC /* ChatViewController.swift */; };
+		3F7DE5631B57BFE2005954FC /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE5621B57BFE2005954FC /* Users.swift */; };
 		3FD49D3E1B28BCC80029218E /* enrollment_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */; };
 		3FD49D401B28C9FE0029218E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D3F1B28C9FE0029218E /* LoginVC.swift */; };
 		3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D411B28CBE10029218E /* SignupVC.swift */; };
@@ -52,6 +53,7 @@
 		3F7DE5591B55884C005954FC /* UatsAppVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UatsAppVC.swift; sourceTree = SOURCE_ROOT; };
 		3F7DE55D1B56B8DF005954FC /* UsersListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersListVC.swift; sourceTree = "<group>"; };
 		3F7DE55F1B56C518005954FC /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		3F7DE5621B57BFE2005954FC /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = enrollment_background.jpg; sourceTree = "<group>"; };
 		3FD49D3F1B28C9FE0029218E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		3FD49D411B28CBE10029218E /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 		3F1DD7781B28A4320081FE34 /* UatsApp */ = {
 			isa = PBXGroup;
 			children = (
+				3F7DE5611B57BFC1005954FC /* Data */,
 				3F7DE5521B5580DB005954FC /* Res */,
 				3FD49D3C1B28BC2A0029218E /* Resources */,
 				3F1DD77B1B28A4320081FE34 /* AppDelegate.swift */,
@@ -153,6 +156,14 @@
 			);
 			name = Res;
 			path = ../UatsApp.xcodeproj;
+			sourceTree = "<group>";
+		};
+		3F7DE5611B57BFC1005954FC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3F7DE5621B57BFE2005954FC /* Users.swift */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 		3FD49D3C1B28BC2A0029218E /* Resources */ = {
@@ -335,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F1DD7811B28A4320081FE34 /* ViewController.swift in Sources */,
+				3F7DE5631B57BFE2005954FC /* Users.swift in Sources */,
 				3F7DE55A1B55884C005954FC /* UatsAppVC.swift in Sources */,
 				3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */,
 				3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */,
