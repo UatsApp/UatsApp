@@ -65,12 +65,14 @@ class LoginVC: UIViewController {
             alertView.show()
         } else {
             
-            var post:NSString = "username=\(username)&password=\(password)"
+            //var post:NSString = "username=\(username)&password=\(password)"
+           var post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\"}"
             
             NSLog("PostData: %@",post);
             
            // var url:NSURL = NSURL(string: "http://uatsapp.16mb.com/register/jsonlogin2.php")!
-            var url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonlogin1.php")!
+           // var url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonlogin1.php")!
+            var url:NSURL = NSURL(string: "http://uatsapp.tk/UatsAppWebDEV/process_user.php")!
             
             
             var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
@@ -106,13 +108,14 @@ class LoginVC: UIViewController {
                     let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as! NSDictionary
                     
                     
-                    let success:NSInteger = jsonData.valueForKey("success") as! NSInteger
+                    let status:NSInteger = jsonData.valueForKey("status") as! NSInteger
+                    let user_id:NSInteger = jsonData.valueForKey("user_id") as! NSInteger
                     
                     //[jsonData[@"success"] integerValue];
                     
-                    NSLog("Success: %ld", success);
+                    NSLog("Success: %ld", status);
                     
-                    if(success == 1)
+                    if(status == 1)
                     {
                         NSLog("Login SUCCESS");
                         var alertView:UIAlertView = UIAlertView()
@@ -131,8 +134,8 @@ class LoginVC: UIViewController {
                     } else {
                         var error_msg:NSString
                         
-                        if jsonData["error_message"] as? NSString != nil {
-                            error_msg = jsonData["error_message"] as! NSString
+                        if jsonData["error"] as? NSString != nil {
+                            error_msg = jsonData["error"] as! NSString
                         } else {
                             error_msg = "Unknown Error"
                         }
