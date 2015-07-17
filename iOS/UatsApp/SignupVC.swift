@@ -73,7 +73,8 @@ class SignupVC: UIViewController {
             alertView.addButtonWithTitle("OK")
             alertView.show()
         }else {
-            var post:NSString = "username=\(username)&password=\(password)&c_password=\(comfirm_password)&email=\(email)"
+            //var post:NSString = "username=\(username)&password=\(password)&c_password=\(comfirm_password)&email=\(email)"
+            var post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\",\"c_password\":\"\(comfirm_password)\",\"email\":\"\(email)\"}"
             NSLog("Post data: %@",post);
             
             var url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonsignup.php")!

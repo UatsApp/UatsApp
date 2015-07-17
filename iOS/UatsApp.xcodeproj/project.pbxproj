@@ -15,12 +15,16 @@
 		3F1DD7951B28A4330081FE34 /* UatsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */; };
 		3F7DE5561B558281005954FC /* msg.ico in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DE5551B558281005954FC /* msg.ico */; };
 		3F7DE5581B5582CE005954FC /* msg@2x.ico in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DE5571B5582CE005954FC /* msg@2x.ico */; };
-		3F7DE55A1B55884C005954FC /* UatsAppViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE5591B55884C005954FC /* UatsAppViewC.swift */; };
+		3F7DE55A1B55884C005954FC /* UatsAppVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE5591B55884C005954FC /* UatsAppVC.swift */; };
+		3F7DE55E1B56B8DF005954FC /* UsersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE55D1B56B8DF005954FC /* UsersListVC.swift */; };
+		3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE55F1B56C518005954FC /* ChatViewController.swift */; };
+		3F7DE5631B57BFE2005954FC /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE5621B57BFE2005954FC /* Users.swift */; };
+		3F7DE5651B5802AD005954FC /* bck.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DE5641B5802AD005954FC /* bck.jpg */; };
 		3FD49D3E1B28BCC80029218E /* enrollment_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */; };
 		3FD49D401B28C9FE0029218E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D3F1B28C9FE0029218E /* LoginVC.swift */; };
 		3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D411B28CBE10029218E /* SignupVC.swift */; };
-		3FD49D441B28D4CA0029218E /* UatsAppVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D431B28D4CA0029218E /* UatsAppVC.swift */; };
 		3FD49D471B28D82D0029218E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD49D451B28D82D0029218E /* Main.storyboard */; };
+		5230A1FBE479994D0A10C1DF /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3080E396B577E8F1966CD697 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3F1DD7761B28A4320081FE34 /* UatsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UatsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1DD77A1B28A4320081FE34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F1DD77B1B28A4320081FE34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,12 +51,17 @@
 		3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UatsAppTests.swift; sourceTree = "<group>"; };
 		3F7DE5551B558281005954FC /* msg.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = msg.ico; sourceTree = "<group>"; };
 		3F7DE5571B5582CE005954FC /* msg@2x.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = "msg@2x.ico"; sourceTree = "<group>"; };
-		3F7DE5591B55884C005954FC /* UatsAppViewC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UatsAppViewC.swift; sourceTree = SOURCE_ROOT; };
+		3F7DE5591B55884C005954FC /* UatsAppVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UatsAppVC.swift; sourceTree = SOURCE_ROOT; };
+		3F7DE55D1B56B8DF005954FC /* UsersListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersListVC.swift; sourceTree = "<group>"; };
+		3F7DE55F1B56C518005954FC /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		3F7DE5621B57BFE2005954FC /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		3F7DE5641B5802AD005954FC /* bck.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bck.jpg; sourceTree = "<group>"; };
 		3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = enrollment_background.jpg; sourceTree = "<group>"; };
 		3FD49D3F1B28C9FE0029218E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		3FD49D411B28CBE10029218E /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
-		3FD49D431B28D4CA0029218E /* UatsAppVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UatsAppVC.swift; sourceTree = "<group>"; };
 		3FD49D461B28D82D0029218E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C67D60E815D3BA9C502089EF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5230A1FBE479994D0A10C1DF /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +89,8 @@
 				3F1DD7781B28A4320081FE34 /* UatsApp */,
 				3F1DD7911B28A4330081FE34 /* UatsAppTests */,
 				3F1DD7771B28A4320081FE34 /* Products */,
+				581D701BD5ABC6C2E4FD535E /* Pods */,
+				E91833B9ABA142E7327506FB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,6 +106,7 @@
 		3F1DD7781B28A4320081FE34 /* UatsApp */ = {
 			isa = PBXGroup;
 			children = (
+				3F7DE5611B57BFC1005954FC /* Data */,
 				3F7DE5521B5580DB005954FC /* Res */,
 				3FD49D3C1B28BC2A0029218E /* Resources */,
 				3F1DD77B1B28A4320081FE34 /* AppDelegate.swift */,
@@ -103,9 +117,10 @@
 				3F1DD77D1B28A4320081FE34 /* UatsApp.xcdatamodeld */,
 				3F1DD7791B28A4320081FE34 /* Supporting Files */,
 				3FD49D3F1B28C9FE0029218E /* LoginVC.swift */,
-				3F7DE5591B55884C005954FC /* UatsAppViewC.swift */,
+				3F7DE5591B55884C005954FC /* UatsAppVC.swift */,
 				3FD49D411B28CBE10029218E /* SignupVC.swift */,
-				3FD49D431B28D4CA0029218E /* UatsAppVC.swift */,
+				3F7DE55D1B56B8DF005954FC /* UsersListVC.swift */,
+				3F7DE55F1B56C518005954FC /* ChatViewController.swift */,
 			);
 			path = UatsApp;
 			sourceTree = "<group>";
@@ -145,12 +160,38 @@
 			path = ../UatsApp.xcodeproj;
 			sourceTree = "<group>";
 		};
+		3F7DE5611B57BFC1005954FC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3F7DE5621B57BFE2005954FC /* Users.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		3FD49D3C1B28BC2A0029218E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3F7DE5641B5802AD005954FC /* bck.jpg */,
 				3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		581D701BD5ABC6C2E4FD535E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3080E396B577E8F1966CD697 /* Pods.debug.xcconfig */,
+				C67D60E815D3BA9C502089EF /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E91833B9ABA142E7327506FB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,9 +201,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3F1DD7981B28A4330081FE34 /* Build configuration list for PBXNativeTarget "UatsApp" */;
 			buildPhases = (
+				362E60AD1BF88645379E98B7 /* Check Pods Manifest.lock */,
 				3F1DD7721B28A4310081FE34 /* Sources */,
 				3F1DD7731B28A4310081FE34 /* Frameworks */,
 				3F1DD7741B28A4310081FE34 /* Resources */,
+				E9D2A6B9E44D56FB6886B1FA /* Embed Pods Frameworks */,
+				DFDA1B876B31063148ECDED6 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -234,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F1DD7891B28A4320081FE34 /* LaunchScreen.xib in Resources */,
+				3F7DE5651B5802AD005954FC /* bck.jpg in Resources */,
 				3F1DD7861B28A4320081FE34 /* Images.xcassets in Resources */,
 				3F7DE5581B5582CE005954FC /* msg@2x.ico in Resources */,
 				3FD49D3E1B28BCC80029218E /* enrollment_background.jpg in Resources */,
@@ -251,17 +296,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		362E60AD1BF88645379E98B7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DFDA1B876B31063148ECDED6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9D2A6B9E44D56FB6886B1FA /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3F1DD7721B28A4310081FE34 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3F1DD7811B28A4320081FE34 /* ViewController.swift in Sources */,
-				3FD49D441B28D4CA0029218E /* UatsAppVC.swift in Sources */,
-				3F7DE55A1B55884C005954FC /* UatsAppViewC.swift in Sources */,
+				3F7DE5631B57BFE2005954FC /* Users.swift in Sources */,
+				3F7DE55A1B55884C005954FC /* UatsAppVC.swift in Sources */,
+				3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */,
 				3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */,
 				3F1DD77F1B28A4320081FE34 /* UatsApp.xcdatamodeld in Sources */,
 				3FD49D401B28C9FE0029218E /* LoginVC.swift in Sources */,
+				3F7DE55E1B56B8DF005954FC /* UsersListVC.swift in Sources */,
 				3F1DD77C1B28A4320081FE34 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -387,6 +482,7 @@
 		};
 		3F1DD7991B28A4330081FE34 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3080E396B577E8F1966CD697 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = UatsApp/Info.plist;
@@ -398,6 +494,7 @@
 		};
 		3F1DD79A1B28A4330081FE34 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C67D60E815D3BA9C502089EF /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = UatsApp/Info.plist;
