@@ -5,5 +5,5 @@ package uatsapp.uatsapp;
  */
 public class Constants {
 
-    public final static String API_URL ="http://uatsapp.tk/registerDEV/";
+    public final static String API_URL ="http://uatsapp.tk/";
 }

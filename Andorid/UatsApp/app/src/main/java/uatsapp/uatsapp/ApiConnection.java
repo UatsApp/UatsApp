@@ -36,7 +36,7 @@ public class ApiConnection {
         parameters.add(new ObjectNameValuePair("password",password));
         parameters.add(new ObjectNameValuePair("c_password",c_password));
         parameters.add(new ObjectNameValuePair("email",email));
-        performRequest("jsonsignup.php", "application/json", parameters, responseToPopulate, type, callback);
+        performRequest("registerDEV/jsonsignup.php", "application/json", parameters, responseToPopulate, type, callback);
 
     }
 
@@ -45,9 +45,15 @@ public class ApiConnection {
         ArrayList<ObjectNameValuePair> parameters = new ArrayList<ObjectNameValuePair>();
         parameters.add(new ObjectNameValuePair("username",username));
         parameters.add(new ObjectNameValuePair("password",password));
-        performRequest("jsonlogin1.php", "application/json", parameters, responseToPopulate, type, callback);
+        performRequest("registerDEV/jsonlogin1.php", "application/json", parameters, responseToPopulate, type, callback);
 
     }
+
+//    public final static <T extends BaseResponse> void GetUsers(final IBaseCallback callback, final T responseToPopulate, final Type type) {
+//        ArrayList<ObjectNameValuePair> parameters = new ArrayList<ObjectNameValuePair>();
+//        performRequest("accounts/jsonlogin1.php", "application/json", parameters, responseToPopulate, type, callback);
+//
+//    }
 
     public static <T extends BaseResponse> void performRequest(final String operation, final String contentType, final ArrayList<ObjectNameValuePair> parameters,
                                                                final T responseToPopulate, final Type type, final IBaseCallback<T> callback) {

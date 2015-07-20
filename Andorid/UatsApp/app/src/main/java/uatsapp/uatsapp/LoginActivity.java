@@ -60,9 +60,10 @@ public class LoginActivity extends Activity {
                                     @Override
                                     public void run() {
                                         Toast.makeText(LoginActivity.this, "You have logged in successfully", Toast.LENGTH_LONG).show();
+                                        Intent launchactivity = new Intent(LoginActivity.this,ListActivity.class);
+                                        startActivity(launchactivity);
                                     }
                                 });
-
                             } else {
                                 runOnUiThread(new Runnable() {
                                     @Override
