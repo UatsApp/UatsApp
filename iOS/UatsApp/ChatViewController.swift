@@ -9,7 +9,7 @@
 import UIKit
 
 class ChatViewController: UIViewController {
-
+    
     var user: String!
     
     @IBOutlet weak var userLabel: UILabel!
