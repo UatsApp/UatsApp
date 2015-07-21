@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Uatsapp</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="login">Login</string>
-    <string name="title_activity_signup">signup</string>
-</resources>
