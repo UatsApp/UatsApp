@@ -13,6 +13,9 @@ class Users:NSObject{
     var email:String = ""
     var user_id:Int = 0
     
+ //   var rel_ID:Int = 0
+    
+    
 //    init(username:String, email:String, user_id:Int){
 //        self.username = username
 //        self.email = email

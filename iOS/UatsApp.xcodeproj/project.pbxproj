@@ -13,6 +13,8 @@
 		3F1DD7861B28A4320081FE34 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7851B28A4320081FE34 /* Images.xcassets */; };
 		3F1DD7891B28A4320081FE34 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7871B28A4320081FE34 /* LaunchScreen.xib */; };
 		3F1DD7951B28A4330081FE34 /* UatsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */; };
+		3F6560641B5D3BE4001BF3C1 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6560631B5D3BE4001BF3C1 /* History.swift */; };
+		3F7585DC1B5A96C400192B1C /* tab_messages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */; };
 		3F7DE5561B558281005954FC /* msg.ico in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DE5551B558281005954FC /* msg.ico */; };
 		3F7DE5581B5582CE005954FC /* msg@2x.ico in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DE5571B5582CE005954FC /* msg@2x.ico */; };
 		3F7DE55A1B55884C005954FC /* UatsAppVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE5591B55884C005954FC /* UatsAppVC.swift */; };
@@ -49,6 +51,8 @@
 		3F1DD78E1B28A4330081FE34 /* UatsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UatsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1DD7931B28A4330081FE34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UatsAppTests.swift; sourceTree = "<group>"; };
+		3F6560631B5D3BE4001BF3C1 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_messages@2x.png"; sourceTree = "<group>"; };
 		3F7DE5551B558281005954FC /* msg.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = msg.ico; sourceTree = "<group>"; };
 		3F7DE5571B5582CE005954FC /* msg@2x.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = "msg@2x.ico"; sourceTree = "<group>"; };
 		3F7DE5591B55884C005954FC /* UatsAppVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UatsAppVC.swift; sourceTree = SOURCE_ROOT; };
@@ -153,6 +157,7 @@
 		3F7DE5521B5580DB005954FC /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */,
 				3F7DE5571B5582CE005954FC /* msg@2x.ico */,
 				3F7DE5551B558281005954FC /* msg.ico */,
 			);
@@ -164,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				3F7DE5621B57BFE2005954FC /* Users.swift */,
+				3F6560631B5D3BE4001BF3C1 /* History.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -283,6 +289,7 @@
 				3F7DE5581B5582CE005954FC /* msg@2x.ico in Resources */,
 				3FD49D3E1B28BCC80029218E /* enrollment_background.jpg in Resources */,
 				3FD49D471B28D82D0029218E /* Main.storyboard in Resources */,
+				3F7585DC1B5A96C400192B1C /* tab_messages@2x.png in Resources */,
 				3F7DE5561B558281005954FC /* msg.ico in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,6 +360,7 @@
 				3F7DE5631B57BFE2005954FC /* Users.swift in Sources */,
 				3F7DE55A1B55884C005954FC /* UatsAppVC.swift in Sources */,
 				3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */,
+				3F6560641B5D3BE4001BF3C1 /* History.swift in Sources */,
 				3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */,
 				3F1DD77F1B28A4320081FE34 /* UatsApp.xcdatamodeld in Sources */,
 				3FD49D401B28C9FE0029218E /* LoginVC.swift in Sources */,
