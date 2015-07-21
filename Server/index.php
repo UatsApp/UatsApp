@@ -13,9 +13,7 @@
 <html>
 
 <head>
-	<!--<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>-->
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-	<!--<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>	-->
 <link rel="stylesheet" type="text/css" href="stylesheets/index.css">
 
 </head>
@@ -72,7 +70,6 @@ window.addEventListener('keydown',this.check,false);
 
    				if(result["status"] === 1){
 					window.location.href = "http://uatsapp.tk/UatsAppWebDEV/UatsApp.php";
-					//alert("result[]")
 					}else{
 						alert(result["error"]);
 						$('#forgot-password').show();
@@ -80,15 +77,14 @@ window.addEventListener('keydown',this.check,false);
 
    				},
    			error: function(error){
-
    				alert(error);
    			}
 		});
 	}else{
 		if(dataToSend.username){
-			alert("Please fill your password, retard.");
+			alert("Please fill your password.");
 		}else{
-			alert("Please fill your username, retard.");
+			alert("Please fill your username.");
 		}
 	}
 }
