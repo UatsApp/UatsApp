@@ -2,10 +2,15 @@ package uatsapp.uatsapp;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import uatsapp.uatsapp.Adapters.UsersAdapter;
@@ -19,21 +24,27 @@ import uatsapp.uatsapp.Utils.Users;
 public class ListActivity extends Activity implements AsyncResponse {
     DowloadWebPageTask asyncTask =new DowloadWebPageTask();
     private UsersAdapter adapter;
+    ListView lv;
+    String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        Bundle extras = getIntent().getExtras();
+        currentUser = extras.getString("username");
+
+        adapter = new UsersAdapter(this, R.layout.item_note_list_entry, new ArrayList<Users>());
+        lv = (ListView)findViewById(R.id.listView);
+        lv.setAdapter(adapter);
 
         asyncTask.execute(new String[]{"http://uatsapp.tk/accounts/get_users.php"});
         asyncTask.delegate = this;
 
-
     }
     public void processFinish(String output){
-        //convert output to json and show it using list adapter
-     //   Log.d("Caine123",output);
+        Log.d("Caine123", output);
 
         Gson gson = new Gson();
 

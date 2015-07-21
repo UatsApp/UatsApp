@@ -25,6 +25,11 @@
             android:name=".SingupActivity"
             android:label="Sign up">
         </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ListActivity"
+            android:label="User List">
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
