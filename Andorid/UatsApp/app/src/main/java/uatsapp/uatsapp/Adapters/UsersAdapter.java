@@ -65,9 +65,9 @@ public class UsersAdapter extends ArrayAdapter<Users> {
         convertView.setTag(holder);
 
         final Users currentItem = getItem(position);
-        String NoteTitle = currentItem.getUsername();
-        holder.name.setText(NoteTitle);
-        holder.length.setText(NoteTitle);
+        String username = currentItem.getUsername();
+        holder.name.setText(username);
+        holder.length.setText(username);
         return convertView;
 //        return super.getView(position, convertView, parent);
     }
