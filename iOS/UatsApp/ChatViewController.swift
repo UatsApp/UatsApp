@@ -15,10 +15,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let cellHistory = "cell_message"
     var user: String!
     var history:[History] = []
-    var user2:NSArray = []
-    
-    
-    //   var muiecupula = user2[0] as! String
+    var userInfo:NSArray = []
     
     @IBOutlet weak var userLabel: UILabel!
     override func viewDidLoad() {
@@ -29,10 +26,10 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.title = user2[1] as? String
+        self.navigationItem.title = userInfo[1] as? String
         historyTable.delegate = self
         historyTable.dataSource = self
-        println(user2[1])
+        println(userInfo[1])
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,7 +40,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func checkRelation(){
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         var userUsername = prefs.valueForKey("USERNAME") as! String
-        Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/history.php", parameters: ["identifier": "\(user2[0])" , "loggedUsername":"\(userUsername)"], encoding: .JSON)
+        Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/history.php", parameters: ["identifier": "\(userInfo[0])" , "loggedUsername":"\(userUsername)"], encoding: .JSON)
             .responseJSON { _, _, JSON, _ in
                 if let jsonResult = JSON?.valueForKey("history") as? Array<Dictionary<String,String>>{
                     var i = 0
@@ -61,8 +58,6 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         self.history.append(currentHistory);
                         
                     }
-                    //
-                    //  completion()
                 }
                 println(JSON)
                 self.historyTable.reloadData()
@@ -70,13 +65,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        var numbOfRows = history.map({$0.message})
-        println("Sugeo Ramona+\(numbOfRows.count)")
         return history.count
     }
     
@@ -84,7 +77,17 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCellWithIdentifier(cellHistory, forIndexPath: indexPath) as! UITableViewCell
         let row = indexPath.row
         let messages = history.map({$0.message})
+        let from = history.map({$0._from})
         println(messages[row])
+        var it:Int = from[row]
+        var muie: AnyObject = userInfo[0]
+        var textAlign:NSTextAlignment
+        println("i\(muie)")
+        //        if(4 != 3){
+        //            cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: cellHistory)
+        //        }else{
+        //            cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: cellHistory)
+        //        }
         cell.textLabel?.text = messages[row]
         return cell
     }

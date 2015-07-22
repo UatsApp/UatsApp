@@ -108,7 +108,7 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
         // Pass the selected object to the new view controller.
         if segue.identifier == "call" {
             let chatController = segue.destinationViewController as! ChatViewController
-            chatController.user2 = sender as! NSArray
+            chatController.userInfo = sender as! NSArray
         }
     }
     
