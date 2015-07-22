@@ -24,7 +24,7 @@ class LoginVC: UIViewController {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
         
-        if(isLoggedin != 1){
+        if(isLoggedin == 1){
             self.performSegueWithIdentifier("goApp", sender: self)//////////DE PUS LOGOUT IN APP SI SCBHIMBAT '!=' IN '==';////////////////
             
         }

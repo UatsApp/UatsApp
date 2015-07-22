@@ -56,14 +56,18 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         let message = jsonResult[i]["message"]
                         let time = jsonResult[i]["_time"]
                         
-                        var currentHistory = History()
-                        currentHistory.id_c = relID!.toInt()!
-                        currentHistory._from = from!.toInt()!
-                        currentHistory._to = to!.toInt()!
-                        currentHistory.message = message!
-                        currentHistory._time = time!
-                        println("asda\(message)")
-                        self.history.append(currentHistory)
+                        var currentHistory = History(id_c: relID!.toInt()!, _from: from!.toInt()!, _to: to!.toInt()!, message: message!, _time: time!);
+                        
+                        self.history.append(currentHistory);
+                        
+//                        var currentHistory = History()
+//                        currentHistory.id_c = relID!.toInt()!
+//                        currentHistory._from = from!.toInt()!
+//                        currentHistory._to = to!.toInt()!
+//                        currentHistory.message = message!
+//                        currentHistory._time = time!
+//                        println("asda\(message)")
+//                        self.history.append(currentHistory)
                         //  completion()
                         
                     }
