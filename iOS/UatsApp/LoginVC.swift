@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Alamofire
 class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var txtUsername: UITextField!
@@ -21,17 +21,25 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         self.signin.layer.borderColor = UIColor.whiteColor().CGColor
         self.signin.layer.borderWidth = 0.2
         
+
+        
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
+        let isFacebookLoggedIn :Int = prefs.integerForKey("ISFACEBOOKLOGGED") as Int
         
-        if(isLoggedin == 1){
+        if(isLoggedin == 1 || isFacebookLoggedIn == 1){
             self.performSegueWithIdentifier("goApp", sender: self)//////////DE PUS LOGOUT IN APP SI SCBHIMBAT '!=' IN '==';////////////////
-            
         }
+        
         //FB login
         if (FBSDKAccessToken.currentAccessToken() != nil)
         {
+            
             // User is already logged in, do work such as go to next view controller.
+            //prefs.setInteger(1, forKey: "ISFACEBOOKLOGGED")
+
+            //self.performSegueWithIdentifier("goApp", sender: self)
+            
         }
         else
         {
@@ -59,7 +67,36 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
-                // Do work
+                let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+                graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+                    
+                    if ((error) != nil)
+                    {
+                        // Process error
+                        println("Error: \(error)")
+                    }
+                    else
+                    {
+                        let userName : NSString = result.valueForKey("name") as! NSString
+                        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                        prefs.setObject(userName, forKey: "USERNAME")
+                        
+                        Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/jsonsignup.php", parameters: ["username": "\(userName)", "password" : "\(userName)", "c_password": "\(userName)", "email" : "\(userName)@\(userName).com"], encoding: .JSON)
+                            .responseJSON { _, _, JSON, _ in
+                                let jsonResult = JSON?.valueForKey("success") as? Int
+                                if((jsonResult) != nil){
+                                    var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                                    prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
+                                     self.performSegueWithIdentifier("goApp", sender: self)
+                                }
+                                
+                                
+                                
+                                println(JSON)
+                                
+                        }
+                    }
+                })
             }
         }
     }
@@ -80,13 +117,13 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             }
             else
             {
-                println("fetched user: \(result)")
+                println("fetched facebook user: \(result)")
                 let userName : NSString = result.valueForKey("name") as! NSString
-                println("User Name is: \(userName)")
-                let userEmail : NSString = result.valueForKey("email") as! NSString
-                println("User Email is: \(userEmail)")
+                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                prefs.setObject(userName, forKey: "USERNAME")
             }
         })
+        
     }
     
     
@@ -99,6 +136,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(true)
+        
         
 //        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
 //        let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
