@@ -22,6 +22,10 @@
 		3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE55F1B56C518005954FC /* ChatViewController.swift */; };
 		3F7DE5631B57BFE2005954FC /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE5621B57BFE2005954FC /* Users.swift */; };
 		3F7DE5651B5802AD005954FC /* bck.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DE5641B5802AD005954FC /* bck.jpg */; };
+		3F8ACEE61B60E2C600B412CC /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8ACEE21B60E2C600B412CC /* Bolts.framework */; };
+		3F8ACEE71B60E2C600B412CC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8ACEE31B60E2C600B412CC /* FBSDKCoreKit.framework */; };
+		3F8ACEE81B60E2C600B412CC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8ACEE41B60E2C600B412CC /* FBSDKLoginKit.framework */; };
+		3F8ACEE91B60E2C600B412CC /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8ACEE51B60E2C600B412CC /* FBSDKMessengerShareKit.framework */; };
 		3FD49D3E1B28BCC80029218E /* enrollment_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */; };
 		3FD49D401B28C9FE0029218E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D3F1B28C9FE0029218E /* LoginVC.swift */; };
 		3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D411B28CBE10029218E /* SignupVC.swift */; };
@@ -60,6 +64,11 @@
 		3F7DE55F1B56C518005954FC /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		3F7DE5621B57BFE2005954FC /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		3F7DE5641B5802AD005954FC /* bck.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bck.jpg; sourceTree = "<group>"; };
+		3F8ACEE21B60E2C600B412CC /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = UatsApp/Bolts.framework; sourceTree = "<group>"; };
+		3F8ACEE31B60E2C600B412CC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = UatsApp/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		3F8ACEE41B60E2C600B412CC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = UatsApp/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		3F8ACEE51B60E2C600B412CC /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = UatsApp/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
+		3F8ACEEA1B60E3AC00B412CC /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = enrollment_background.jpg; sourceTree = "<group>"; };
 		3FD49D3F1B28C9FE0029218E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		3FD49D411B28CBE10029218E /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
@@ -74,6 +83,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5230A1FBE479994D0A10C1DF /* Pods.framework in Frameworks */,
+				3F8ACEE71B60E2C600B412CC /* FBSDKCoreKit.framework in Frameworks */,
+				3F8ACEE91B60E2C600B412CC /* FBSDKMessengerShareKit.framework in Frameworks */,
+				3F8ACEE81B60E2C600B412CC /* FBSDKLoginKit.framework in Frameworks */,
+				3F8ACEE61B60E2C600B412CC /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +135,7 @@
 				3F1DD7791B28A4320081FE34 /* Supporting Files */,
 				3FD49D3F1B28C9FE0029218E /* LoginVC.swift */,
 				3F7DE5591B55884C005954FC /* UatsAppVC.swift */,
+				3F8ACEEA1B60E3AC00B412CC /* Bridging-Header.h */,
 				3FD49D411B28CBE10029218E /* SignupVC.swift */,
 				3F7DE55D1B56B8DF005954FC /* UsersListVC.swift */,
 				3F7DE55F1B56C518005954FC /* ChatViewController.swift */,
@@ -195,6 +209,10 @@
 		E91833B9ABA142E7327506FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F8ACEE21B60E2C600B412CC /* Bolts.framework */,
+				3F8ACEE31B60E2C600B412CC /* FBSDKCoreKit.framework */,
+				3F8ACEE41B60E2C600B412CC /* FBSDKLoginKit.framework */,
+				3F8ACEE51B60E2C600B412CC /* FBSDKMessengerShareKit.framework */,
 				E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -494,10 +512,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/UatsApp",
+				);
 				INFOPLIST_FILE = UatsApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UatsApp/Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -507,10 +530,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/UatsApp",
+				);
 				INFOPLIST_FILE = UatsApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UatsApp/Bridging-Header.h";
 			};
 			name = Release;
 		};
