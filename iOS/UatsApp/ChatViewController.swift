@@ -9,21 +9,28 @@
 import UIKit
 import Alamofire
 
-struct CellMeta {
-    var alingment: NSTextAlignment
-    var identifier: String
-    var text: String
-    
-    init(_ alingment: NSTextAlignment, _ identifier: String, _ text: String){
-        self.alingment = alingment
-        self.identifier = identifier
-        self.text = text
-    }
-    
-}
+
+
 
 
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+/////Cell construct///////
+    
+    struct CellMeta {
+        var alingment: NSTextAlignment
+        var identifier: String
+        var text: String
+        
+        init(_ alingment: NSTextAlignment, _ identifier: String, _ text: String){
+            self.alingment = alingment
+            self.identifier = identifier
+            self.text = text
+        }
+        
+    }
+    
+    
     
     @IBOutlet var historyTable: UITableView!
     let cellHistory = "cell_message"
@@ -31,16 +38,18 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var user: String!
     var history:[History] = []
     var userInfo:NSArray = []
-    
-    var fakeHistory:[CellMeta] = [
-        CellMeta(NSTextAlignment.Left, "cell_info", "Cata"),
-        CellMeta(NSTextAlignment.Left, "cell_message", "Ce plm sentampla. djaldlksd as dfjdf asdf sdafjklsd fasd  sentampla. djaldlksd as dfjdf asdf sdafjklsd fasd fasdf sadlfjasd flasd flasd jflsadjf asldfa"),
-        CellMeta(NSTextAlignment.Right, "cell_info", "Paul"),
-        CellMeta(NSTextAlignment.Right, "cell_message", "Une ma pula?"),
-        CellMeta(NSTextAlignment.Left, "cell_info", "Cata"),
-        CellMeta(NSTextAlignment.Left, "cell_message", "Acilea"),
-        CellMeta(NSTextAlignment.Left, "cell_message", "La birou")
-    ]
+    var cellMetas:[CellMeta] = []
+//        
+//
+//   Prototype cells for test
+//        CellMeta(NSTextAlignment.Left, "cell_info", "Cata"),
+//        CellMeta(NSTextAlignment.Left, "cell_message", "Ce plm sentampla. djaldlksd as dfjdf asdf sdafjklsd fasd  sentampla. djaldlksd as dfjdf asdf sdafjklsd fasd fasdf sadlfjasd flasd flasd jflsadjf asldfa"),
+//        CellMeta(NSTextAlignment.Right, "cell_info", "Paul"),
+//        CellMeta(NSTextAlignment.Right, "cell_message", "Une ma pula?"),
+//        CellMeta(NSTextAlignment.Left, "cell_info", "Cata"),
+//        CellMeta(NSTextAlignment.Left, "cell_message", "Acilea"),
+//        CellMeta(NSTextAlignment.Left, "cell_message", "La birou")
+//    ]
     
     @IBOutlet weak var userLabel: UILabel!
     
@@ -63,7 +72,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+//////Populate Class History, populate cells/////////////////
     func checkRelation(){
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         var userUsername = prefs.valueForKey("USERNAME") as! String
@@ -71,6 +81,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             .responseJSON { _, _, JSON, _ in
                 if let jsonResult = JSON?.valueForKey("history") as? Array<Dictionary<String,String>>{
                     var i = 0
+                    self.history = []
+                    self.cellMetas = []
                     for (i = 0; i < jsonResult.count; i++)
                     {
                         
@@ -87,22 +99,42 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     }
                 }
                 println(JSON)
+                
+                if self.history.count > 0 {
+                    
+                    let partnerUserId = self.userInfo[0] as! Int
+                    let partnerUserName = self.userInfo[1] as! String
+                    let myUserName = userUsername
+                    var currentFromUserId = -1000
+                    
+                    for historyItem in self.history {
+                        
+                        if historyItem._from != currentFromUserId {
+                            currentFromUserId = historyItem._from
+                            self.cellMetas.append(CellMeta( partnerUserId == currentFromUserId ? NSTextAlignment.Left : NSTextAlignment.Right, "cell_info", partnerUserId == currentFromUserId ? partnerUserName : myUserName))
+                        }
+                        
+                        self.cellMetas.append(CellMeta( partnerUserId == historyItem._from ? NSTextAlignment.Left : NSTextAlignment.Right, "cell_message", historyItem.message))
+                        
+                        
+                    }
+                }
                 self.historyTable.reloadData()
         }
         
     }
     
-    @IBOutlet var msjLabel: UILabel!
+/////////Table View Implement
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fakeHistory.count
+        return cellMetas.count
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let meta = fakeHistory[indexPath.row]
+        let meta = cellMetas[indexPath.row]
         if meta.identifier == "cell_info" {
             return 20
         }
@@ -111,38 +143,12 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let meta = fakeHistory[indexPath.row]
+        let meta = cellMetas[indexPath.row]
         
         let cell = tableView.dequeueReusableCellWithIdentifier(meta.identifier, forIndexPath: indexPath) as! UITableViewCell
         
         cell.textLabel?.text = meta.text
         cell.textLabel?.textAlignment = meta.alingment
-        
-//        let row = indexPath.row
-//        
-//        let messages = history.map({$0.message})
-//        let from = history.map({$0._from})
-//        println(messages[row])
-//        println(from[row])
-//        var it:Int = from[row]
-//        var muie: AnyObject = userInfo[0]
-//  //      let textAlign:NSTextAlignment
-//        println("i\(muie)")
-//        //        if(4 != 3){
-//        //            cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: cellHistory)
-//        //        }else{
-//        //            cell = UITableViewCell(style: UITableViewCellStyle.Value2, reuseIdentifier: cellHistory)
-//        //        }
-//        cell.textLabel?.text = messages[row]
-////        cell.detailTextLabel?.text = muie as? String
-////        cell.textLabel?.textAlignment = NSTextAlignment.Right
-////        cell.detailTextLabel?.textAlignment = NSTextAlignment.Right
-//        
-//        if(from[row] == muie){
-//            cell.textLabel?.textAlignment = NSTextAlignment.Right
-//        }else{
-//            cell.textLabel?.textAlignment = NSTextAlignment.Left
-//        }
         
         return cell
     }
