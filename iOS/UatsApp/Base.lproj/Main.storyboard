@@ -343,10 +343,10 @@
         <!--Uats AppVC-->
         <scene sceneID="6QG-Lk-60h">
             <objects>
-                <tabBarController id="Kr2-fz-f22" customClass="UatsAppVC" sceneMemberID="viewController">
+                <tabBarController id="Kr2-fz-f22" customClass="UatsAppVC" customModule="UatsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="jNY-Hd-LU2">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="HNg-21-42q">
+                        <barButtonItem key="leftBarButtonItem" id="HNg-21-42q">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="a8s-hE-eMO">
                                 <rect key="frame" x="148" y="491" width="79" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -355,8 +355,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="logoutAction:" destination="Kr2-fz-f22" eventType="touchUpInside" id="XYw-bb-3Yg"/>
                                     <action selector="logoutTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Drk-98-CBR"/>
-                                    <segue destination="C71-eD-UqQ" kind="modal" identifier="goto_login" id="a7q-qd-2WK"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -377,8 +377,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <outlet property="logoutBtn" destination="a8s-hE-eMO" id="eDk-k1-C6U"/>
                         <segue destination="SRi-Eb-x4d" kind="relationship" relationship="viewControllers" id="DpO-iU-osZ"/>
                         <segue destination="d40-eS-E4c" kind="relationship" relationship="viewControllers" id="sz2-fl-Bhl"/>
+                        <segue destination="C71-eD-UqQ" kind="modal" identifier="goto_login" id="qEG-eS-AN2"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dcr-wY-lsi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -419,6 +421,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="a7q-qd-2WK"/>
+        <segue reference="qEG-eS-AN2"/>
     </inferredMetricsTieBreakers>
 </document>
