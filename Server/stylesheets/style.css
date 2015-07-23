@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+#page-wrapper p.chat-partener{
+  text-align: center;
+  color: green;
+  font-size: 20px;
+}
+
 html {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 100%;
@@ -88,12 +94,29 @@ ul li span {
   letter-spacing: 1px;
 }
 
-.sent {
-  background-color: #F7F7F7;
- 
+li.sent {
+  display: inline-block;
+  float: right;
+  background-color: green;
+  margin-left: 60%;
+  overflow: auto;
+  text-align: center;
+  padding: 1% 5% 1% 5%;
+  border-radius: 50% 0% 50% 50%;
 }
 
-.received {}
+.received {
+  display: inline-block;
+  float: left;
+  background-color: blue;
+  margin-right: 60%;
+  overflow: auto;
+  text-align: center;
+  padding: 1% 5% 1% 5%;
+  border-radius: 50% 50% 50% 0%;
+  color: white;
+
+}
 
 #message-form {
   margin-top: 1.5rem;
