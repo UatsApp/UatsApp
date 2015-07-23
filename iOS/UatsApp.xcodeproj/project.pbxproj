@@ -27,6 +27,10 @@
 		3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D411B28CBE10029218E /* SignupVC.swift */; };
 		3FD49D471B28D82D0029218E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD49D451B28D82D0029218E /* Main.storyboard */; };
 		5230A1FBE479994D0A10C1DF /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		52A306D51B5FA41E00DD4DE1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A306D21B5FA41E00DD4DE1 /* FBSDKCoreKit.framework */; };
+		52A306D61B5FA41E00DD4DE1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A306D31B5FA41E00DD4DE1 /* FBSDKLoginKit.framework */; };
+		52A306D71B5FA41E00DD4DE1 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A306D41B5FA41E00DD4DE1 /* FBSDKMessengerShareKit.framework */; };
+		52A306DA1B5FAE7300DD4DE1 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A306D91B5FAE7300DD4DE1 /* Bolts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +68,11 @@
 		3FD49D3F1B28C9FE0029218E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		3FD49D411B28CBE10029218E /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		3FD49D461B28D82D0029218E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		52A306D21B5FA41E00DD4DE1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		52A306D31B5FA41E00DD4DE1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		52A306D41B5FA41E00DD4DE1 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
+		52A306D81B5FAC1F00DD4DE1 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		52A306D91B5FAE7300DD4DE1 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		C67D60E815D3BA9C502089EF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -73,7 +82,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52A306DA1B5FAE7300DD4DE1 /* Bolts.framework in Frameworks */,
+				52A306D71B5FA41E00DD4DE1 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				5230A1FBE479994D0A10C1DF /* Pods.framework in Frameworks */,
+				52A306D51B5FA41E00DD4DE1 /* FBSDKCoreKit.framework in Frameworks */,
+				52A306D61B5FA41E00DD4DE1 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +127,7 @@
 				3F7DE5521B5580DB005954FC /* Res */,
 				3FD49D3C1B28BC2A0029218E /* Resources */,
 				3F1DD77B1B28A4320081FE34 /* AppDelegate.swift */,
+				52A306D81B5FAC1F00DD4DE1 /* Bridging-Header.h */,
 				3F1DD7801B28A4320081FE34 /* ViewController.swift */,
 				3F1DD7851B28A4320081FE34 /* Images.xcassets */,
 				3FD49D451B28D82D0029218E /* Main.storyboard */,
@@ -195,6 +209,10 @@
 		E91833B9ABA142E7327506FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				52A306D91B5FAE7300DD4DE1 /* Bolts.framework */,
+				52A306D21B5FA41E00DD4DE1 /* FBSDKCoreKit.framework */,
+				52A306D31B5FA41E00DD4DE1 /* FBSDKLoginKit.framework */,
+				52A306D41B5FA41E00DD4DE1 /* FBSDKMessengerShareKit.framework */,
 				E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -493,10 +511,15 @@
 			baseConfigurationReference = 3080E396B577E8F1966CD697 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = UatsApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UatsApp/Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -505,10 +528,15 @@
 			baseConfigurationReference = C67D60E815D3BA9C502089EF /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = UatsApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UatsApp/Bridging-Header.h";
 			};
 			name = Release;
 		};
