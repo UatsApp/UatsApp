@@ -27,7 +27,11 @@ class UatsAppVC: UITabBarController {
     @IBAction func logoutAction(sender: UIButton) {
         let appDomain = NSBundle.mainBundle().bundleIdentifier
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
-        self.performSegueWithIdentifier("goto_login", sender: logoutBtn)
+
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
+        
+                self.performSegueWithIdentifier("goto_login", sender: logoutBtn)
     }
     
     

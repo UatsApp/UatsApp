@@ -9,9 +9,9 @@
 import UIKit
 import Alamofire
 class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
-
+    
     @IBOutlet weak var txtUsername: UITextField!
-
+    
     @IBOutlet weak var txtPassword: UITextField!
     
     override func viewDidLoad() {
@@ -21,7 +21,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         self.signin.layer.borderColor = UIColor.whiteColor().CGColor
         self.signin.layer.borderWidth = 0.2
         
-
+        
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
@@ -37,7 +37,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             
             // User is already logged in, do work such as go to next view controller.
             //prefs.setInteger(1, forKey: "ISFACEBOOKLOGGED")
-
+            
             //self.performSegueWithIdentifier("goApp", sender: self)
             
         }
@@ -51,7 +51,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         }
         // Do any additional setup after loading the view.
     }
-
+    
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         println("User Logged In")
         
@@ -87,7 +87,14 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                                 if((jsonResult) != nil){
                                     var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                                     prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
-                                     self.performSegueWithIdentifier("goApp", sender: self)
+                                    self.performSegueWithIdentifier("goApp", sender: self)
+                                    
+                                    var alertView:UIAlertView = UIAlertView()
+                                    alertView.title = "Success!"
+                                    alertView.message = "You are logged in!"
+                                    alertView.delegate = self
+                                    alertView.addButtonWithTitle("OK")
+                                    alertView.show()
                                 }
                                 
                                 
@@ -121,6 +128,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                 let userName : NSString = result.valueForKey("name") as! NSString
                 let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                 prefs.setObject(userName, forKey: "USERNAME")
+                
             }
         })
         
@@ -138,12 +146,12 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         super.viewDidAppear(true)
         
         
-//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//        let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
-//        
-//        if(isLoggedin == 1){
-//            self.performSegueWithIdentifier("goApp", sender: self)
-//        }
+        //        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        //        let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
+        //
+        //        if(isLoggedin == 1){
+        //            self.performSegueWithIdentifier("goApp", sender: self)
+        //        }
     }
     
     
@@ -164,12 +172,12 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         } else {
             
             //var post:NSString = "username=\(username)&password=\(password)"
-           var post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\"}"
+            var post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\"}"
             
             NSLog("PostData: %@",post);
             
-           // var url:NSURL = NSURL(string: "http://uatsapp.16mb.com/register/jsonlogin2.php")!
-           // var url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonlogin1.php")!
+            // var url:NSURL = NSURL(string: "http://uatsapp.16mb.com/register/jsonlogin2.php")!
+            // var url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonlogin1.php")!
             var url:NSURL = NSURL(string: "http://uatsapp.tk/UatsAppWebDEV/process_user.php")!
             
             
@@ -227,8 +235,8 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         prefs.setInteger(1, forKey: "ISLOGGEDIN")
                         prefs.synchronize()
                         self.performSegueWithIdentifier("goApp", sender: self)
-                    
-                      //  self.dismissViewControllerAnimated(true, completion: nil)
+                        
+                        //  self.dismissViewControllerAnimated(true, completion: nil)
                     } else {
                         var error_msg:NSString
                         
@@ -270,12 +278,12 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     }
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
