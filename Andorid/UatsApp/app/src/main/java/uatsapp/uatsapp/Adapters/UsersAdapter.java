@@ -8,28 +8,27 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import uatsapp.uatsapp.R;
-import uatsapp.uatsapp.Utils.Users;
+import uatsapp.uatsapp.Utils.User;
 
 /**
  * Created by Sergiu on 7/9/2015.
  */
-public class UsersAdapter extends ArrayAdapter<Users> {
+public class UsersAdapter extends ArrayAdapter<User> {
 
     Context context;
     int res;
-    private ArrayList<Users> dataSource;
+    private ArrayList<User> dataSource;
 
-    public UsersAdapter(Context context, int resource, List<Users> objects) {
+    public UsersAdapter(Context context, int resource, List<User> objects) {
         super(context, resource, objects);
         this.context =context;
         this.res = resource;
     }
-    public void setDataSource(List<Users> dataSource) {
+    public void setDataSource(List<User> dataSource) {
         this.dataSource = (ArrayList)dataSource;
         notifyDataSetChanged();
     }
@@ -44,7 +43,7 @@ public class UsersAdapter extends ArrayAdapter<Users> {
     }
 
     @Override
-    public Users getItem(int position) {
+    public User getItem(int position) {
         if (this.dataSource != null && this.dataSource.size() > position) {
             return dataSource.get(position);
         }
@@ -64,9 +63,9 @@ public class UsersAdapter extends ArrayAdapter<Users> {
         holder.length = (TextView) convertView.findViewById(R.id.tv_length);
         convertView.setTag(holder);
 
-        final Users currentItem = getItem(position);
+        final User currentItem = getItem(position);
         String username = currentItem.getUsername();
-        holder.name.setText(username);
+        holder.name.setText("");
         holder.length.setText(username);
         return convertView;
 //        return super.getView(position, convertView, parent);

@@ -1,56 +1,73 @@
 package uatsapp.uatsapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import uatsapp.uatsapp.Adapters.UsersAdapter;
-import uatsapp.uatsapp.Utils.AsyncResponse;
-import uatsapp.uatsapp.Utils.DowloadWebPageTask;
-import uatsapp.uatsapp.Utils.Users;
+import uatsapp.uatsapp.Utils.User;
+import uatsapp.uatsapp.data.data.IBaseCallback;
+import uatsapp.uatsapp.data.data.UsersListResponse;
 
 /**
  * Created by Vlad on 20-Jul-15.
  */
-public class ListActivity extends Activity implements AsyncResponse {
-    DowloadWebPageTask asyncTask =new DowloadWebPageTask();
+public class ListActivity extends Activity {
+//    DowloadWebPageTask asyncTask =new DowloadWebPageTask();
     private UsersAdapter adapter;
     ListView lv;
-    String currentUser;
+    String currentUser = AppPreferences.getStringPreferences("USERNAME");
+    List<User> userList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        Bundle extras = getIntent().getExtras();
-        currentUser = extras.getString("username");
 
-        adapter = new UsersAdapter(this, R.layout.item_note_list_entry, new ArrayList<Users>());
+        adapter = new UsersAdapter(this, R.layout.item_note_list_entry, new ArrayList<User>());
         lv = (ListView)findViewById(R.id.listView);
         lv.setAdapter(adapter);
 
-        asyncTask.execute(new String[]{"http://uatsapp.tk/accounts/get_users.php"});
-        asyncTask.delegate = this;
+        ApiConnection.GetUsers(new IBaseCallback<UsersListResponse>() {
+            @Override
+            public void onResult(final UsersListResponse result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        userList = result.getUsers();
+                        adapter.setDataSource(userList);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        }, new UsersListResponse(), new TypeToken<UsersListResponse>() {
+        }.getType());
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int friendId = userList.get(position).getId();
+                String friendUser = userList.get(position).getUsername();
+                for(User user:userList){
+                    if(user.getUsername().equals(currentUser))
+                        AppPreferences.setPreferences("ID", user.getId());
+                }
+                AppPreferences.setPreferences("friendId",friendId);
+                AppPreferences.setPreferences("friendUser",friendUser);
+                Intent launchactivity = new Intent(ListActivity.this,MessageActivity.class);
+                startActivity(launchactivity);
+            }
+        });
     }
-    public void processFinish(String output){
-        Log.d("Caine123", output);
 
-        Gson gson = new Gson();
-
-        List<Users> userList = gson.fromJson(output,new TypeToken<List<Users>>(){}.getType());
-        adapter.setDataSource(userList);
-        adapter.notifyDataSetChanged();
-        //sper ca macar o sa se inteleaga ce am vrut sa fac...
-    }
 }

@@ -3,7 +3,7 @@ package uatsapp.uatsapp.Utils;
 /**
  * Created by Vlad on 20-Jul-15.
  */
-public class Users {
+public class User {
     private int id;
     private String username;
     private String email;
