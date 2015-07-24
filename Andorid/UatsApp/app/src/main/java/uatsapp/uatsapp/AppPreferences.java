@@ -11,6 +11,10 @@ public class AppPreferences {
 
     public static final String SERVER_URL = "serverUrl";
     public static final String FREQUENCY = "frequency";
+    public static final String USERNAME = "username";
+    public static final String friendUser = "username";
+    public static final int ID = -1;
+    public int friendId = -1;
 
     static Context ctx = CoreApplication.getInstance();
 

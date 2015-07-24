@@ -49,11 +49,19 @@ public class ApiConnection {
 
     }
 
-//    public final static <T extends BaseResponse> void GetUsers(final IBaseCallback callback, final T responseToPopulate, final Type type) {
-//        ArrayList<ObjectNameValuePair> parameters = new ArrayList<ObjectNameValuePair>();
-//        performRequest("accounts/jsonlogin1.php", "application/json", parameters, responseToPopulate, type, callback);
-//
-//    }
+    public final static <T extends BaseResponse> void GetMessages(final IBaseCallback callback,final String username,final int id,
+                                                               final T responseToPopulate, final Type type) {
+        ArrayList<ObjectNameValuePair> parameters = new ArrayList<ObjectNameValuePair>();
+        parameters.add(new ObjectNameValuePair("identifier",id));
+        parameters.add(new ObjectNameValuePair("loggedUsername",username));
+        performRequest("UatsAppWebDEV/history.php", "application/json", parameters, responseToPopulate, type, callback);
+    }
+
+    public final static <T extends BaseResponse> void GetUsers(final IBaseCallback callback, final T responseToPopulate, final Type type) {
+        ArrayList<ObjectNameValuePair> parameters = new ArrayList<ObjectNameValuePair>();
+        performRequest("UatsAppWebDEV/get_usersANDROID.php", "application/json", parameters, responseToPopulate, type, callback);
+    }
+
 
     public static <T extends BaseResponse> void performRequest(final String operation, final String contentType, final ArrayList<ObjectNameValuePair> parameters,
                                                                final T responseToPopulate, final Type type, final IBaseCallback<T> callback) {
