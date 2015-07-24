@@ -13,6 +13,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var txtUsername: UITextField!
     
     @IBOutlet weak var txtPassword: UITextField!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +37,6 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         {
             
             // User is already logged in, do work such as go to next view controller.
-            //prefs.setInteger(1, forKey: "ISFACEBOOKLOGGED")
-            
-            //self.performSegueWithIdentifier("goApp", sender: self)
             
         }
         else
@@ -67,43 +65,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
-                let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-                graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-                    
-                    if ((error) != nil)
-                    {
-                        // Process error
-                        println("Error: \(error)")
-                    }
-                    else
-                    {
-                        let userName : NSString = result.valueForKey("name") as! NSString
-                        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-                        prefs.setObject(userName, forKey: "USERNAME")
-                        
-                        Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/jsonsignup.php", parameters: ["username": "\(userName)", "password" : "\(userName)", "c_password": "\(userName)", "email" : "\(userName)@\(userName).com"], encoding: .JSON)
-                            .responseJSON { _, _, JSON, _ in
-                                let jsonResult = JSON?.valueForKey("success") as? Int
-                                if((jsonResult) != nil){
-                                    var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-                                    prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
-                                    self.performSegueWithIdentifier("goApp", sender: self)
-                                    
-                                    var alertView:UIAlertView = UIAlertView()
-                                    alertView.title = "Success!"
-                                    alertView.message = "You are logged in!"
-                                    alertView.delegate = self
-                                    alertView.addButtonWithTitle("OK")
-                                    alertView.show()
-                                }
-                                
-                                
-                                
-                                println(JSON)
-                                
-                        }
-                    }
-                })
+              self.checkFacebookUser()
             }
         }
     }
@@ -114,7 +76,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
     func returnUserData()
     {
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,name,picture.width(480).height(480)"])
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
             if ((error) != nil)
@@ -125,12 +87,62 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             else
             {
                 println("fetched facebook user: \(result)")
-                let userName : NSString = result.valueForKey("name") as! NSString
+//                let userName : NSString = result.valueForKey("name") as! NSString
+//                println("User name is: \(userName)")
+//                let userEmail : NSString = result.valueForKey("email") as! NSString
+//                println("User Email is: \(userEmail)")
+//                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//                prefs.setObject(userName, forKey: "USERNAME")
+                
+            }
+        })
+    }
+    
+    func checkFacebookUser(){
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,name,picture.width(480).height(480)"])
+        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+            
+            if ((error) != nil)
+            {
+                // Process error
+                println("Error: \(error)")
+            }
+            else
+            {
+                println("fetched facebook user: \(result)")
+                let userName : String = result.valueForKey("name") as! String
+                let userEmail : String = result.valueForKey("email") as! String
+                
+                Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/jsonsignup.php", parameters: ["username": "\(userName)", "password" : "\(userName)", "c_password": "\(userName)", "email" : "\(userEmail)"], encoding: .JSON)
+                    .responseJSON { _, _, JSON, _ in
+                        let jsonResult = JSON?.valueForKey("success") as? Int
+                        if((jsonResult) != nil){
+                            var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                            prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
+                            
+                            self.performSegueWithIdentifier("goApp", sender: self)
+                            
+                            var alertView:UIAlertView = UIAlertView()
+                            alertView.title = "Success!"
+                            alertView.message = "You are logged in!"
+                            alertView.delegate = self
+                            alertView.addButtonWithTitle("OK")
+                            alertView.show()
+                        }
+                        
+                        
+                        
+                        println(JSON)
+                        
+                }
+
+                
                 let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                 prefs.setObject(userName, forKey: "USERNAME")
                 
             }
         })
+        
         
     }
     
