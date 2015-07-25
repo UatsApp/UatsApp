@@ -15,7 +15,7 @@ import Alamofire
 
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-/////Cell construct///////
+    /////Cell construct///////
     
     struct CellMeta {
         var alingment: NSTextAlignment
@@ -32,6 +32,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     
+    @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomLayoutConstraintSendButton: NSLayoutConstraint!
+    
+    
+    
     @IBOutlet var historyTable: UITableView!
     let cellHistory = "cell_message"
     let cellInfo = "cell_info"
@@ -39,24 +44,24 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var history:[History] = []
     var userInfo:NSArray = []
     var cellMetas:[CellMeta] = []
-//        
-//
-//   Prototype cells for test
-//        CellMeta(NSTextAlignment.Left, "cell_info", "Cata"),
-//        CellMeta(NSTextAlignment.Left, "cell_message", "Ce plm sentampla. djaldlksd as dfjdf asdf sdafjklsd fasd  sentampla. djaldlksd as dfjdf asdf sdafjklsd fasd fasdf sadlfjasd flasd flasd jflsadjf asldfa"),
-//        CellMeta(NSTextAlignment.Right, "cell_info", "Paul"),
-//        CellMeta(NSTextAlignment.Right, "cell_message", "Une ma pula?"),
-//        CellMeta(NSTextAlignment.Left, "cell_info", "Cata"),
-//        CellMeta(NSTextAlignment.Left, "cell_message", "Acilea"),
-//        CellMeta(NSTextAlignment.Left, "cell_message", "La birou")
-//    ]
+    //
+    //
+    //   Prototype cells for test
+    //        CellMeta(NSTextAlignment.Left, "cell_info", "Cata"),
+    //        CellMeta(NSTextAlignment.Left, "cell_message", "Ce plm sentampla. djaldlksd as dfjdf asdf sdafjklsd fasd  sentampla. djaldlksd as dfjdf asdf sdafjklsd fasd fasdf sadlfjasd flasd flasd jflsadjf asldfa"),
+    //        CellMeta(NSTextAlignment.Right, "cell_info", "Paul"),
+    //        CellMeta(NSTextAlignment.Right, "cell_message", "Une ma pula?"),
+    //        CellMeta(NSTextAlignment.Left, "cell_info", "Cata"),
+    //        CellMeta(NSTextAlignment.Left, "cell_message", "Acilea"),
+    //        CellMeta(NSTextAlignment.Left, "cell_message", "La birou")
+    //    ]
     
     @IBOutlet weak var userLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.checkRelation()
-//        historyTable.rowHeight = UITableViewAutomaticDimension
+        //        historyTable.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
     }
     
@@ -66,6 +71,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         historyTable.delegate = self
         historyTable.dataSource = self
         println(userInfo[1])
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,7 +80,38 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Dispose of any resources that can be recreated.
     }
     
-//////Populate Class History, populate cells/////////////////
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWillShowNotification(notification: NSNotification) {
+        updateBottomLayoutConstraintWithNotification(notification)
+    }
+    
+    func keyboardWillHideNotification(notification: NSNotification) {
+        updateBottomLayoutConstraintWithNotification(notification)
+    }
+    
+    func updateBottomLayoutConstraintWithNotification(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        
+        let animationDuration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        let keyboardEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let convertedKeyboardEndFrame = view.convertRect(keyboardEndFrame, fromView: view.window)
+        let rawAnimationCurve = (notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).unsignedIntValue << 16
+        let animationCurve = UIViewAnimationOptions(rawValue: UInt(rawAnimationCurve))
+        
+        bottomLayoutConstraint.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame)
+        bottomLayoutConstraintSendButton.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame)
+        UIView.animateWithDuration(animationDuration, delay: 0.0, options: .BeginFromCurrentState | animationCurve, animations: {
+            self.view.layoutIfNeeded()
+            }, completion: nil)
+    }
+    
+    
+    //////Populate Class History, populate cells/////////////////
     func checkRelation(){
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         var userUsername = prefs.valueForKey("USERNAME") as! String
@@ -124,7 +162,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
-/////////Table View Implement
+    /////////Table View Implement
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -132,7 +170,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellMetas.count
     }
-
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let meta = cellMetas[indexPath.row]
         if meta.identifier == "cell_info" {
