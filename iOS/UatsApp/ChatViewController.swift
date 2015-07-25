@@ -9,10 +9,6 @@
 import UIKit
 import Alamofire
 
-
-
-
-
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     /////Cell construct///////
@@ -44,24 +40,14 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var history:[History] = []
     var userInfo:NSArray = []
     var cellMetas:[CellMeta] = []
-    //
-    //
-    //   Prototype cells for test
-    //        CellMeta(NSTextAlignment.Left, "cell_info", "Cata"),
-    //        CellMeta(NSTextAlignment.Left, "cell_message", "Ce plm sentampla. djaldlksd as dfjdf asdf sdafjklsd fasd  sentampla. djaldlksd as dfjdf asdf sdafjklsd fasd fasdf sadlfjasd flasd flasd jflsadjf asldfa"),
-    //        CellMeta(NSTextAlignment.Right, "cell_info", "Paul"),
-    //        CellMeta(NSTextAlignment.Right, "cell_message", "Une ma pula?"),
-    //        CellMeta(NSTextAlignment.Left, "cell_info", "Cata"),
-    //        CellMeta(NSTextAlignment.Left, "cell_message", "Acilea"),
-    //        CellMeta(NSTextAlignment.Left, "cell_message", "La birou")
-    //    ]
     
     @IBOutlet weak var userLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.checkRelation()
-        //        historyTable.rowHeight = UITableViewAutomaticDimension
+        
+        historyTable.rowHeight = UITableViewAutomaticDimension
+        
         // Do any additional setup after loading the view.
     }
     
@@ -73,6 +59,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         println(userInfo[1])
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
+        self.checkRelation()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -85,6 +73,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
+    ////////////////Constraint TextField To Keyboard////////////////////
     
     func keyboardWillShowNotification(notification: NSNotification) {
         updateBottomLayoutConstraintWithNotification(notification)
@@ -154,15 +143,23 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         
                         self.cellMetas.append(CellMeta( partnerUserId == historyItem._from ? NSTextAlignment.Left : NSTextAlignment.Right, "cell_message", historyItem.message))
                         
-                        
                     }
                 }
+                //////////////Autoscroll to last Message///////////////
+                if self.cellMetas.count > 0{
+                    let delay = 0.1 * Double(NSEC_PER_SEC)
+                    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                    
+                    dispatch_after(time, dispatch_get_main_queue(), {
+                        self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
+                    })}
+                
                 self.historyTable.reloadData()
         }
         
     }
     
-    /////////Table View Implement
+    /////////Table View Implement////////////
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -190,8 +187,6 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         return cell
     }
-    
-    
     
     
     /*
