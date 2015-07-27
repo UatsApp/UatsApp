@@ -23,7 +23,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 <body>
 	<div id="page-wrapper" >
 		<h1>UatsApp Demo</h1><br>
-		<h2 id = "status"></h2>
+		<p id = "status" class = "chat-partener"></p>
 
 		<ul id="log" style = "overflow-y: scroll; overflow-x: hidden; height:30%;"></ul>
 
@@ -79,7 +79,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 				if ( e.keyCode == 13 && this.value) {
 					text = this.value.replace(/[\n\t\r]/g,"");
 					if(relation_id !=0 && text != ""){
-						log( '<li class="sent"> <span><?php echo $_SESSION['user'];?>:</span>'+this.value+'</li>');
+						log( '<li class="sent"> '+this.value+'</li>');
 						var dataForServer = new Object();
 						dataForServer.message = text;
 						dataForServer.relation_id = relation_id;
@@ -106,12 +106,12 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 
 			//Let the user know we're connected
 			Server.bind('open', function() {
-				document.getElementById('status').innerHTML = "Status: Connected";
+				//document.getElementById('status').innerHTML = "Status: Connected";
 			});
 
 			//OH NOES! Disconnection occurred.
 			Server.bind('close', function( data ) {
-				document.getElementById('status').innerHTML = "Status: Disconnected";
+				//document.getElementById('status').innerHTML = "Status: Disconnected";
 			});
 
 			//Log any messages sent from server
@@ -129,7 +129,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 						success: function(success){
 						//check if you should receive a message and if you have a chat windows opened with the sender
 						if(success["receiver"] == '<?php echo $_SESSION["user_id"] ?>' && success["relation_id"] == window_chat.getAttribute('data-identifier')){ 
-							log('<li class="received"> <span>' + success["sender_username"]+ ':</span>'+success["message"]+'</li>');
+							log('<li class="received">'+success["message"]+'</li>');
 
 						}else{
    							//Check if you have a chat window opened and someone else sends you a message
@@ -164,7 +164,7 @@ function submitMessage(){
 	var msg = document.getElementById('message');
 		text = msg.value.replace(/[\n\t\r]/g,"");
 					if(relation_id !=0 && text != ""){
-						log( '<li class="sent"> <span><?php echo $_SESSION['user'];?>:</span>'+text+'</li>');
+						log( '<li class="sent">'+text+'</li>');
 						var dataForServer = new Object();
 						dataForServer.message = text;
 						dataForServer.relation_id = relation_id;
@@ -199,6 +199,7 @@ $(document).ready(function(){
 }).on('click','#row li', function(){
 	
 	var partener_username = $(this).data("username");
+	document.getElementById('status').innerHTML = partener_username;
 	var userid = $(this).data('userid');
 
 	$(this).text($(this).data("username"));
@@ -217,15 +218,15 @@ $(document).ready(function(){
 		data: JSON.stringify(dataForHistory),
 		success: function(success){
 			relation_id = success["relation_id"];
+			window_chat.setAttribute("data-identifier", relation_id);
 			jQuery.fn.reverse = [].reverse;
 			$.each(success["history"], function(key, value) {
 				console.log(value);
-				window_chat.setAttribute("data-identifier", value.id_c);
         				//check who is the sender and who's the receiver
         				if(value._from == '<?php echo $_SESSION["user_id"]?>'){
-        					log('<li class="sent"> <span><?php echo $_SESSION['user'];?>:</span>' + value.message.toString() + '</li>');
+        					log('<li class="sent"> ' + value.message.toString() + '</li>'); //<span><?php echo $_SESSION['user'];?>:</span> 
         				}else{
-        					log('<li class="received"> <span>' + partener_username + ':</span>' + value.message + '</li>');//TODO get username from DB not userid
+        					log('<li class="received"> ' + value.message + '</li>');//TODO get username from DB not userid
         				}
 
         			});
