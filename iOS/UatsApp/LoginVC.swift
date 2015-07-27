@@ -78,8 +78,6 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                     else
                     {
                         let userName : NSString = result.valueForKey("name") as! NSString
-                        let userEmail : String = result.valueForKey("email") as! String
-                        println(userEmail)
                         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                         prefs.setObject(userName, forKey: "USERNAME")
                         
