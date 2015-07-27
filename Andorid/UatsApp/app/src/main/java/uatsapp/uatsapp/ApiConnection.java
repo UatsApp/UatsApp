@@ -62,6 +62,16 @@ public class ApiConnection {
         performRequest("UatsAppWebDEV/get_usersANDROID.php", "application/json", parameters, responseToPopulate, type, callback);
     }
 
+    public final static <T extends BaseResponse> void sendMessage(final IBaseCallback callback,final String message,final int relation_id,final int senderID,
+                                                            final T responseToPopulate, final Type type) {
+        ArrayList<ObjectNameValuePair> parameters = new ArrayList<ObjectNameValuePair>();
+        parameters.add(new ObjectNameValuePair("message",message));
+        parameters.add(new ObjectNameValuePair("relation_id",relation_id));
+        parameters.add(new ObjectNameValuePair("senderID",senderID));
+        performRequest("UatsAppWebDEV/insert_message.php", "application/json", parameters, responseToPopulate, type, callback);
+
+    }
+
 
     public static <T extends BaseResponse> void performRequest(final String operation, final String contentType, final ArrayList<ObjectNameValuePair> parameters,
                                                                final T responseToPopulate, final Type type, final IBaseCallback<T> callback) {

@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -16,6 +16,7 @@ import java.util.List;
 import uatsapp.uatsapp.Adapters.UsersAdapter;
 import uatsapp.uatsapp.Utils.User;
 import uatsapp.uatsapp.data.data.IBaseCallback;
+import uatsapp.uatsapp.data.data.RegisterResponse;
 import uatsapp.uatsapp.data.data.UsersListResponse;
 
 /**
@@ -25,6 +26,7 @@ public class ListActivity extends Activity {
 //    DowloadWebPageTask asyncTask =new DowloadWebPageTask();
     private UsersAdapter adapter;
     ListView lv;
+    Button btn_out;
     String currentUser = AppPreferences.getStringPreferences("USERNAME");
     List<User> userList;
 
@@ -32,6 +34,37 @@ public class ListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+        btn_out=(Button)findViewById(R.id.btn_out);
+        btn_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppPreferences.setPreferences("USERNAME","");
+                AppPreferences.setPreferences("PASSWORD","");
+                Intent launchactivity = new Intent(ListActivity.this, LoginActivity.class);
+                startActivity(launchactivity);
+                finish();
+            }
+        });
+
+        if(!AppPreferences.getStringPreferences("USERNAME").isEmpty()) {
+            ApiConnection.Login(new IBaseCallback<RegisterResponse>() {
+                @Override
+                public void onResult(final RegisterResponse result) {
+                    if (result.isSuccess()) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                            }
+                        });
+                    }
+                }
+            }, AppPreferences.getStringPreferences("USERNAME"), AppPreferences.getStringPreferences("PASSWORD"), new RegisterResponse(), new TypeToken<RegisterResponse>() {
+            }.getType());
+        }else{
+            Intent launchactivity = new Intent(ListActivity.this, LoginActivity.class);
+            startActivity(launchactivity);
+            finish();
+        }
 
 
         adapter = new UsersAdapter(this, R.layout.item_note_list_entry, new ArrayList<User>());
@@ -58,13 +91,13 @@ public class ListActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int friendId = userList.get(position).getId();
                 String friendUser = userList.get(position).getUsername();
-                for(User user:userList){
-                    if(user.getUsername().equals(currentUser))
+                for (User user : userList) {
+                    if (user.getUsername().equals(currentUser))
                         AppPreferences.setPreferences("ID", user.getId());
                 }
-                AppPreferences.setPreferences("friendId",friendId);
-                AppPreferences.setPreferences("friendUser",friendUser);
-                Intent launchactivity = new Intent(ListActivity.this,MessageActivity.class);
+                AppPreferences.setPreferences("friendId", friendId);
+                AppPreferences.setPreferences("friendUser", friendUser);
+                Intent launchactivity = new Intent(ListActivity.this, MessageActivity.class);
                 startActivity(launchactivity);
             }
         });

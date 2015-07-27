@@ -9,6 +9,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/Users"
         android:id="@+id/listView"
+        android:divider="@null"
+        android:dividerHeight="0dp"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="10dp" />
 
@@ -21,5 +23,13 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textSize="45sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:id="@+id/btn_out"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

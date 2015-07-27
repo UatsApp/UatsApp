@@ -13,6 +13,7 @@ public class AppPreferences {
     public static final String FREQUENCY = "frequency";
     public static final String USERNAME = "username";
     public static final String friendUser = "username";
+    public static final String PASSOWRD = "password";
     public static final int ID = -1;
     public int friendId = -1;
 

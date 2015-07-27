@@ -107,10 +107,7 @@ public class SingupActivity extends Activity {
     }
 
     public boolean emailcheck(String s){
-        if(s.contains("@"))
-            return true;
-        else
-            return false;
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches();
     }
     public boolean passwordcheck(String pass, String c_pass){
         if(pass.equals(c_pass)){

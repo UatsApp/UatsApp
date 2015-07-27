@@ -3,10 +3,28 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="message"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Name.mp3"
         android:id="@+id/message"
+        android:textColor="@android:color/holo_blue_dark"
         android:layout_centerVertical="true"
-        android:textSize="30sp" />
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:layout_alignTop="@+id/message2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="message"
+        android:layout_marginLeft="20dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/white"
+        android:layout_toRightOf="@+id/message"
+        android:layout_toEndOf="@+id/message"
+        android:id="@+id/message2"
+        android:layout_centerVertical="true"/>
 </RelativeLayout>

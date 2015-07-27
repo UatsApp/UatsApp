@@ -61,8 +61,10 @@ public class LoginActivity extends Activity {
                                     public void run() {
                                         Toast.makeText(LoginActivity.this, "You have logged in successfully", Toast.LENGTH_LONG).show();
                                         AppPreferences.setPreferences("USERNAME",et.getText().toString());
+                                        AppPreferences.setPreferences("PASSSWORD",et2.getText().toString());
                                         Intent launchactivity = new Intent(LoginActivity.this,ListActivity.class);
                                         startActivity(launchactivity);
+                                        finish();
                                     }
                                 });
                             } else {
