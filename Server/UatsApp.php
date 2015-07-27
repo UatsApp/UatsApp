@@ -129,7 +129,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 						success: function(success){
 						//check if you should receive a message and if you have a chat windows opened with the sender
 						if(success["receiver"] == '<?php echo $_SESSION["user_id"] ?>' && success["relation_id"] == window_chat.getAttribute('data-identifier')){ 
-							log('<li class="received"> <span>' + success["sender_username"]+ ':</span>'+success["message"]+'</li>');
+							log('<li class="received">'+success["message"]+'</li>');
 
 						}else{
    							//Check if you have a chat window opened and someone else sends you a message
@@ -218,10 +218,10 @@ $(document).ready(function(){
 		data: JSON.stringify(dataForHistory),
 		success: function(success){
 			relation_id = success["relation_id"];
+			window_chat.setAttribute("data-identifier", relation_id);
 			jQuery.fn.reverse = [].reverse;
 			$.each(success["history"], function(key, value) {
 				console.log(value);
-				window_chat.setAttribute("data-identifier", value.id_c);
         				//check who is the sender and who's the receiver
         				if(value._from == '<?php echo $_SESSION["user_id"]?>'){
         					log('<li class="sent"> ' + value.message.toString() + '</li>'); //<span><?php echo $_SESSION['user'];?>:</span> 
