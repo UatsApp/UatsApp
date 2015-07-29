@@ -56,11 +56,11 @@
         android:layout_height="wrap_content"
         android:text="Sign In"
         android:id="@+id/button"
-        android:layout_below="@+id/editText2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="59dp"
         android:textColor="@android:color/white"
-        android:background="#ff3b5eff"/>
+        android:background="#ff3b5eff"
+        android:layout_below="@+id/login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp" />
 
 
     <TextView
@@ -68,9 +68,6 @@
         android:layout_height="wrap_content"
         android:text="Don't have an account? Sign up!"
         android:id="@+id/textView2"
-        android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="63dp"
         android:gravity="center_horizontal"
         android:textColor="#ff3b5eff"
         android:textSize="20sp"
@@ -78,5 +75,27 @@
         android:visibility="visible"
         android:enabled="true"
         android:clickable="true"
-        android:background="#00ffffff" />
+        android:background="#00ffffff"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/info"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textSize="18sp"
+        />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/editText2"
+        android:layout_alignStart="@+id/editText2"
+        android:layout_marginStart="38dp" />
+
 </RelativeLayout>

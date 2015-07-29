@@ -81,29 +81,29 @@ public class SingupActivity extends Activity {
         else
         {
             ApiConnection.Register(new IBaseCallback<RegisterResponse>() {
-                @Override
-                public void onResult(final RegisterResponse result) {
-                    if(result.isSuccess()){
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(SingupActivity.this, "Your account has been successfully registered", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        });
+            @Override
+            public void onResult(final RegisterResponse result) {
+                if(result.isSuccess()){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(SingupActivity.this, "Your account has been successfully registered", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
 
-                    }
-                    else {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                DialogHelper.showAlertDialog(SingupActivity.this, result.getError_message());
-                            }
-                        });
-                    }
                 }
-            },id,pass,c_pass,e_mail,new RegisterResponse(),new TypeToken<RegisterResponse>(){}.getType());
-        }
+                else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DialogHelper.showAlertDialog(SingupActivity.this, result.getError_message());
+                        }
+                    });
+                }
+            }
+        },id,pass,c_pass,e_mail,new RegisterResponse(),new TypeToken<RegisterResponse>(){}.getType());
+    }
     }
 
     public boolean emailcheck(String s){

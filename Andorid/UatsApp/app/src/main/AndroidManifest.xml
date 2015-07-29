@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="uatsapp.uatsapp" >
 
+    <activity android:name="com.hathy.fblogin.LoginActivity">
+
+    </activity>
+
     <application
         android:name=".CoreApplication"
         android:allowBackup="true"
@@ -9,6 +13,12 @@
         android:label="@string/app_name"
         android:configChanges="keyboardHidden|orientation"
         android:theme="@style/AppTheme" >
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
 
         <activity
             android:name=".LoginActivity"
@@ -20,21 +30,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:screenOrientation="portrait"
             android:name=".SingupActivity"
             android:label="Sign up">
         </activity>
+
         <activity
             android:screenOrientation="portrait"
             android:name=".ListActivity"
             android:label="User List">
         </activity>
+
         <activity
             android:screenOrientation="portrait"
             android:name=".MessageActivity"
             android:label="Message history">
         </activity>
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
