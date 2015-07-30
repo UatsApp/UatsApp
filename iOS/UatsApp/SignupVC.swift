@@ -111,7 +111,9 @@ class SignupVC: UIViewController {
                         alertView.delegate = self
                         alertView.addButtonWithTitle("OK")
                         alertView.show()
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        let data:NSArray = [username, password]
+                        self.performSegueWithIdentifier("BackToLogin", sender: data)
+                       // self.dismissViewControllerAnimated(true, completion: nil)
                     }else{
                         var error_msg:NSString
                         if jsonData["error_message"] as? NSString != nil
@@ -156,15 +158,20 @@ class SignupVC: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "BackToLogin"{
+            let loginController = segue.destinationViewController as! LoginVC
+            loginController.DataForAutoComplete = sender as! NSArray
+        }
     }
-    */
+    
 
 }
 

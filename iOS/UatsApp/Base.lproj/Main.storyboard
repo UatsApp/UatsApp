@@ -66,7 +66,7 @@
                         <viewControllerLayoutGuide type="bottom" id="sc6-93-ik6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tBE-M3-gJV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="enrollment_background.jpg" highlightedImage="enrollment_background.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Zlr-fV-dBF">
@@ -195,11 +195,12 @@
                         <outlet property="txtEmail" destination="wPA-gf-bHF" id="z0O-tE-b4S"/>
                         <outlet property="txtPassword" destination="x8P-oP-GKf" id="PrO-gQ-g4f"/>
                         <outlet property="txtUsername" destination="ruw-vp-q21" id="8Z0-Zw-XhT"/>
+                        <segue destination="C71-eD-UqQ" kind="modal" identifier="BackToLogin" id="rOU-X4-LLI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L3g-tg-bkx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1125.5" y="1179.5"/>
+            <point key="canvasLocation" x="1101" y="1097"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vEq-zx-8hc">
@@ -304,7 +305,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Duma" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="irM-y3-pGb">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -483,6 +484,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qEG-eS-AN2"/>
+        <segue reference="rOU-X4-LLI"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -55,7 +55,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     
                     self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_message", jsonResponse["message"] as! String))
                     
-                    if self.cellMetas.count > 0{
+                    if self.cellMetas.count >= 0{
                         let delay = 0.1 * Double(NSEC_PER_SEC)
                         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                         
@@ -126,7 +126,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             self.cellMetas.append(CellMeta(NSTextAlignment.Right, "cell_message", messageToSend))
             
-            if self.cellMetas.count > 0{
+            if self.cellMetas.count >= 0{
                 let delay = 0.1 * Double(NSEC_PER_SEC)
                 let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                 

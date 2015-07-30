@@ -16,7 +16,9 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var txtUsername: UITextField!
     
     @IBOutlet weak var txtPassword: UITextField!
-
+    
+    var DataForAutoComplete:NSArray = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,10 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         self.signin.layer.borderColor = UIColor.whiteColor().CGColor
         self.signin.layer.borderWidth = 0.2
         
+        if DataForAutoComplete.count != 0 {
+            self.txtUsername.text = DataForAutoComplete[0] as! String
+            self.txtPassword.text = DataForAutoComplete[1] as! String
+        }
         
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -175,6 +181,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         //        if(isLoggedin == 1){
         //            self.performSegueWithIdentifier("goApp", sender: self)
         //        }
+
     }
     
     
