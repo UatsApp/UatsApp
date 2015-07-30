@@ -31,6 +31,8 @@
 		3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D411B28CBE10029218E /* SignupVC.swift */; };
 		3FD49D471B28D82D0029218E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD49D451B28D82D0029218E /* Main.storyboard */; };
 		5230A1FBE479994D0A10C1DF /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		525762291B676E39008CC78F /* socketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525762281B676E39008CC78F /* socketManager.swift */; };
+		5284F05E1B67EABF0038583B /* ReceivedMessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5284F05D1B67EABF0038583B /* ReceivedMessageDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		3FD49D3F1B28C9FE0029218E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		3FD49D411B28CBE10029218E /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		3FD49D461B28D82D0029218E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		525762281B676E39008CC78F /* socketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = socketManager.swift; sourceTree = "<group>"; };
+		5284F05D1B67EABF0038583B /* ReceivedMessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedMessageDelegate.swift; sourceTree = "<group>"; };
 		C67D60E815D3BA9C502089EF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -184,6 +188,8 @@
 			children = (
 				3F7DE5621B57BFE2005954FC /* Users.swift */,
 				3F6560631B5D3BE4001BF3C1 /* History.swift */,
+				525762281B676E39008CC78F /* socketManager.swift */,
+				5284F05D1B67EABF0038583B /* ReceivedMessageDelegate.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -375,11 +381,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F1DD7811B28A4320081FE34 /* ViewController.swift in Sources */,
+				525762291B676E39008CC78F /* socketManager.swift in Sources */,
 				3F7DE5631B57BFE2005954FC /* Users.swift in Sources */,
 				3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */,
 				3F8ACEEE1B61323900B412CC /* UatsAppVC.swift in Sources */,
 				3F6560641B5D3BE4001BF3C1 /* History.swift in Sources */,
 				3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */,
+				5284F05E1B67EABF0038583B /* ReceivedMessageDelegate.swift in Sources */,
 				3F1DD77F1B28A4320081FE34 /* UatsApp.xcdatamodeld in Sources */,
 				3FD49D401B28C9FE0029218E /* LoginVC.swift in Sources */,
 				3F7DE55E1B56B8DF005954FC /* UsersListVC.swift in Sources */,

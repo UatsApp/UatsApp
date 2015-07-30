@@ -336,7 +336,10 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your message here..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qaL-ce-B7M">
                                 <rect key="frame" x="0.0" y="574" width="330" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="dUA-Cd-XAr" id="WFu-7d-YAp"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9m1-Ys-YYY">
                                 <rect key="frame" x="338" y="573" width="36" height="30"/>
@@ -347,6 +350,9 @@
                                 <state key="normal" title="Send">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="sendButtonTapped:" destination="dUA-Cd-XAr" eventType="touchUpInside" id="pGB-xH-qLg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -369,6 +375,8 @@
                         <outlet property="bottomLayoutConstraint" destination="af2-a9-Ekp" id="ZQj-z9-HDg"/>
                         <outlet property="bottomLayoutConstraintSendButton" destination="sIV-6B-JkA" id="o6x-lu-1SR"/>
                         <outlet property="historyTable" destination="cb4-PK-eXn" id="2FV-9L-2KB"/>
+                        <outlet property="messageField" destination="qaL-ce-B7M" id="NLk-gD-UNm"/>
+                        <outlet property="sendBtn" destination="9m1-Ys-YYY" id="zZF-DC-xS0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HtU-Xt-FIT" userLabel="First Responder" sceneMemberID="firstResponder"/>

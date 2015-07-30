@@ -11,9 +11,10 @@ import UIKit
 class UatsAppVC: UITabBarController {
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        super.viewDidLoad()        
         // Do any additional setup after loading the view.
+        socketManager.sharedSocket.socket.connect()
+        println(loggedUserID)
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,8 +31,8 @@ class UatsAppVC: UITabBarController {
 
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
-        
-                self.performSegueWithIdentifier("goto_login", sender: logoutBtn)
+        loggedUserID = -1000
+        self.performSegueWithIdentifier("goto_login", sender: logoutBtn)
     }
     
     

@@ -8,6 +8,9 @@
 
 import UIKit
 import Alamofire
+
+var loggedUserID : Int = -1000
+
 class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var txtUsername: UITextField!
@@ -30,6 +33,9 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         
         if(isLoggedin == 1 || isFacebookLoggedIn == 1){
             self.performSegueWithIdentifier("goApp", sender: self)//////////DE PUS LOGOUT IN APP SI SCBHIMBAT '!=' IN '==';////////////////
+            if loggedUserID == -1000{
+                
+            }
         }
         
         //FB login
@@ -113,12 +119,18 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                 let userName : String = result.valueForKey("name") as! String
                 let userEmail : String = result.valueForKey("email") as! String
                 
+                
+                //Validate  Facebook User
                 Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/jsonsignup.php", parameters: ["username": "\(userName)", "password" : "\(userName)", "c_password": "\(userName)", "email" : "\(userEmail)"], encoding: .JSON)
                     .responseJSON { _, _, JSON, _ in
+                        println(JSON)
                         let jsonResult = JSON?.valueForKey("success") as? Int
                         if((jsonResult) != nil){
                             var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                             prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
+                            if JSON?.valueForKey("FBUserID") != nil {
+                                loggedUserID = (JSON?.valueForKey("FBUserID") as? Int)!
+                            }
                             
                             self.performSegueWithIdentifier("goApp", sender: self)
                             
@@ -131,8 +143,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         }
                         
                         
-                        
-                        println(JSON)
+
                         
                 }
 
@@ -228,6 +239,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                     
                     let status:NSInteger = jsonData.valueForKey("status") as! NSInteger
                     let user_id:NSInteger = jsonData.valueForKey("user_id") as! NSInteger
+                    loggedUserID = user_id
                     
                     //[jsonData[@"success"] integerValue];
                     
