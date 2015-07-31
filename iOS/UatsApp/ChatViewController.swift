@@ -53,18 +53,25 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     
                     if jsonResponse["receiver"] as! Int == loggedUserID && jsonResponse["sender"] as! Int == self.partener_id{
                         
-                    self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_info", jsonResponse["sender_username"] as! String))
-                    
-                    self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_message", jsonResponse["message"] as! String))
-                    
-                    if self.cellMetas.count >= 0{
-                        let delay = 0.1 * Double(NSEC_PER_SEC)
-                        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                         
-                        dispatch_after(time, dispatch_get_main_queue(), {
-                            self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
-                        })}
-                    self.historyTable.reloadData()
+                        let infoMetas = self.cellMetas.filter{$0.identifier == "cell_info"}
+                        
+                        if infoMetas.count == 0 || infoMetas.last!.text != jsonResponse["sender_username"] as! String {
+                            self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_info", jsonResponse["sender_username"] as! String))
+                        }
+                        self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_message", jsonResponse["message"] as! String))
+                        
+                        
+                        
+                        
+                        if self.cellMetas.count >= 0{
+                            let delay = 0.1 * Double(NSEC_PER_SEC)
+                            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                            
+                            dispatch_after(time, dispatch_get_main_queue(), {
+                                self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
+                            })}
+                        self.historyTable.reloadData()
                     }
                 }
                 
@@ -279,7 +286,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
- 
+    
     
 }
 
@@ -288,5 +295,5 @@ extension ChatViewController : UITextFieldDelegate {
         sendButtonTapped(nil)
         return true
     }
-
+    
 }
