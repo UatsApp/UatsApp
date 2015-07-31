@@ -1,5 +1,5 @@
 <?php
-header('Content-type: application/json');
+//header('Content-type: application/json');
 include'db_connect.php';
 
 /*
@@ -10,20 +10,23 @@ $response_obj["receiver"] = $uid2;
 $response_obj["sender_username"] = $username;
 */
 
+$data = json_decode(file_get_contents('php://input'));
 
-if($_POST){
-	error_log("muio");
-	$response_obj["message"] = $_POST['message'];
-	$mesaj = $_POST['message'];
-	$senderID = $_POST["senderID"];
-	$id_rel= $_POST["relation_id"];
+	$mesaj = $data->{"message"};
+	$senderID = $data->{"senderID"};
+	$id_rel = $data->{"relation_id"};
+	$response_obj["message"] = $mesaj;
 	$response_obj["relation_id"] = $id_rel;
-	//echo $idul_relatiei;
+
+if($mesaj){
+	error_log("muio");
+
 	$query = "SELECT uid1,uid2 FROM rel WHERE id_r = '$id_rel'";
 	$stmt = $conn->prepare($query);
 
 	$name = "SELECT username FROM users WHERE id = '$senderID'";
 	$stmt2 = $conn->prepare($name);
+
 
 
 	$stmt->execute();
@@ -38,7 +41,6 @@ if($_POST){
 		$response_obj["sender"] = $uid1;
 		$response_obj["receiver"] = $uid2;
 		$response_obj["sender_username"] = $username;
-
 
 	}else{
 		$stmt2->execute();

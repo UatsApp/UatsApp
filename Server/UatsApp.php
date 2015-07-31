@@ -83,7 +83,8 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 						var dataForServer = new Object();
 						dataForServer.message = text;
 						dataForServer.relation_id = relation_id;
-						dataForServer.senderID = '<?php echo $_SESSION["user_id"] ?>';
+						var temp = '<?php echo $_SESSION["user_id"] ?>';
+						dataForServer.senderID = parseInt(temp);
 						var validator = JSON.stringify(dataForServer);
 						$.ajax({
 							type:'POST',
@@ -118,29 +119,33 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 			Server.bind('message', function( payload ) {
 				try{
 					var received_obj = JSON.parse(payload);
+					debugger;
+					console.log(JSON.stringify(received_obj));
 					$.ajax({
 						type:'POST',
 						url:'validate_message.php',
-						data: received_obj,
+						data: JSON.stringify(received_obj),
 						error: function(data){
 							alert("There was an error: " + data);
-							
+							debugger;
 						},
 						success: function(success){
+							debugger;
+							succ = JSON.parse(success)
 						//check if you should receive a message and if you have a chat windows opened with the sender
-						if(success["receiver"] == '<?php echo $_SESSION["user_id"] ?>' && success["relation_id"] == window_chat.getAttribute('data-identifier')){ 
-							log('<li class="received">'+success["message"]+'</li>');
+						if(succ["receiver"] == '<?php echo $_SESSION["user_id"] ?>' && succ["relation_id"] == window_chat.getAttribute('data-identifier')){ 
+							log('<li class="received">'+succ["message"]+'</li>');
 
 						}else{
    							//Check if you have a chat window opened and someone else sends you a message
-   							if(success["receiver"] == '<?php echo $_SESSION["user_id"] ?>'){ 
+   							if(succ["receiver"] == '<?php echo $_SESSION["user_id"] ?>'){ 
    								var users = getElements("data-userid");
    								for ( var i = 0; i < users.length; i++ ) {
    									
     								//Check which user sent the message and update users list 
-    								if(users[i].getAttribute('data-userid') == success["sender"]){
+    								if(users[i].getAttribute('data-userid') == succ["sender"]){
     									$(users[i]).data("receivedMessages",parseInt($(users[i]).data("receivedMessages")) + 1);
-    									$(users[i]).text(success["sender_username"] + "\n" +$(users[i]).data("receivedMessages") + " new messages ");
+    									$(users[i]).text(succ["sender_username"] + "\n" +$(users[i]).data("receivedMessages") + " new messages ");
     								}
     							}
     						}
@@ -150,7 +155,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
     				}
     			});
 }catch (exception){
-	alert("cannot parse json");
+	//alert("cannot parse json");
 }
 
 

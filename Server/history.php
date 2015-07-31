@@ -67,7 +67,8 @@ if($uid){
 		$rel_ID->close();
 
 		$response["relation_id"] = $activeConversationID;
-		$get_messages = "SELECT * FROM mesages WHERE id_c = '$activeConversationID' ORDER BY id DESC LIMIT 5";
+		$response["loggedUserID"] = $loggedUserID;
+		$get_messages = "SELECT * FROM mesages WHERE id_c = '$activeConversationID' ORDER BY id DESC LIMIT 30";
 
 		error_log("eeor");
 		$hyst = array();

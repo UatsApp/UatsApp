@@ -4,10 +4,15 @@
   box-sizing: border-box;
 }
 
+
+h1{
+  text-align: center;
+}
 #page-wrapper p.chat-partener{
   text-align: center;
-  color: green;
+  color: black;
   font-size: 20px;
+  font-style: italic;
 }
 
 html {

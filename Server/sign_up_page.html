@@ -1,5 +1,11 @@
 <html>
-<head><script src="//code.jquery.com/jquery-1.11.3.min.js"></script></head>
+
+<head>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js">
+	</script>
+	<link rel="stylesheet" type="text/css" href="stylesheets/index.css">
+</head>
+
 <body>
 <!-- TODO:
 	-modify html tags
@@ -9,9 +15,6 @@
 
 -->
 
-
-
-
 <STYLE type="text/css">
   H3 { text-align: center}
 </STYLE>
@@ -19,16 +22,16 @@
 <h3>
 	<form> 
 	E-mail:<br>
-	<input type="email" id="email" required>
+	<input type="email" id="email" placeholder="E-mail" required>
 	<br>
 	Username:<br>
-	<input type="text" id="username" required>
+	<input type="text" id="username" placeholder="Username" required>
 	<br>
 	Password:<br>
-	<input type="password" id= "password" required>
+	<input type="password" id= "password" placeholder="Password" required>
 	<br>
 	Confirm password:<br>
-	<input type="password" id="c_password" required>
+	<input type="password" id="c_password" placeholder="Confirm your password" required>
 	<br><br>
 	<input type="submit" value="Sign up" onClick="signUP()">
 
@@ -52,22 +55,24 @@
 		if(dataToSend.username && dataToSend.password && dataToSend.c_password && dataToSend.email){
 		$.ajax({
    			type: 'POST',
-   			url: 'http://uatsapp.tk/registerDEV/jsonsignup.php',
-   			// dataType: "application/json; charset=utf-8",
+   			url: 'http://uatsapp.tk/registerDEV/jsonsignup.php',  
    			contentType: "application/json",
-   			data: JSON.stringify(dataToSend),                      
+   			xhrFields: {
+         		withCredentials: true
+    		},
+    		data: JSON.stringify(dataToSend),
    			success: function (result) {
    				debugger;
    				if(result["success"] === 1){
-						alert(result["success"]);
+						alert("Your account has been registred");
 					}else{
 						alert(result["error"]);
 					}
 
    				},
    			error: function(error){
-
-   				alert(error);
+   				debugger;
+   				alert("ce pula mea intra pe error "+ error);
    			}
 		});
 	}
