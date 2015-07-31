@@ -41,7 +41,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             println(dict["message"] as! String)
             var MsgToSend : String = dict["message"] as! String
             var RelToSend : Int = dict["relation_id"] as! Int
-            var SenderToSend : String = dict["senderID"] as! String
+            var SenderToSend : Int = dict["senderID"] as! Int
             
             
             //Validate message
@@ -51,6 +51,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 if let jsonResponse = JSON as? [String : AnyObject]{
                     println(jsonResponse["sender"])
                     
+                    if jsonResponse["receiver"] as! Int == loggedUserID && jsonResponse["sender"] as! Int == self.partener_id{
+                        
                     self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_info", jsonResponse["sender_username"] as! String))
                     
                     self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_message", jsonResponse["message"] as! String))
@@ -63,7 +65,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
                         })}
                     self.historyTable.reloadData()
-                    
+                    }
                 }
                 
             }
@@ -111,7 +113,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func sendButtonTapped(sender: AnyObject!) {
         if messageField.text != ""{
             var messageToSend = messageField.text
-            socketManager.sharedSocket.socket.writeString("{\"message\":\"\(messageToSend)\",\"relation_id\":\"\(self.relation_id)\",\"senderID\":\"\(loggedUserID)\",\"reciever\":\"\(self.partener_id)\",\"username\":\"\(self.myUserName)\"}")
+            socketManager.sharedSocket.socket.writeString("{\"message\":\"\(messageToSend)\",\"relation_id\":\"\(self.relation_id)\",\"senderID\":\"\(loggedUserID)\"}")
             
             Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/insert_message.php", parameters: ["message" : "\(messageToSend)" , "relation_id"  : "\(self.relation_id)" , "senderID" : "\(loggedUserID)"], encoding: .JSON).responseJSON {
                 _, _, JSON, _ in
