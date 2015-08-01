@@ -54,11 +54,6 @@ class UatsAppVC: UITabBarController {
         self.performSegueWithIdentifier("goto_login", sender: logoutBtn)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-     
-    }
-    
     
     /*
     // MARK: - Navigation
