@@ -41,7 +41,7 @@ class socketManager: WebSocketDelegate {
     
     
     init(){
-        self.socket = WebSocket(url: NSURL(scheme: "ws", host: "46.101.248.188:9300", path: "/")!, protocols: [""])
+        self.socket = WebSocket(url: NSURL(scheme: "ws", host: "46.101.248.188:9400", path: "/")!, protocols: [""])
         socket.delegate = self
     }
     
@@ -49,6 +49,8 @@ class socketManager: WebSocketDelegate {
     
     func websocketDidConnect(ws: WebSocket) {
         println("websocket is connected")
+        println("{\"type\":\"handShake\", \"senderID\":\"\(loggedUserID)\"}")
+        self.socket.writeString("{\"type\":\"handShake\", \"senderID\":\"\(loggedUserID)\"}")
         //send id to sv
         
     }

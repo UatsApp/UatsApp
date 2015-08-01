@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Alamofire
 class UatsAppVC: UITabBarController {
     
 
@@ -15,8 +15,19 @@ class UatsAppVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()        
         // Do any additional setup after loading the view.
-        socketManager.sharedSocket.socket.connect()
-        println(loggedUserID)
+        if loggedUserID == -1000 {
+            var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+            var user : String = prefs.valueForKey("USERNAME") as! String
+            Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/returnLoggedUseID.php", parameters: ["username" : "\(user)"], encoding: .JSON).responseJSON {
+                _, _, JSON, _ in
+                if JSON != nil{
+                    loggedUserID = JSON?.valueForKey("loggedUseID") as! Int
+                    socketManager.sharedSocket.socket.connect()
+                }
+            }
+        }else{
+            socketManager.sharedSocket.socket.connect()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,6 +54,10 @@ class UatsAppVC: UITabBarController {
         self.performSegueWithIdentifier("goto_login", sender: logoutBtn)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+     
+    }
     
     
     /*

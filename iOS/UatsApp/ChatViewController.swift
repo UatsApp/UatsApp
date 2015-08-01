@@ -40,45 +40,37 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: &localError)
         if let dict = json as? [String: AnyObject] {
             println(dict["message"] as! String)
-            var MsgToSend : String = dict["message"] as! String
-            var RelToSend : Int = dict["relation_id"] as! Int
-            var SenderToSend : Int = dict["senderID"] as! Int
+            var textMessage : String = dict["message"] as! String
+            var relID : Int = dict["relation_id"] as! Int
+            var senderID : Int = dict["senderID"] as! Int
+            var receiverID : Int = dict["receiverID"] as! Int
+            var sender_username : String = dict["sender_username"] as! String
             
             
-            //Validate message
-            Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/validate_message.php", parameters: ["message" : "\(MsgToSend)" , "senderID" : "\(SenderToSend)", "relation_id"  : "\(RelToSend)"], encoding: .JSON).responseJSON {
-                _, _, JSON, _ in
-                println(JSON)
-                if let jsonResponse = JSON as? [String : AnyObject]{
-                    println(jsonResponse["sender"])
+            
+            if receiverID == loggedUserID && senderID == self.partener_id{
+                
+                    let infoMetas = self.cellMetas.filter{$0.identifier == "cell_info"}
                     
-                    if jsonResponse["receiver"] as! Int == loggedUserID && jsonResponse["sender"] as! Int == self.partener_id{
-                        
-                        
-                        let infoMetas = self.cellMetas.filter{$0.identifier == "cell_info"}
-                        
-                        if infoMetas.count == 0 || infoMetas.last!.text != jsonResponse["sender_username"] as! String {
-                            self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_info", jsonResponse["sender_username"] as! String))
-                        }
-                        self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_message", jsonResponse["message"] as! String))
-                        
-                        
-                        
-                        
-                        if self.cellMetas.count >= 0{
-                            let delay = 0.1 * Double(NSEC_PER_SEC)
-                            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                            
-                            dispatch_after(time, dispatch_get_main_queue(), {
-                                self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
-                            })}
-                        self.historyTable.reloadData()
+                    if infoMetas.count == 0 || infoMetas.last!.text != sender_username {
+                        self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_info", sender_username))
                     }
-                }
+                    self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_message", textMessage))
+                    
+                    
+                    
+                    
+                    if self.cellMetas.count >= 0{
+                        let delay = 0.1 * Double(NSEC_PER_SEC)
+                        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                        
+                        dispatch_after(time, dispatch_get_main_queue(), {
+                            self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
+                        })}
+                    self.historyTable.reloadData()
+
                 
             }
-            
-            
         }
         
         
@@ -120,8 +112,18 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var sendBtn: UIButton!
     @IBAction func sendButtonTapped(sender: AnyObject!) {
         if messageField.text != ""{
+            
+//            dataForServer.type = "msg";
+//            dataForServer.message = text;
+//            dataForServer.relation_id = relation_id;
+//            dataForServer.senderID = my_id;
+//            dataForServer.receiverID = userid;
+//            dataForServer.sender_username = my_username;
+            
+            
+            
             var messageToSend = messageField.text
-            socketManager.sharedSocket.socket.writeString("{\"message\":\"\(messageToSend)\",\"relation_id\":\"\(self.relation_id)\",\"senderID\":\"\(loggedUserID)\"}")
+            socketManager.sharedSocket.socket.writeString("{\"type\":\"msg\", \"message\":\"\(messageToSend)\", \"relation_id\":\"\(self.relation_id)\", \"senderID\":\"\(loggedUserID)\", \"receiverID\":\"\(self.partener_id)\", \"sender_username\":\"\(self.myUserName)\"}")
             
             Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/insert_message.php", parameters: ["message" : "\(messageToSend)" , "relation_id"  : "\(self.relation_id)" , "senderID" : "\(loggedUserID)"], encoding: .JSON).responseJSON {
                 _, _, JSON, _ in
