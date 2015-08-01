@@ -40,9 +40,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         
         if(isLoggedin == 1 || isFacebookLoggedIn == 1){
             self.performSegueWithIdentifier("goApp", sender: self)//////////DE PUS LOGOUT IN APP SI SCBHIMBAT '!=' IN '==';////////////////
-            if loggedUserID == -1000{
-                
-            }
+          
         }
         
         //FB login
