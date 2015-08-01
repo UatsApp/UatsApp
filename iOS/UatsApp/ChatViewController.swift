@@ -16,6 +16,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var partener_id : Int = 0
     var myUserName : String = ""
     var partenerName : String = ""
+    var keyboardDismissTapGesture: UIGestureRecognizer?
     
     struct CellMeta {
         var alingment: NSTextAlignment
@@ -175,10 +176,24 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func keyboardWillShowNotification(notification: NSNotification) {
         updateBottomLayoutConstraintWithNotification(notification)
+        if keyboardDismissTapGesture == nil
+        {
+            keyboardDismissTapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard:"))
+            self.view.addGestureRecognizer(keyboardDismissTapGesture!)
+        }
+
     }
     
     func keyboardWillHideNotification(notification: NSNotification) {
         updateBottomLayoutConstraintWithNotification(notification)
+        if keyboardDismissTapGesture != nil
+        {
+            self.view.removeGestureRecognizer(keyboardDismissTapGesture!)
+            keyboardDismissTapGesture = nil
+        }
+    }
+    func dismissKeyboard(sender: AnyObject) {
+        messageField?.resignFirstResponder()
     }
     
     func updateBottomLayoutConstraintWithNotification(notification: NSNotification) {
@@ -196,6 +211,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.view.layoutIfNeeded()
             }, completion: nil)
     }
+    
     
     
     //////Populate Class History, populate cells/////////////////
