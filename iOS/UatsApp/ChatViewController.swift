@@ -112,16 +112,6 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var sendBtn: UIButton!
     @IBAction func sendButtonTapped(sender: AnyObject!) {
         if messageField.text != ""{
-            
-//            dataForServer.type = "msg";
-//            dataForServer.message = text;
-//            dataForServer.relation_id = relation_id;
-//            dataForServer.senderID = my_id;
-//            dataForServer.receiverID = userid;
-//            dataForServer.sender_username = my_username;
-            
-            
-            
             var messageToSend = messageField.text
             socketManager.sharedSocket.socket.writeString("{\"type\":\"msg\", \"message\":\"\(messageToSend)\", \"relation_id\":\(self.relation_id), \"senderID\":\(loggedUserID), \"receiverID\":\(self.partener_id), \"sender_username\":\"\(self.myUserName)\"}")
             
