@@ -35,9 +35,9 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //Delegate part
     func didReceiveMessage(socket : socketManager ,message: String){
         //Parse received JSON(message)
-        var data = message.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: false)
+        var data = message.dataUsingEncoding(NSUTF16StringEncoding, allowLossyConversion: false)
         var localError: NSError?
-        var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: &localError)
+        var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: &localError)
         if let dict = json as? [String: AnyObject] {
             println(dict["message"] as! String)
             var textMessage : String = dict["message"] as! String
@@ -123,7 +123,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             
             var messageToSend = messageField.text
-            socketManager.sharedSocket.socket.writeString("{\"type\":\"msg\", \"message\":\"\(messageToSend)\", \"relation_id\":\"\(self.relation_id)\", \"senderID\":\"\(loggedUserID)\", \"receiverID\":\"\(self.partener_id)\", \"sender_username\":\"\(self.myUserName)\"}")
+            socketManager.sharedSocket.socket.writeString("{\"type\":\"msg\", \"message\":\"\(messageToSend)\", \"relation_id\":\(self.relation_id), \"senderID\":\(loggedUserID), \"receiverID\":\(self.partener_id), \"sender_username\":\"\(self.myUserName)\"}")
             
             Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/insert_message.php", parameters: ["message" : "\(messageToSend)" , "relation_id"  : "\(self.relation_id)" , "senderID" : "\(loggedUserID)"], encoding: .JSON).responseJSON {
                 _, _, JSON, _ in
