@@ -23,7 +23,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.txtPassword.delegate = self
         self.signin.layer.cornerRadius = 15.0
         self.signin.layer.borderColor = UIColor.whiteColor().CGColor
         self.signin.layer.borderWidth = 0.2
@@ -209,7 +209,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var signin: UIButton!
     
-    @IBAction func signinTapped(sender: UIButton) {
+    @IBAction func signinTapped(sender: AnyObject?) {
         var username:NSString = txtUsername.text
         var password:NSString = txtPassword.text
         
@@ -340,3 +340,13 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     */
     
 }
+
+extension LoginVC:UITextFieldDelegate{
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        signinTapped(nil)
+        return true
+    }
+}
+
+
+
