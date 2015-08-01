@@ -16,6 +16,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var txtUsername: UITextField!
     
     @IBOutlet weak var txtPassword: UITextField!
+    @IBOutlet weak var FBButton: FBSDKLoginButton!
     
     var DataForAutoComplete:NSArray = []
     var keyboardDismissTapGesture: UIGestureRecognizer?
@@ -24,6 +25,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.txtPassword.delegate = self
+        self.FBButton.layer.cornerRadius = 15.0
         self.signin.layer.cornerRadius = 15.0
         self.signin.layer.borderColor = UIColor.whiteColor().CGColor
         self.signin.layer.borderWidth = 0.2
@@ -53,8 +55,8 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         else
         {
             let loginView : FBSDKLoginButton = FBSDKLoginButton()
-            self.view.addSubview(loginView)
-            loginView.center = self.view.center
+           // self.view.addSubview(loginView)
+            //loginView.center = self.view.center
             loginView.readPermissions = ["public_profile", "email", "user_friends"]
             loginView.delegate = self
         }
