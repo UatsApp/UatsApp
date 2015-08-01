@@ -21,6 +21,7 @@ class SignupVC: UIViewController {
         self.signup.layer.cornerRadius = 5.0
         self.signup.layer.borderColor = UIColor.whiteColor().CGColor
         self.signup.layer.borderWidth = 0.2
+        self.txtEmail.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -209,6 +210,12 @@ class SignupVC: UIViewController {
             loginController.DataForAutoComplete = sender as! NSArray
         }
     }
-    
 
+}
+
+extension SignupVC:UITextFieldDelegate{
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        singupTapped(nil)
+        return true
+    }
 }
