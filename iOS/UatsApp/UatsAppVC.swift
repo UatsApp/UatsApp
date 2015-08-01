@@ -10,6 +10,8 @@ import UIKit
 
 class UatsAppVC: UITabBarController {
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()        
         // Do any additional setup after loading the view.
@@ -21,7 +23,13 @@ class UatsAppVC: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    // @IBOutlet weak var logout: UIButton!
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        var LoggedUseUserName = prefs.valueForKey("USERNAME") as! String
+        self.navigationItem.title = LoggedUseUserName
+    }
+
     
     @IBOutlet var logoutBtn: UIButton!
     
