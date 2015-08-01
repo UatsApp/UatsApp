@@ -14,6 +14,7 @@ class SignupVC: UIViewController {
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtConfrimPassword: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
+    var keyboardDismissTapGesture: UIGestureRecognizer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,43 @@ class SignupVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        
+        super.viewWillDisappear(animated)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if keyboardDismissTapGesture == nil
+        {
+            keyboardDismissTapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard:"))
+            self.view.addGestureRecognizer(keyboardDismissTapGesture!)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if keyboardDismissTapGesture != nil
+        {
+            self.view.removeGestureRecognizer(keyboardDismissTapGesture!)
+            keyboardDismissTapGesture = nil
+        }
+    }
+    
+    func dismissKeyboard(sender: AnyObject) {
+        txtEmail?.resignFirstResponder()
+        txtPassword?.resignFirstResponder()
+        txtUsername?.resignFirstResponder()
+        txtConfrimPassword?.resignFirstResponder()
+    }
+    
     
     func isValidEmail(testStr:String) -> Bool {
         
@@ -44,7 +82,7 @@ class SignupVC: UIViewController {
     @IBOutlet weak var signup: UIButton!
 
 
-    @IBAction func singupTapped(sender: UIButton){
+    @IBAction func singupTapped(sender: AnyObject!){
         var username:NSString = txtUsername.text as NSString
         var password:NSString = txtPassword.text as NSString
         var comfirm_password:NSString = txtConfrimPassword.text as NSString
@@ -174,4 +212,3 @@ class SignupVC: UIViewController {
     
 
 }
-
