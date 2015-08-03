@@ -24,9 +24,10 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        FBButton.delegate = self
         self.txtPassword.delegate = self
         self.FBButton.layer.cornerRadius = 15.0
-        self.signin.layer.cornerRadius = 15.0
+        self.signin.layer.cornerRadius = 5.0
         self.signin.layer.borderColor = UIColor.whiteColor().CGColor
         self.signin.layer.borderWidth = 0.2
         
@@ -97,7 +98,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         txtPassword?.resignFirstResponder()
     }
     
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+    func loginButton(FBButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         println("User Logged In")
         
         if ((error) != nil)
@@ -117,7 +118,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
     
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+    func loginButtonDidLogOut(FBButton: FBSDKLoginButton!) {
         println("User Logged Out")
     }
     
