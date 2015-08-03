@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,14 +13,29 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.Profile;
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import uatsapp.uatsapp.data.data.IBaseCallback;
 import uatsapp.uatsapp.data.data.RegisterResponse;
@@ -28,6 +44,7 @@ import uatsapp.uatsapp.data.data.RegisterResponse;
 public class LoginActivity extends Activity{
     EditText et;
     EditText et2;
+    EditText et3;
     TextView tv;
     Button btn;
 
@@ -47,9 +64,76 @@ public class LoginActivity extends Activity{
         info = (TextView)findViewById(R.id.info);
         loginButton = (LoginButton)findViewById(R.id.login_button);
 
+        List<String> permissions = new ArrayList<>();
+        permissions.add("email");
+        loginButton.setReadPermissions(permissions);
+
+
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
+            public void onSuccess(final LoginResult loginResult) {
+
+                System.out.println("onSuccess");
+
+                String accessToken = loginResult.getAccessToken()
+                        .getToken();
+                Log.i("accessToken", accessToken);
+
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, final GraphResponse response) {
+                            Log.i("LoginActivity",response.toString());
+                            try {
+                                String id = object.getString("id");
+                                 String name = object.getString("name");
+                                 String password = String.valueOf(name);
+                                String c_password = String.valueOf(name);
+                                 String email = String.valueOf(name + "@" + name + ".com");
+
+                                {
+                                    ApiConnection.Register(new IBaseCallback<RegisterResponse>() {
+                                        @Override
+                                        public void onResult(final RegisterResponse result) {
+                                            if(result.isSuccess()){
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        Toast.makeText(LoginActivity.this, "Your account has been successfully registered", Toast.LENGTH_SHORT).show();
+                                                        Intent launchactivity = new Intent(LoginActivity.this,ListActivity.class);
+                                                        startActivity(launchactivity);
+                                                    }
+                                                });
+
+                                            }
+                                            else {
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                       // DialogHelper.showAlertDialog(LoginActivity.this, result.getError_message());
+                                                        Toast.makeText(LoginActivity.this, "You have logged in successfully", Toast.LENGTH_LONG).show();
+                                                      //  AppPreferences.setPreferences("USERNAME",et.getText().toString());
+                                                        Intent launchactivity = new Intent(LoginActivity.this,ListActivity.class);
+                                                        startActivity(launchactivity);
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    },name,password,c_password,email,new RegisterResponse(),new TypeToken<RegisterResponse>(){}.getType());
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields",
+                        "id,name,email");
+                request.setParameters(parameters);
+                request.executeAsync();
+
+
                 info.setText(
                         "User ID: "
                                 + loginResult.getAccessToken().getUserId()
@@ -72,8 +156,6 @@ public class LoginActivity extends Activity{
             }
 
         });
-
-
 
         setContentView(R.layout.activity_main);
         et = (EditText) findViewById(R.id.editText);

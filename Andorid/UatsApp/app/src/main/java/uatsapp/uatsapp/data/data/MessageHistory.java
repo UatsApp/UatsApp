@@ -10,6 +10,15 @@ public class MessageHistory {
     private int _to;
     private String message;
     private String _time;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}

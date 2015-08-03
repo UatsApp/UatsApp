@@ -40,6 +40,8 @@ public class ApiConnection {
 
     }
 
+
+
     public final static <T extends BaseResponse> void Login(final IBaseCallback callback,final String username,final String password,
                                                                final T responseToPopulate, final Type type) {
         ArrayList<ObjectNameValuePair> parameters = new ArrayList<ObjectNameValuePair>();
@@ -48,6 +50,31 @@ public class ApiConnection {
         performRequest("registerDEV/jsonlogin1.php", "application/json", parameters, responseToPopulate, type, callback);
 
     }
+
+
+    public final static <T extends BaseResponse> void sentMessages(final IBaseCallback callback,final String message,final int relation_id,final int senderID,final int receiverID,final String sender_username,
+                                                            final T responseToPopulate, final Type type) {
+        ArrayList<ObjectNameValuePair> parameters = new ArrayList<ObjectNameValuePair>();
+        parameters.add(new ObjectNameValuePair("type","msg"));
+        parameters.add(new ObjectNameValuePair("message",message));
+        parameters.add(new ObjectNameValuePair("relation_id",relation_id));
+        parameters.add(new ObjectNameValuePair("senderID",senderID));
+        parameters.add(new ObjectNameValuePair("receiverID",receiverID));
+        parameters.add(new ObjectNameValuePair("sender_username",sender_username));
+        performRequest("UatsAppWebDEV/insert_message.php", "application/json", parameters, responseToPopulate, type, callback);
+
+    }
+
+    public final static <T extends BaseResponse> void onMessages(final IBaseCallback callback,final String s,final int relation_id,final int senderID,
+                                                                   final T responseToPopulate, final Type type) {
+        ArrayList<ObjectNameValuePair> parameters = new ArrayList<ObjectNameValuePair>();
+        parameters.add(new ObjectNameValuePair("message", s));
+        parameters.add(new ObjectNameValuePair("relation_id", relation_id));
+        parameters.add(new ObjectNameValuePair("senderID", senderID));
+        performRequest("UatsAppWebDEV/validate_message.php", "application/json", parameters, responseToPopulate, type, callback);
+
+    }
+
 
     public final static <T extends BaseResponse> void GetMessages(final IBaseCallback callback,final String username,final int id,
                                                                final T responseToPopulate, final Type type) {

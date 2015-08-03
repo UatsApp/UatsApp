@@ -61,6 +61,7 @@ public class ListActivity extends Activity {
                 for(User user:userList){
                     if(user.getUsername().equals(currentUser))
                         AppPreferences.setPreferences("ID", user.getId());
+                        int identifier;
                 }
                 AppPreferences.setPreferences("friendId",friendId);
                 AppPreferences.setPreferences("friendUser",friendUser);
