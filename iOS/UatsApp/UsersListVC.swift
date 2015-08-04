@@ -46,7 +46,6 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
                         currentUser.user_id = id!.toInt()!
                         self.usersList.append(currentUser)
                         println(username)
-                        
                     }
                     self.tableView.reloadData()
                     

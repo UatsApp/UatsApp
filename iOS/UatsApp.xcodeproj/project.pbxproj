@@ -26,6 +26,8 @@
 		3F8ACEE81B60E2C600B412CC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8ACEE41B60E2C600B412CC /* FBSDKLoginKit.framework */; };
 		3F8ACEE91B60E2C600B412CC /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8ACEE51B60E2C600B412CC /* FBSDKMessengerShareKit.framework */; };
 		3F8ACEEE1B61323900B412CC /* UatsAppVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8ACEED1B61323900B412CC /* UatsAppVC.swift */; };
+		3F9B21341B6FEA4700D5123E /* FriendListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B21331B6FEA4700D5123E /* FriendListVC.swift */; };
+		3F9B21361B6FED6900D5123E /* FriendList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B21351B6FED6900D5123E /* FriendList.swift */; };
 		3FD49D3E1B28BCC80029218E /* enrollment_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */; };
 		3FD49D401B28C9FE0029218E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D3F1B28C9FE0029218E /* LoginVC.swift */; };
 		3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D411B28CBE10029218E /* SignupVC.swift */; };
@@ -71,6 +73,8 @@
 		3F8ACEE51B60E2C600B412CC /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = UatsApp/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
 		3F8ACEEA1B60E3AC00B412CC /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		3F8ACEED1B61323900B412CC /* UatsAppVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UatsAppVC.swift; sourceTree = "<group>"; };
+		3F9B21331B6FEA4700D5123E /* FriendListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListVC.swift; sourceTree = "<group>"; };
+		3F9B21351B6FED6900D5123E /* FriendList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendList.swift; sourceTree = "<group>"; };
 		3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = enrollment_background.jpg; sourceTree = "<group>"; };
 		3FD49D3F1B28C9FE0029218E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		3FD49D411B28CBE10029218E /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 				3FD49D411B28CBE10029218E /* SignupVC.swift */,
 				3F7DE55D1B56B8DF005954FC /* UsersListVC.swift */,
 				3F7DE55F1B56C518005954FC /* ChatViewController.swift */,
+				3F9B21331B6FEA4700D5123E /* FriendListVC.swift */,
 			);
 			path = UatsApp;
 			sourceTree = "<group>";
@@ -190,6 +195,7 @@
 				3F6560631B5D3BE4001BF3C1 /* History.swift */,
 				525762281B676E39008CC78F /* socketManager.swift */,
 				5284F05D1B67EABF0038583B /* ReceivedMessageDelegate.swift */,
+				3F9B21351B6FED6900D5123E /* FriendList.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -383,8 +389,10 @@
 				3F1DD7811B28A4320081FE34 /* ViewController.swift in Sources */,
 				525762291B676E39008CC78F /* socketManager.swift in Sources */,
 				3F7DE5631B57BFE2005954FC /* Users.swift in Sources */,
+				3F9B21361B6FED6900D5123E /* FriendList.swift in Sources */,
 				3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */,
 				3F8ACEEE1B61323900B412CC /* UatsAppVC.swift in Sources */,
+				3F9B21341B6FEA4700D5123E /* FriendListVC.swift in Sources */,
 				3F6560641B5D3BE4001BF3C1 /* History.swift in Sources */,
 				3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */,
 				5284F05E1B67EABF0038583B /* ReceivedMessageDelegate.swift in Sources */,

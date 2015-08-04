@@ -9,14 +9,18 @@
 import UIKit
 import Alamofire
 
+var FriendshipINFO:[FriendLIST] = []
+
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReceivedMessageDelegate {
     
+
     /////Cell construct///////
     var relation_id : Int = 0
     var partener_id : Int = 0
     var myUserName : String = ""
     var partenerName : String = ""
     var keyboardDismissTapGesture: UIGestureRecognizer?
+    
     
     struct CellMeta {
         var alingment: NSTextAlignment
@@ -242,10 +246,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 println(JSON) //History JSON
                 if self.history.count > 0 {
                     
-                    
                     let partnerUserName = self.userInfo[1] as! String
-                    
                     var currentFromUserId = -1000
+                    
+                    var currINFO = FriendLIST(id_c: self.relation_id, friendUsername: partnerUserName)
+                    FriendshipINFO.append(currINFO)
                     
                     for historyItem in self.history {
                         

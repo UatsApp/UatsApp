@@ -457,21 +457,57 @@
         <!--Item-->
         <scene sceneID="a0f-f0-bT7">
             <objects>
-                <viewController id="SRi-Eb-x4d" sceneMemberID="viewController">
+                <viewController id="SRi-Eb-x4d" customClass="FriendListVC" customModule="UatsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6pX-gg-MiR"/>
                         <viewControllerLayoutGuide type="bottom" id="VyZ-W8-zes"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nDW-33-vX9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="avF-O4-ZZc">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell_text" textLabel="hmw-7S-RDz" style="IBUITableViewCellStyleDefault" id="d86-dr-7wj">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d86-dr-7wj" id="3by-zu-2Sx">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hmw-7S-RDz">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="SRi-Eb-x4d" id="5XP-Iu-7OE"/>
+                                    <outlet property="delegate" destination="SRi-Eb-x4d" id="0Wf-HZ-plT"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="avF-O4-ZZc" secondAttribute="trailing" id="001-1i-sff"/>
+                            <constraint firstItem="avF-O4-ZZc" firstAttribute="bottom" secondItem="VyZ-W8-zes" secondAttribute="top" id="Y6q-LH-hns"/>
+                            <constraint firstItem="avF-O4-ZZc" firstAttribute="top" secondItem="6pX-gg-MiR" secondAttribute="bottom" id="ig5-9H-INp"/>
+                            <constraint firstItem="avF-O4-ZZc" firstAttribute="leading" secondItem="nDW-33-vX9" secondAttribute="leading" id="sGj-HJ-OBh"/>
+                        </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="Item" systemItem="favorites" id="9N3-R0-UZQ"/>
+                    <connections>
+                        <outlet property="FriendListTable" destination="avF-O4-ZZc" id="RFc-hh-8x9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vog-is-ndZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1032.5" y="2045.5"/>
+            <point key="canvasLocation" x="392.5" y="2008.5"/>
         </scene>
         <!--Uats AppVC-->
         <scene sceneID="6QG-Lk-60h">
