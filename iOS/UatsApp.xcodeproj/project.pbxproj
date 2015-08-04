@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		375C89041B8237460087693B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375C89021B8237460087693B /* Fabric.framework */; };
+		375C89051B8237460087693B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375C89031B8237460087693B /* Crashlytics.framework */; };
 		3F154E491B7E19B600494114 /* KeyChainRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F154E471B7E19B600494114 /* KeyChainRequest.swift */; };
 		3F154E4A1B7E19B600494114 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F154E481B7E19B600494114 /* KeyChain.swift */; };
 		3F1DD77C1B28A4320081FE34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD77B1B28A4320081FE34 /* AppDelegate.swift */; };
@@ -51,6 +53,8 @@
 
 /* Begin PBXFileReference section */
 		3080E396B577E8F1966CD697 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		375C89021B8237460087693B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Pods/Fabric/Fabric.framework; sourceTree = "<group>"; };
+		375C89031B8237460087693B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Pods/Fabric/Crashlytics.framework; sourceTree = "<group>"; };
 		3F154E471B7E19B600494114 /* KeyChainRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainRequest.swift; sourceTree = "<group>"; };
 		3F154E481B7E19B600494114 /* KeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		3F1DD7761B28A4320081FE34 /* UatsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UatsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +103,8 @@
 				3F8ACEE91B60E2C600B412CC /* FBSDKMessengerShareKit.framework in Frameworks */,
 				3F8ACEE81B60E2C600B412CC /* FBSDKLoginKit.framework in Frameworks */,
 				3F8ACEE61B60E2C600B412CC /* Bolts.framework in Frameworks */,
+				375C89041B8237460087693B /* Fabric.framework in Frameworks */,
+				375C89051B8237460087693B /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +130,8 @@
 		3F1DD76D1B28A4310081FE34 = {
 			isa = PBXGroup;
 			children = (
+				375C89021B8237460087693B /* Fabric.framework */,
+				375C89031B8237460087693B /* Crashlytics.framework */,
 				3F1DD7781B28A4320081FE34 /* UatsApp */,
 				3F1DD7911B28A4330081FE34 /* UatsAppTests */,
 				3F1DD7771B28A4320081FE34 /* Products */,
@@ -507,7 +515,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -545,7 +553,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -561,9 +569,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UatsApp",
+					"$(PROJECT_DIR)/Pods/Fabric",
 				);
 				INFOPLIST_FILE = UatsApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "UatsApp/Bridging-Header.h";
@@ -579,9 +588,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/UatsApp",
+					"$(PROJECT_DIR)/Pods/Fabric",
 				);
 				INFOPLIST_FILE = UatsApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "UatsApp/Bridging-Header.h";
