@@ -2,12 +2,12 @@
 session_start();
 //header('Content-type: application/json');
 if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
-	echo 'You are log in as:'.$_SESSION['user'].' with database id: '.$_SESSION['user_id'];
+	echo 'You are log in as:'.$_SESSION['user'];
 }else{
 	echo "user session NOT set";
-	http_redirect("http://uatsapp.tk/UatsAppWebDEV/index.php", false, HTTP_REDIRECT_PERM);
+
 }
-			//$connectedUser = $_SESSION['user'];
+
 
 ?>
 <!DOCTYPE html>
@@ -22,8 +22,10 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 
 <body>
 	<div id="page-wrapper" >
-		<h1>UatsApp Demo</h1><br>
+		<div class="chat-header">
+		<h1>UatsApp Demo</h1>
 		<p id = "status" class = "chat-partener"></p>
+	</div>
 
 		<ul id="log" style = "overflow-y: scroll; overflow-x: hidden; height:30%;"></ul>
 
@@ -50,15 +52,31 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 
 	<script src="fancywebsocket.js"></script>
 	<script>
+	//Globals
 	var Server;
 	var relation_id = 0;
+	var userid = -1;
+	var partener_username = "";
+	var my_username = '<?php echo $_SESSION["user"] ?>';
+	var my_id = parseInt('<?php echo $_SESSION["user_id"] ?>');
+	var currentMsgFloat = -1;
+ 	var previousMsgFloat = 2;
 
+
+	$('#page-wrapper').show();
+
+	function handShake(){
+		var data = new Object();
+		data.type = "handShake";
+		data.senderID = my_id;
+		send(JSON.stringify(data));
+	}
 
 	function getElements(attrib) {
 		return document.querySelectorAll('[' + attrib + ']');
 	}
 
-	function log( text ) {
+	function log( text, temp, temp2 ) {
 		$log = $('#log');
 			//Add text to log
 			$log.append(($log.val()?"\n":'')+text);
@@ -66,91 +84,82 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 			$log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
 		}
 
+
+		function logMessage(text, temp, temp2){
+			debugger;
+				$log = $('#log');
+		if (temp == temp2){
+			$ul = $('#log ul:last-child');
+			$ul.append(text);
+		}else{
+			$log.append("<ul></ul>");
+			$ul = $('#log ul:last-child');
+			$ul.append(text);
+		}
+		$log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
+		}
+
 		function send( text ) {
 			Server.send( 'message', text );
 		}
 
 		$(document).ready(function() {
-			//$('#page-wrapper').hide();
 
-			Server = new FancyWebSocket('ws://46.101.248.188:9300');
+			Server = new FancyWebSocket('ws://46.101.248.188:9400');
 
 			$('#message').keypress(function(e) {
 				if ( e.keyCode == 13 && this.value) {
-					text = this.value.replace(/[\n\t\r]/g,"");
-					if(relation_id !=0 && text != ""){
-						log( '<li class="sent"> '+this.value+'</li>');
-						var dataForServer = new Object();
-						dataForServer.message = text;
-						dataForServer.relation_id = relation_id;
-						dataForServer.senderID = '<?php echo $_SESSION["user_id"] ?>';
-						var validator = JSON.stringify(dataForServer);
-						$.ajax({
-							type:'POST',
-							url:'insert_message.php',
-							data: validator,
-							error: function(data){
-								console.log("There was an error while inserting the message in DB: " + data);
-
-							},
-							success: function(success){
-								document.getElementById('message').value = "";
-								send(JSON.stringify(dataForServer));
-							}
-
-						});
-
-					}	
+					submitMessage();
 				}
 			});
 
-			//Let the user know we're connected
+			//Call server handShake
 			Server.bind('open', function() {
-				//document.getElementById('status').innerHTML = "Status: Connected";
+				handShake();
+				$('#page-wrapper').show();
 			});
 
-			//OH NOES! Disconnection occurred.
+			//Disconnection occurred.
 			Server.bind('close', function( data ) {
-				//document.getElementById('status').innerHTML = "Status: Disconnected";
+				alert("You've been disconnected from the server");
 			});
 
-			//Log any messages sent from server
+			//Received a new message
 			Server.bind('message', function( payload ) {
 				try{
+					debugger;
 					var received_obj = JSON.parse(payload);
-					$.ajax({
-						type:'POST',
-						url:'validate_message.php',
-						data: received_obj,
-						error: function(data){
-							alert("There was an error: " + data);
-							
-						},
-						success: function(success){
+					currentMsgFloat = 0;
+					console.log(JSON.stringify(received_obj));
 						//check if you should receive a message and if you have a chat windows opened with the sender
-						if(success["receiver"] == '<?php echo $_SESSION["user_id"] ?>' && success["relation_id"] == window_chat.getAttribute('data-identifier')){ 
-							log('<li class="received">'+success["message"]+'</li>');
+						if(received_obj["receiverID"] == my_id && received_obj["relation_id"] == window_chat.getAttribute('data-identifier')){ 
+							if($('#log ul:last-child li:last-child').hasClass("received")){
+							previousMsgFloat = 0;
+						}else{
+							previousMsgFloat = 1;
+						}
+						logMessage('<li class="received">'+received_obj["message"]+'</li>',currentMsgFloat, previousMsgFloat);
 
 						}else{
    							//Check if you have a chat window opened and someone else sends you a message
-   							if(success["receiver"] == '<?php echo $_SESSION["user_id"] ?>'){ 
+   							if(received_obj["receiverID"] == my_id){ 
    								var users = getElements("data-userid");
    								for ( var i = 0; i < users.length; i++ ) {
    									
     								//Check which user sent the message and update users list 
-    								if(users[i].getAttribute('data-userid') == success["sender"]){
+    								if(users[i].getAttribute('data-userid') == received_obj["senderID"]){
     									$(users[i]).data("receivedMessages",parseInt($(users[i]).data("receivedMessages")) + 1);
-    									$(users[i]).text(success["sender_username"] + "\n" +$(users[i]).data("receivedMessages") + " new messages ");
+    									$(users[i]).text(received_obj["sender_username"] + "\n" +$(users[i]).data("receivedMessages") + " new messages ");
     								}
     							}
     						}
 
     					}
 
-    				}
-    			});
+
+
 }catch (exception){
-	alert("cannot parse json");
+	//alert("cannot parse json");
 }
 
 
@@ -160,47 +169,54 @@ Server.connect();
 });
 
 function submitMessage(){
-	debugger;
 	var msg = document.getElementById('message');
-		text = msg.value.replace(/[\n\t\r]/g,"");
-					if(relation_id !=0 && text != ""){
-						log( '<li class="sent">'+text+'</li>');
-						var dataForServer = new Object();
-						dataForServer.message = text;
-						dataForServer.relation_id = relation_id;
-						dataForServer.senderID = '<?php echo $_SESSION["user_id"] ?>';
-						var validator = JSON.stringify(dataForServer);
-						$.ajax({
-							type:'POST',
-							url:'insert_message.php',
-							data: validator,
-							error: function(data){
-								console.log("There was an error while inserting the message in DB: " + data);
+	debugger;
+	text = msg.value.replace(/[\n\t\r]/g,"");
+	currentMsgFloat = 0;
+	if(relation_id !=0 && text != ""){
+		if($('#log ul:last-child li:last-child').hasClass("sent")){
+							previousMsgFloat = 0;
+						}else{
+							previousMsgFloat = 1;
+						}
+		logMessage('<li class="sent"> '+text+'</li>',currentMsgFloat, previousMsgFloat);
 
-							},
-							success: function(success){
-								document.getElementById('message').value = "";
-								send(JSON.stringify(dataForServer));
-							}
+		var dataForServer = new Object();
+		dataForServer.type = "msg";
+		dataForServer.message = text;
+		dataForServer.relation_id = relation_id;
+		dataForServer.senderID = my_id;
+		dataForServer.receiverID = userid;
+		dataForServer.sender_username = my_username;
 
-						});
+		$.ajax({
+			type:'POST',
+			url:'insert_message.php',
+			data: JSON.stringify(dataForServer),
+			error: function(data){
+				console.log("There was an error while inserting the message in DB: " + data);
+			},
+			success: function(success){
+				document.getElementById('message').value = "";
+				send(JSON.stringify(dataForServer));
+			}
 
-					}	
+		});
+
+	}	
 
 }
 
-</script>
-
-<script>
 
 $(document).ready(function(){
 	populateUsers();
 	window_chat = document.getElementById('page-wrapper');
 }).on('click','#row li', function(){
 	
-	var partener_username = $(this).data("username");
+	partener_username = $(this).data("username");
 	document.getElementById('status').innerHTML = partener_username;
-	var userid = $(this).data('userid');
+	userid = $(this).data('userid');
+	$(this).data("receivedMessages",0);
 
 	$(this).text($(this).data("username"));
 	document.getElementById('log').innerHTML = "";
@@ -209,7 +225,8 @@ $(document).ready(function(){
 	$(this).addClass('active');
 	var dataForHistory = new Object();
 	dataForHistory.identifier = userid;
-	dataForHistory.loggedUsername = '<?php echo $_SESSION["user"]?>'; 
+	dataForHistory.loggedUsername = my_username; 
+	previousMsgFloat = -1;
 	$.ajax({
 		type:'POST',
 		url:'history.php',
@@ -223,18 +240,19 @@ $(document).ready(function(){
 			$.each(success["history"], function(key, value) {
 				console.log(value);
         				//check who is the sender and who's the receiver
-        				if(value._from == '<?php echo $_SESSION["user_id"]?>'){
-        					log('<li class="sent"> ' + value.message.toString() + '</li>'); //<span><?php echo $_SESSION['user'];?>:</span> 
+        				if(value._from == my_id){
+        					currentMsgFloat = 0;
+								logMessage('<li class="sent"> ' + value.message.toString() + '</li>',currentMsgFloat, previousMsgFloat);
         				}else{
-        					log('<li class="received"> ' + value.message + '</li>');//TODO get username from DB not userid
+        					currentMsgFloat = 1;
+								logMessage('<li class="received"> ' + value.message.toString() + '</li>',currentMsgFloat, previousMsgFloat);
         				}
-
+        				previousMsgFloat = currentMsgFloat;
         			});
 			$('#page-wrapper').show();
 		},
 		error: function(data){
-			debugger;
-			console.log(data);
+			console.log("There was an error retrieving your history :::" + data);
 		}
 
 	});
@@ -258,17 +276,12 @@ function populateUsers(){
 
 }
 
-</script>
-
-
-
-<script type="text/javascript">
 function logOut(){
-	window.location.href = "http://uatsapp.tk/UatsAppWebDEV/index.php";
-	}
+	window.location.href = "http://uatsapp.tk/UatsAppWeb/index.php";
+}
 
 
-	</script>
+</script>
 
 </body>
 </html>
