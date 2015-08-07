@@ -131,7 +131,7 @@
 		if(dataToSend.username && dataToSend.password && dataToSend.c_password && dataToSend.email){
 		$.ajax({
    			type: 'POST',
-   			url: 'http://uatsapp.tk/UatsAppWeb/process_user.php',
+   			url: 'http://uatsapp.tk/registerDEV/jsonsignup.php',
    			// dataType: "application/json; charset=utf-8",
    			contentType: "application/json",
    			data: JSON.stringify(dataToSend),                      
@@ -139,7 +139,7 @@
    				debugger;
    				if(result["success"] === 1 || dataToSend.email == email){
             
-						window.location.href = "http://uatsapp.tk/UatsAppWeb/UatsApp.php";
+						window.location.href = "http://uatsapp.tk/UatsAppWebDEV/UatsApp.php";
 
 					}else{
 						alert(result["error"]);
@@ -230,7 +230,7 @@ window.addEventListener('keydown',this.check,false);
    			success: function (result) {
 
    				if(result["status"] === 1){
-					window.location.href = "http://uatsapp.tk/UatsAppWeb/UatsApp.php";
+					window.location.href = "http://uatsapp.tk/UatsAppWebDEV/UatsApp.php";
 					//alert("result[]")
 					}else{
 						alert(result["error"]);
