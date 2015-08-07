@@ -2,64 +2,67 @@
 //  UatsAppVC.swift
 //  UatsApp
 //
-//  Created by Student on 10/06/15.
+//  Created by Student on 23/07/15.
 //  Copyright (c) 2015 Paul Paul. All rights reserved.
 //
 
 import UIKit
+import Alamofire
+class UatsAppVC: UITabBarController {
+    
 
-class UatsAppVC: UIViewController {
-
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        self.logout.layer.cornerRadius = 5.0
-        self.logout.layer.borderColor = UIColor.whiteColor().CGColor
-        self.logout.layer.borderWidth = 0.2
-
+        super.viewDidLoad()        
         // Do any additional setup after loading the view.
+        if loggedUserID == -1000 {
+            var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+            var user : String = prefs.valueForKey("USERNAME") as! String
+            Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/returnLoggedUseID.php", parameters: ["username" : "\(user)"], encoding: .JSON).responseJSON {
+                _, _, JSON, _ in
+                if JSON != nil{
+                    loggedUserID = JSON?.valueForKey("loggedUseID") as! Int
+                    socketManager.sharedSocket.socket.connect()
+                }
+            }
+        }else{
+            socketManager.sharedSocket.socket.connect()
+        }
     }
-    @IBOutlet weak var txtusername: UILabel!
-
-    @IBOutlet weak var logout: UIButton!
-    @IBOutlet weak var `continue`: UIButton!
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
-        
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
-        
-        if(isLoggedin != 1){
-            self.performSegueWithIdentifier("goApp", sender: self)
-        }
-        else{
-            self.txtusername.text = prefs.valueForKey("USERNAME") as? String
-        }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        var LoggedUseUserName = prefs.valueForKey("USERNAME") as! String
+        self.navigationItem.title = LoggedUseUserName
     }
+
     
-    @IBAction func logoutTapped(sender: UIButton) {
+    @IBOutlet var logoutBtn: UIButton!
+    
+    @IBAction func logoutAction(sender: UIButton) {
         let appDomain = NSBundle.mainBundle().bundleIdentifier
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
-        self.performSegueWithIdentifier("goto_login", sender: self)
-    }
-    
-    @IBAction func continueTapped(sender: UIButton) {
-        self.performSegueWithIdentifier("goInapp", sender: self)
-    }
-    
 
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
+        loggedUserID = -1000
+        self.performSegueWithIdentifier("goto_login", sender: logoutBtn)
+    }
+    
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

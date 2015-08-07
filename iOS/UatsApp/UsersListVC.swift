@@ -46,7 +46,6 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
                         currentUser.user_id = id!.toInt()!
                         self.usersList.append(currentUser)
                         println(username)
-                        
                     }
                     self.tableView.reloadData()
                     
@@ -89,13 +88,12 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let row = indexPath.row
-        let urr = usersList.map({$0.user_id})
-        let urr_user = usersList.map({$0.username})
+        let user_id = usersList[row].user_id
+        let username = usersList[row].username
         
-        var idPlusUN = [urr[row], urr_user[row]]
-        
-        println("lol+\(urr[row])")
-        self.performSegueWithIdentifier("call", sender: idPlusUN)
+
+        let data: NSArray = [user_id, username]
+        self.performSegueWithIdentifier("call", sender: data)
         
     }
     
@@ -108,7 +106,7 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
         // Pass the selected object to the new view controller.
         if segue.identifier == "call" {
             let chatController = segue.destinationViewController as! ChatViewController
-            chatController.user2 = sender as! NSArray
+            chatController.userInfo = sender as! NSArray
         }
     }
     

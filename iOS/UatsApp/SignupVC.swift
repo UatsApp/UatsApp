@@ -14,12 +14,14 @@ class SignupVC: UIViewController {
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtConfrimPassword: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
+    var keyboardDismissTapGesture: UIGestureRecognizer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.signup.layer.cornerRadius = 5.0
         self.signup.layer.borderColor = UIColor.whiteColor().CGColor
         self.signup.layer.borderWidth = 0.2
+        self.txtEmail.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -27,6 +29,43 @@ class SignupVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        
+        super.viewWillDisappear(animated)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if keyboardDismissTapGesture == nil
+        {
+            keyboardDismissTapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard:"))
+            self.view.addGestureRecognizer(keyboardDismissTapGesture!)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if keyboardDismissTapGesture != nil
+        {
+            self.view.removeGestureRecognizer(keyboardDismissTapGesture!)
+            keyboardDismissTapGesture = nil
+        }
+    }
+    
+    func dismissKeyboard(sender: AnyObject) {
+        txtEmail?.resignFirstResponder()
+        txtPassword?.resignFirstResponder()
+        txtUsername?.resignFirstResponder()
+        txtConfrimPassword?.resignFirstResponder()
+    }
+    
     
     func isValidEmail(testStr:String) -> Bool {
         
@@ -44,7 +83,7 @@ class SignupVC: UIViewController {
     @IBOutlet weak var signup: UIButton!
 
 
-    @IBAction func singupTapped(sender: UIButton){
+    @IBAction func singupTapped(sender: AnyObject!){
         var username:NSString = txtUsername.text as NSString
         var password:NSString = txtPassword.text as NSString
         var comfirm_password:NSString = txtConfrimPassword.text as NSString
@@ -111,7 +150,9 @@ class SignupVC: UIViewController {
                         alertView.delegate = self
                         alertView.addButtonWithTitle("OK")
                         alertView.show()
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        let data:NSArray = [username, password]
+                        self.performSegueWithIdentifier("BackToLogin", sender: data)
+                       // self.dismissViewControllerAnimated(true, completion: nil)
                     }else{
                         var error_msg:NSString
                         if jsonData["error_message"] as? NSString != nil
@@ -156,15 +197,25 @@ class SignupVC: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "BackToLogin"{
+            let loginController = segue.destinationViewController as! LoginVC
+            loginController.DataForAutoComplete = sender as! NSArray
+        }
     }
-    */
 
 }
 
+extension SignupVC:UITextFieldDelegate{
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        singupTapped(nil)
+        return true
+    }
+}
