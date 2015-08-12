@@ -17,9 +17,9 @@ class FriendListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         FriendListTable.delegate = self
         FriendListTable.dataSource = self
         self.FriendListTable.reloadData()
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        prefs.setObject(FriendshipINFO, forKey: "Friends")
-        let fukingFriends:[FriendLIST]  = prefs.valueForKey("Friends") as! [FriendLIST]
+//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        prefs.setObject(FriendshipINFO, forKey: "Friends")
+//        let fukingFriends:[FriendLIST]  = prefs.valueForKey("Friends") as! [FriendLIST]
         // Do any additional setup after loading the view.
     }
     
@@ -31,7 +31,7 @@ class FriendListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     let cellIdentif = "cell_text"
     
-   // var pulamea = ["paul", "cata", "clau"]
+    var testInfo = ["paul", "cata", "clau"]
     
     @IBOutlet weak var FriendListTable: UITableView!
     
@@ -40,15 +40,13 @@ class FriendListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return FriendshipINFO.count
+        return testInfo.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentif, forIndexPath: indexPath) as! UITableViewCell
         let row = indexPath.row
-        let pulamea = FriendshipINFO.map({$0.friendUsername})
-        cell.textLabel?.text = pulamea[row]
-        
+        cell.textLabel?.text = testInfo[row]
         return cell
     }
     

@@ -268,8 +268,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                     
                     
                     let status:NSInteger = jsonData.valueForKey("status") as! NSInteger
-                    let user_id:NSInteger = jsonData.valueForKey("user_id") as! NSInteger
-                    loggedUserID = user_id
+
                     
                     //[jsonData[@"success"] integerValue];
                     
@@ -277,6 +276,12 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                     
                     if(status == 1)
                     {
+                        let user_id:NSInteger = jsonData.valueForKey("user_id") as! NSInteger
+                        let SessionToken:String = jsonData.valueForKey("token") as! String
+                        loggedUserID = user_id
+                        var isSessionToken:String = SessionToken
+                        
+                        
                         NSLog("Login SUCCESS");
                         var alertView:UIAlertView = UIAlertView()
                         alertView.title = "Success!"
