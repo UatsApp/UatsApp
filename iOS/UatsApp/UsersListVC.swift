@@ -54,7 +54,6 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
                         println(username)
                     }
                     self.tableView.reloadData()
-                    
                 }
                 println(JSON)
         }

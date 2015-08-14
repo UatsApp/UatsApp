@@ -281,13 +281,13 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         prefs.setObject(username, forKey: "USERNAME")
                         prefs.setInteger(1, forKey: "ISLOGGEDIN")
                         prefs.synchronize()
-                        
+                        println(username)
                         let user_id:NSInteger = jsonData.valueForKey("user_id") as! NSInteger
                         let SessionToken:String = jsonData.valueForKey("token") as! String
                         loggedUserID = user_id
                         //isSessionToken = SessionToken
                         let isSessionToken = KeyChain.saveData(["token" : "\(SessionToken)"], forUserAccount: "\(username)")
-                        println(isSessionToken)
+
                         
                         NSLog("Login SUCCESS");
                         var alertView:UIAlertView = UIAlertView()
