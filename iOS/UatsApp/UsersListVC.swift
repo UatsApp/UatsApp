@@ -30,9 +30,15 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
     
     
     func getUsers(){
-        Alamofire.request(.GET, "http://uatsapp.tk/accounts/get_users.php")
+        
+        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        var LoggedUseUserName = prefs.valueForKey("USERNAME") as! String
+        let (isSessionToken, error) = KeyChain.loadDataForUserAccount("\(LoggedUseUserName)")
+        var token: AnyObject? = isSessionToken!["token"] as! String
+        
+        Alamofire.request(.POST, "http://uatsapp.tk/accounts/get_users.php", parameters: ["token":"\(token!)", "uid":"\(loggedUserID)"], encoding: .JSON)
             .responseJSON { _, _, JSON, _ in
-                if let jsonResult = JSON as? Array<Dictionary<String,String>>{
+                if let jsonResult = JSON?.valueForKey("friends") as? Array<Dictionary<String,String>>{
                     var i = 0
                     for (i = 0; i < jsonResult.count; i++)
                     {
@@ -52,6 +58,13 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
                 }
                 println(JSON)
         }
+//        var alertview:UIAlertView = UIAlertView()
+//        alertview.title = "Token!"
+//        alertview.message = "\(pp!)" as String
+//        alertview.delegate = self
+//        alertview.addButtonWithTitle("OK")
+//        alertview.show()
+//        println("USERUL LOGAT ARE TOKENUL: \(pp!)")
     }
     
     

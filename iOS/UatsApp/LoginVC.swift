@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 var loggedUserID : Int = -1000
-var isSessionToken:String = ""
+//var isSessionToken:String = ""
 
 class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
@@ -277,11 +277,17 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                     
                     if(status == 1)
                     {
+                        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                        prefs.setObject(username, forKey: "USERNAME")
+                        prefs.setInteger(1, forKey: "ISLOGGEDIN")
+                        prefs.synchronize()
+                        
                         let user_id:NSInteger = jsonData.valueForKey("user_id") as! NSInteger
                         let SessionToken:String = jsonData.valueForKey("token") as! String
                         loggedUserID = user_id
-                        isSessionToken = SessionToken
-                        
+                        //isSessionToken = SessionToken
+                        let isSessionToken = KeyChain.saveData(["token" : "\(SessionToken)"], forUserAccount: "\(username)")
+                        println(isSessionToken)
                         
                         NSLog("Login SUCCESS");
                         var alertView:UIAlertView = UIAlertView()
@@ -290,10 +296,6 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         alertView.delegate = self
                         alertView.addButtonWithTitle("OK")
                         alertView.show()
-                        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-                        prefs.setObject(username, forKey: "USERNAME")
-                        prefs.setInteger(1, forKey: "ISLOGGEDIN")
-                        prefs.synchronize()
                         self.performSegueWithIdentifier("goApp", sender: self)
                         
                         //  self.dismissViewControllerAnimated(true, completion: nil)

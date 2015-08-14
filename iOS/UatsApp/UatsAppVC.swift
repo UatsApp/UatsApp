@@ -51,8 +51,16 @@ class UatsAppVC: UITabBarController {
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
         
+//        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        var LoggedUseUserName = prefs.valueForKey("USERNAME") as! String
+//        let (dictionary, isSessionToken) = KeyChain.loadDataForUserAccount("\(LoggedUseUserName)")
+        
+        
+        
+        let isSessionToken:Int = 1
         println("\(isSessionToken)","OMFG")
         
+        let deleteKeyChain = KeyChain.deleteDataForUserAccount("paul")
         
         Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(isSessionToken)", "id":"\(loggedUserID)"], encoding: .JSON).responseJSON{
             _, _, JSON, _ in

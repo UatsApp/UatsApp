@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F154E491B7E19B600494114 /* KeyChainRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F154E471B7E19B600494114 /* KeyChainRequest.swift */; };
+		3F154E4A1B7E19B600494114 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F154E481B7E19B600494114 /* KeyChain.swift */; };
 		3F1DD77C1B28A4320081FE34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD77B1B28A4320081FE34 /* AppDelegate.swift */; };
 		3F1DD77F1B28A4320081FE34 /* UatsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD77D1B28A4320081FE34 /* UatsApp.xcdatamodeld */; };
 		3F1DD7811B28A4320081FE34 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD7801B28A4320081FE34 /* ViewController.swift */; };
@@ -49,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		3080E396B577E8F1966CD697 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		3F154E471B7E19B600494114 /* KeyChainRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainRequest.swift; sourceTree = "<group>"; };
+		3F154E481B7E19B600494114 /* KeyChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		3F1DD7761B28A4320081FE34 /* UatsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UatsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1DD77A1B28A4320081FE34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F1DD77B1B28A4320081FE34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +112,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F154E461B7E19A500494114 /* KeyChainWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				3F154E471B7E19B600494114 /* KeyChainRequest.swift */,
+				3F154E481B7E19B600494114 /* KeyChain.swift */,
+			);
+			name = KeyChainWrapper;
+			sourceTree = "<group>";
+		};
 		3F1DD76D1B28A4310081FE34 = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +144,7 @@
 		3F1DD7781B28A4320081FE34 /* UatsApp */ = {
 			isa = PBXGroup;
 			children = (
+				3F154E461B7E19A500494114 /* KeyChainWrapper */,
 				3F7DE5611B57BFC1005954FC /* Data */,
 				3F7DE5521B5580DB005954FC /* Res */,
 				3FD49D3C1B28BC2A0029218E /* Resources */,
@@ -391,6 +405,8 @@
 				3F7DE5631B57BFE2005954FC /* Users.swift in Sources */,
 				3F9B21361B6FED6900D5123E /* FriendList.swift in Sources */,
 				3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */,
+				3F154E4A1B7E19B600494114 /* KeyChain.swift in Sources */,
+				3F154E491B7E19B600494114 /* KeyChainRequest.swift in Sources */,
 				3F8ACEEE1B61323900B412CC /* UatsAppVC.swift in Sources */,
 				3F9B21341B6FEA4700D5123E /* FriendListVC.swift in Sources */,
 				3F6560641B5D3BE4001BF3C1 /* History.swift in Sources */,
