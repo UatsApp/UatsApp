@@ -33,8 +33,9 @@
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
+      debugger;
       // Logged into your app and Facebook.
-      testAPI();
+      //testAPI();
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       //document.getElementById('status').innerHTML = 'Please log ' +
@@ -51,12 +52,13 @@
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
   function checkLoginState() {
+    debugger;
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
     });
   }
 
-   logInWithFacebook = function() {
+    function logInWithFacebook() {
     FB.login(function(response) {
       if (response.authResponse) {
         alert('You are logged in & cookie set!');
@@ -108,11 +110,10 @@
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
+    debugger;
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
 
        
         var user = response.name;
@@ -131,7 +132,7 @@
 		if(dataToSend.username && dataToSend.password && dataToSend.c_password && dataToSend.email){
 		$.ajax({
    			type: 'POST',
-   			url: 'http://uatsapp.tk/UatsAppWeb/process_user.php',
+   			url: 'http://uatsapp.tk/registerDEV/jsonsignup.php',
    			// dataType: "application/json; charset=utf-8",
    			contentType: "application/json",
    			data: JSON.stringify(dataToSend),                      
@@ -139,7 +140,7 @@
    				debugger;
    				if(result["success"] === 1 || dataToSend.email == email){
             
-						window.location.href = "http://uatsapp.tk/UatsAppWeb/UatsApp.php";
+						window.location.href = "http://uatsapp.tk/UatsAppWebDEV/UatsApp.php";
 
 					}else{
 						alert(result["error"]);
@@ -155,9 +156,9 @@
     });
 
 
-     	FB.logout(function(response) {
-        // Person is now logged out
-    });
+    //  	FB.logout(function(response) {
+    //     // Person is now logged out
+    // });
   }
 </script>
 
@@ -173,14 +174,13 @@
 
 <div id="containerLogin" >
 <form action="action_page.php"> 
-Username:<br>
+<b>Username:<br>
 <input  id = "userName" type="text" placeholder="Username" required>
 <br><br>
 Password:<br>
 <input id = "userPass" type="password" placeholder="Password" required>
 </form>
-<a href="forgot_password.html" id = "forgot-password">Did you forget your password? </a>
-
+</b>
 
 <br><br>
 <form>
@@ -189,7 +189,7 @@ Password:<br>
 <br><br>
 
 <div id="containerLogin" >
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+<fb:login-button scope="public_profile,email" onlogin="testAPI();">
 </fb:login-button>
 </div>
 
@@ -200,10 +200,6 @@ Password:<br>
 
 <script type="text/javascript">
 
-
-$(document).ready(function() {
-			$('#forgot-password').hide();
-		});
 
 
 window.addEventListener('keydown',this.check,false);
@@ -216,7 +212,6 @@ window.addEventListener('keydown',this.check,false);
 		dataToSend.username = user;
 		dataToSend.password = password;
 
-
 		if(dataToSend.username && dataToSend.password){
 		$.ajax({
    			type: 'POST',
@@ -228,9 +223,9 @@ window.addEventListener('keydown',this.check,false);
     		},
    			data: JSON.stringify(dataToSend),                      
    			success: function (result) {
-
+          console.log(JSON.stringify(result));
    				if(result["status"] === 1){
-					window.location.href = "http://uatsapp.tk/UatsAppWeb/UatsApp.php";
+					window.location.href = "http://uatsapp.tk/UatsAppWebDEV/UatsApp.php";
 					//alert("result[]")
 					}else{
 						alert(result["error"]);

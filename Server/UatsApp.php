@@ -1,7 +1,7 @@
 <?php 
 session_start();
 //header('Content-type: application/json');
-if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
+if(isset($_SESSION['user']) && isset($_SESSION['token'])){
 
 }else{
 	echo "user session NOT set";
@@ -73,6 +73,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 	var my_id = parseInt('<?php echo $_SESSION["user_id"] ?>');
 	var currentMsgFloat = -1;
 	var previousMsgFloat = 2;
+	var active_token = '';
 
 
 	$('#page-wrapper').show();
@@ -223,10 +224,11 @@ function submitMessage(){
 
 
 $(document).ready(function(){
+	active_token = '<?php echo $_SESSION["token"] ?>' ;
+	console.log("token : " + active_token);
 	populateUsers();
 	window_chat = document.getElementById('page-wrapper');
 }).on('click','#row a', function(){
-	debugger;
 	partener_username = $(this).data("username");
 	document.getElementById('chat-partener').innerHTML = partener_username;
 	userid = $(this).data('userid');
@@ -277,18 +279,47 @@ $(document).ready(function(){
 
 
 function populateUsers(){
-	$.getJSON('get_users.php', function(data) {
+	debugger;
+	var dataToSend = new Object();
+	dataToSend.token = active_token;
+	dataToSend.uid = my_id;
 
-		$.each(data, function(key, value) {
+	$.ajax({
+		type:"POST",
+		url:'http://uatsapp.tk/accounts/get_users.php',
+		dataType:"json",
+		contentType: "application/json; charset=utf-8",
+		data:JSON.stringify(dataToSend),
+		success: function(response){
+			if(response["status"] == 1){
+
+			$.each(response["friends"], function(key, value) {
 			$('#row').append('<a href="#" data-userid="' + value.id + '" data-username="' + value.username + '"  class="list-group-item" >' + value.username + '</li>');
 			
 			$('#row a').data("receivedMessages",0);
 			$('#row a').attr("data-receivedMessages",0);
+});
+			}else{
+				if(response["status"] == -1000){
+					var callObject = new Object();
+					callObject.invalidator = active_token;
+					callObject.id = my_id; 
+					$.ajax({
+						type:"POST",
+						url:'http://uatsapp.tk/registerDEV/invalidate.php',
+						dataType:"json",
+						ContentType:"application/json; charset=utf-8",
+						data: JSON.stringify(callObject),
+					});
+					window.location.href = "http://uatsapp.tk/UatsAppWebDEV/index.php";
+				} 
+			}
+		},
 
-
-		});
-			$('#row a').append('<span class="badge"></span>');
-	});
+		error: function(error){
+			console.log("Call error for geting friends list.");
+		}
+	});		
 
 }
 
