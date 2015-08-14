@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-var FriendshipINFO:[FriendLIST] = []
+//var FriendshipINFO:[FriendLIST] = []
 
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReceivedMessageDelegate {
     
@@ -249,8 +249,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     let partnerUserName = self.userInfo[1] as! String
                     var currentFromUserId = -1000
                     
-                    var currINFO = FriendLIST(id_c: self.relation_id, friendUsername: partnerUserName)
-                    FriendshipINFO.append(currINFO)
+//                    var currINFO = FriendLIST(id_c: self.relation_id, friendUsername: partnerUserName)
+//                    FriendshipINFO.append(currINFO)
                     
                     for historyItem in self.history {
                         

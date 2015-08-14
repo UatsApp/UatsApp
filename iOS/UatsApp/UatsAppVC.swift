@@ -50,7 +50,18 @@ class UatsAppVC: UITabBarController {
 
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
-        loggedUserID = -1000
+        
+        println("\(isSessionToken)","OMFG")
+        
+        
+        Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(isSessionToken)", "id":"\(loggedUserID)"], encoding: .JSON).responseJSON{
+            _, _, JSON, _ in
+            let succes:Int = JSON?.valueForKey("succes") as! Int
+            let log:String = JSON?.valueForKey("log") as! String
+            println("\(succes)","\(log)")
+            loggedUserID = -1000
+        }
+        
         self.performSegueWithIdentifier("goto_login", sender: logoutBtn)
     }
     
