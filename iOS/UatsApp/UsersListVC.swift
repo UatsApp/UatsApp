@@ -35,6 +35,7 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
         var LoggedUseUserName = prefs.valueForKey("USERNAME") as! String
         let (isSessionToken, error) = KeyChain.loadDataForUserAccount("\(LoggedUseUserName)")
         var token: AnyObject? = isSessionToken!["token"] as! String
+       
         
         Alamofire.request(.POST, "http://uatsapp.tk/accounts/get_users.php", parameters: ["token":"\(token!)", "uid":"\(loggedUserID)"], encoding: .JSON)
             .responseJSON { _, _, JSON, _ in

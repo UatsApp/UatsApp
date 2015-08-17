@@ -39,6 +39,7 @@ class UatsAppVC: UITabBarController {
         super.viewWillAppear(animated)
         var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         var LoggedUseUserName = prefs.valueForKey("USERNAME") as! String
+        
         self.navigationItem.title = LoggedUseUserName
     }
     
@@ -53,8 +54,9 @@ class UatsAppVC: UITabBarController {
         
         var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         var LoggedUseUserName = prefs.valueForKey("USERNAME") as! String
-        let (isSessionToken, error) = KeyChain.loadDataForUserAccount("\(LoggedUseUserName)")
-        var token: AnyObject? = isSessionToken!["token"] as! String
+        
+        let (keychainData, error) = KeyChain.loadDataForUserAccount("\(LoggedUseUserName)")
+        var token: AnyObject? = keychainData!["token"] as! String
         
         Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(token!)", "id":"\(loggedUserID)"], encoding: .JSON).responseJSON{
             _, _, JSON, _ in

@@ -137,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UatsApp/LoginVC.swift"
-            timestampString = "461258866.075252"
+            filePath = "UatsApp/ChatViewController.swift"
+            timestampString = "461496049.450157"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
-            landmarkName = "signinTapped(_:)"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
+            landmarkName = "checkRelation()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,13 +153,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "UatsApp/LoginVC.swift"
-            timestampString = "461258769.143494"
+            filePath = "UatsApp/ChatViewController.swift"
+            timestampString = "461495753.007998"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
-            landmarkName = "signinTapped(_:)"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "checkRelation()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UatsApp/ChatViewController.swift"
+            timestampString = "461496039.545677"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "checkRelation()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UatsApp/ChatViewController.swift"
+            timestampString = "461496040.175426"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
+            landmarkName = "checkRelation()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

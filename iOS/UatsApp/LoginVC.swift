@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 
 var loggedUserID : Int = -1000
-//var isSessionToken:String = ""
+
 
 class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
@@ -44,7 +44,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         
         if(isLoggedin == 1 || isFacebookLoggedIn == 1){
             self.performSegueWithIdentifier("goApp", sender: self)//////////DE PUS LOGOUT IN APP SI SCBHIMBAT '!=' IN '==';////////////////
-          
+            
         }
         
         //FB login
@@ -57,7 +57,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         else
         {
             let loginView : FBSDKLoginButton = FBSDKLoginButton()
-           // self.view.addSubview(loginView)
+            // self.view.addSubview(loginView)
             //loginView.center = self.view.center
             loginView.readPermissions = ["public_profile", "email", "user_friends"]
             loginView.delegate = self
@@ -114,7 +114,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
-              self.checkFacebookUser()
+                self.checkFacebookUser()
             }
         }
     }
@@ -136,12 +136,12 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             else
             {
                 println("fetched facebook user: \(result)")
-//                let userName : NSString = result.valueForKey("name") as! NSString
-//                println("User name is: \(userName)")
-//                let userEmail : NSString = result.valueForKey("email") as! NSString
-//                println("User Email is: \(userEmail)")
-//                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//                prefs.setObject(userName, forKey: "USERNAME")
+                //                let userName : NSString = result.valueForKey("name") as! NSString
+                //                println("User name is: \(userName)")
+                //                let userEmail : NSString = result.valueForKey("email") as! NSString
+                //                println("User Email is: \(userEmail)")
+                //                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                //                prefs.setObject(userName, forKey: "USERNAME")
                 
             }
         })
@@ -186,10 +186,10 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         }
                         
                         
-
+                        
                         
                 }
-
+                
                 
                 let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                 prefs.setObject(userName, forKey: "USERNAME")
@@ -207,7 +207,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-        
+    
     
     @IBOutlet weak var signin: UIButton!
     
@@ -269,9 +269,6 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                     
                     
                     let status:NSInteger = jsonData.valueForKey("status") as! NSInteger
-
-                    
-                    //[jsonData[@"success"] integerValue];
                     
                     NSLog("Success: %ld", status);
                     
@@ -285,10 +282,9 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         let user_id:NSInteger = jsonData.valueForKey("user_id") as! NSInteger
                         let SessionToken:String = jsonData.valueForKey("token") as! String
                         loggedUserID = user_id
-                        //isSessionToken = SessionToken
-                        let isSessionToken = KeyChain.saveData(["token" : "\(SessionToken)"], forUserAccount: "\(username)")
-
-                        
+                        println(loggedUserID)
+                        let isSessionToken = KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
+                        //let userID = KeyChain.saveData(["user_id":"\(user_id)"], forUserAccount: "pula")
                         NSLog("Login SUCCESS");
                         var alertView:UIAlertView = UIAlertView()
                         alertView.title = "Success!"

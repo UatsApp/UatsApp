@@ -13,7 +13,7 @@ import Alamofire
 
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReceivedMessageDelegate {
     
-
+    
     /////Cell construct///////
     var relation_id : Int = 0
     var partener_id : Int = 0
@@ -54,25 +54,25 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             if receiverID == loggedUserID && senderID == self.partener_id{
                 
-                    let infoMetas = self.cellMetas.filter{$0.identifier == "cell_info"}
+                let infoMetas = self.cellMetas.filter{$0.identifier == "cell_info"}
+                
+                if infoMetas.count == 0 || infoMetas.last!.text != sender_username {
+                    self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_info", sender_username))
+                }
+                self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_message", textMessage))
+                
+                
+                
+                
+                if self.cellMetas.count >= 0{
+                    let delay = 0.1 * Double(NSEC_PER_SEC)
+                    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                     
-                    if infoMetas.count == 0 || infoMetas.last!.text != sender_username {
-                        self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_info", sender_username))
-                    }
-                    self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_message", textMessage))
-                    
-                    
-                    
-                    
-                    if self.cellMetas.count >= 0{
-                        let delay = 0.1 * Double(NSEC_PER_SEC)
-                        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                        
-                        dispatch_after(time, dispatch_get_main_queue(), {
-                            self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
-                        })}
-                    self.historyTable.reloadData()
-
+                    dispatch_after(time, dispatch_get_main_queue(), {
+                        self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
+                    })}
+                self.historyTable.reloadData()
+                
                 
             }
         }
@@ -177,7 +177,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             keyboardDismissTapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard:"))
             self.view.addGestureRecognizer(keyboardDismissTapGesture!)
         }
-
+        
     }
     
     func keyboardWillHideNotification(notification: NSNotification) {
@@ -204,12 +204,12 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         bottomLayoutConstraint.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame)
         bottomLayoutConstraintSendButton.constant = CGRectGetMaxY(view.bounds) - CGRectGetMinY(convertedKeyboardEndFrame)
         if self.cellMetas.count > 0{
-        let delay = 0.1 * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        
-        dispatch_after(time, dispatch_get_main_queue(), {
-            self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
-        })}
+            let delay = 0.1 * Double(NSEC_PER_SEC)
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            
+            dispatch_after(time, dispatch_get_main_queue(), {
+                self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
+            })}
         UIView.animateWithDuration(animationDuration, delay: 0.0, options: .BeginFromCurrentState | animationCurve, animations: {
             self.view.layoutIfNeeded()
             }, completion: nil)
@@ -221,9 +221,16 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func checkRelation(){
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         self.myUserName  = prefs.valueForKey("USERNAME") as! String
+        let (isSessionToken, error) = KeyChain.loadDataForUserAccount("\(self.myUserName)")
+        var token: AnyObject? = isSessionToken!["token"] as! String
+        var userID:AnyObject? = isSessionToken!["user_id"] as! String
+        
+        
+        println(userID!)
         //Get History
-        Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/history.php", parameters: ["identifier": "\(userInfo[0])" , "loggedUsername":"\(self.myUserName)"], encoding: .JSON)
+        Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/history.php", parameters: ["identifier": "\(userInfo[0])" , "loggedUsername":"\(self.myUserName)", "token":"\(token!)", "uid":"\(userID!)"], encoding: .JSON)
             .responseJSON { _, _, JSON, _ in
+                var status = JSON?.valueForKey("status") as! Int
                 self.relation_id = JSON?.valueForKey("relation_id") as! Int
                 loggedUserID = JSON?.valueForKey("loggedUserID") as! Int
                 if let jsonResult = JSON?.valueForKey("history") as? Array<Dictionary<String,String>>{
@@ -249,8 +256,8 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     let partnerUserName = self.userInfo[1] as! String
                     var currentFromUserId = -1000
                     
-//                    var currINFO = FriendLIST(id_c: self.relation_id, friendUsername: partnerUserName)
-//                    FriendshipINFO.append(currINFO)
+                    //                    var currINFO = FriendLIST(id_c: self.relation_id, friendUsername: partnerUserName)
+                    //                    FriendshipINFO.append(currINFO)
                     
                     for historyItem in self.history {
                         
