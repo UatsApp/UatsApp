@@ -48,9 +48,15 @@ class socketManager: WebSocketDelegate {
     // MARK: Websocket Delegate Methods.
     
     func websocketDidConnect(ws: WebSocket) {
+        
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let myUserName:String  = prefs.valueForKey("USERNAME") as! String
+        let (isSessionToken, error) = KeyChain.loadDataForUserAccount("\(myUserName)")
+        var token: AnyObject? = isSessionToken!["token"] as! String
+        var userID:AnyObject? = isSessionToken!["user_id"] as! String
         println("websocket is connected")
-        println("{\"type\":\"handShake\", \"senderID\":\"\(loggedUserID)\"}")
-        self.socket.writeString("{\"type\":\"handShake\", \"senderID\":\"\(loggedUserID)\"}")
+        println("{\"type\":\"handShake\", \"senderID\":\"\(userID!)\"}")
+        self.socket.writeString("{\"type\":\"handShake\", \"senderID\":\"\(userID!)\"}")
         //send id to sv
         
     }

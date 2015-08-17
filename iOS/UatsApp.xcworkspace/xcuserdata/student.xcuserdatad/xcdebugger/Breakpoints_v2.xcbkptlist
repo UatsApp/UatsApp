@@ -106,12 +106,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UatsApp/ChatViewController.swift"
-            timestampString = "460373355.852093"
+            timestampString = "461518044.471432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "didReceiveMessage(_:message:)"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "sendButtonTapped(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UatsApp/UatsAppVC.swift"
+            timestampString = "461514831.532805"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "logoutAction(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UatsApp/UatsAppVC.swift"
+            timestampString = "461514830.82847"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "logoutAction(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,12 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UatsApp/ChatViewController.swift"
-            timestampString = "460373355.852093"
+            timestampString = "461518044.471432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "sendButtonTapped(_:)"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "didReceiveMessage(_:message:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
