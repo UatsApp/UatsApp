@@ -9,8 +9,6 @@
 import UIKit
 import Alamofire
 
-var loggedUserID : Int = -1000
-
 
 class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     
@@ -171,8 +169,13 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         if((jsonResult) != nil){
                             var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                             prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
+                            prefs.setObject(userName, forKey: "USERNAME")
                             if JSON?.valueForKey("FBUserID") != nil {
-                                loggedUserID = (JSON?.valueForKey("FBUserID") as? Int)!
+                                
+                                let SessionToken:String = JSON?.valueForKey("token") as! String
+                                let user_id:Int = JSON?.valueForKey("FBUserID") as! Int
+                                let isSessionToken = KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(userName)")
+                                
                             }
                             
                             self.performSegueWithIdentifier("goApp", sender: self)
@@ -279,13 +282,11 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         prefs.setInteger(1, forKey: "ISLOGGEDIN")
                         prefs.synchronize()
                         println(username)
-                        let user_id:NSInteger = jsonData.valueForKey("user_id") as! NSInteger
+                        let user_id:Int = jsonData.valueForKey("user_id") as! Int
                         let SessionToken:String = jsonData.valueForKey("token") as! String
-                        loggedUserID = user_id
-                        println(loggedUserID)
-                        let isSessionToken = KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
-                        //let userID = KeyChain.saveData(["user_id":"\(user_id)"], forUserAccount: "pula")
+                        let isSessionToken = KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)" ], forUserAccount: "\(username)")
                         NSLog("Login SUCCESS");
+
                         var alertView:UIAlertView = UIAlertView()
                         alertView.title = "Success!"
                         alertView.message = "You are logged in!"

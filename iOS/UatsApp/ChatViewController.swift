@@ -50,9 +50,15 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             var receiverID : Int = dict["receiverID"] as! Int
             var sender_username : String = dict["sender_username"] as! String
             
+            let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+            self.myUserName  = prefs.valueForKey("USERNAME") as! String
+            let (KeyChainData, error) = KeyChain.loadDataForUserAccount("\(self.myUserName)")
+            var token: AnyObject? = KeyChainData!["token"] as! String
+            var userIDasString = KeyChainData!["user_id"] as! String
             
+            let UserIDasInt:Int? = NSNumberFormatter().numberFromString(userIDasString)?.integerValue
             
-            if receiverID == loggedUserID && senderID == self.partener_id{
+            if receiverID == UserIDasInt && senderID == self.partener_id{
                 
                 let infoMetas = self.cellMetas.filter{$0.identifier == "cell_info"}
                 
@@ -115,11 +121,19 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var messageField: UITextField!
     @IBOutlet weak var sendBtn: UIButton!
     @IBAction func sendButtonTapped(sender: AnyObject!) {
+        
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.myUserName  = prefs.valueForKey("USERNAME") as! String
+        let (KeyChainData, error) = KeyChain.loadDataForUserAccount("\(self.myUserName)")
+        var token: AnyObject? = KeyChainData!["token"] as! String
+        var userID:AnyObject? = KeyChainData!["user_id"] as! String
+        
+        
         if messageField.text != ""{
             var messageToSend = messageField.text
-            socketManager.sharedSocket.socket.writeString("{\"type\":\"msg\", \"message\":\"\(messageToSend)\", \"relation_id\":\(self.relation_id), \"senderID\":\(loggedUserID), \"receiverID\":\(self.partener_id), \"sender_username\":\"\(self.myUserName)\"}")
+            socketManager.sharedSocket.socket.writeString("{\"type\":\"msg\", \"message\":\"\(messageToSend)\", \"relation_id\":\(self.relation_id), \"senderID\":\(userID!), \"receiverID\":\(self.partener_id), \"sender_username\":\"\(self.myUserName)\"}")
             
-            Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/insert_message.php", parameters: ["message" : "\(messageToSend)" , "relation_id"  : "\(self.relation_id)" , "senderID" : "\(loggedUserID)"], encoding: .JSON).responseJSON {
+            Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/insert_message.php", parameters: ["message" : "\(messageToSend)" , "relation_id"  : "\(self.relation_id)" , "senderID" : "\(userID!)"], encoding: .JSON).responseJSON {
                 _, _, JSON, _ in
                 //TODO check the result from insert_message.php which is ???"string"???
             }
@@ -224,15 +238,13 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let (isSessionToken, error) = KeyChain.loadDataForUserAccount("\(self.myUserName)")
         var token: AnyObject? = isSessionToken!["token"] as! String
         var userID:AnyObject? = isSessionToken!["user_id"] as! String
-        
-        
-        println(userID!)
+
         //Get History
         Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/history.php", parameters: ["identifier": "\(userInfo[0])" , "loggedUsername":"\(self.myUserName)", "token":"\(token!)", "uid":"\(userID!)"], encoding: .JSON)
             .responseJSON { _, _, JSON, _ in
                 var status = JSON?.valueForKey("status") as! Int
                 self.relation_id = JSON?.valueForKey("relation_id") as! Int
-                loggedUserID = JSON?.valueForKey("loggedUserID") as! Int
+//                loggedUserID = JSON?.valueForKey("loggedUserID") as! Int
                 if let jsonResult = JSON?.valueForKey("history") as? Array<Dictionary<String,String>>{
                     var i = 0
                     self.history = []
