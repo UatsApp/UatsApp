@@ -13,99 +13,24 @@ import Alamofire
 
 class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ReceivedMessageDelegate {
     
-    
-    /////Cell construct///////
-    var relation_id : Int = 0
-    var partener_id : Int = 0
-    var myUserName : String = ""
-    var partenerName : String = ""
-    var keyboardDismissTapGesture: UIGestureRecognizer?
-    
-    
-    struct CellMeta {
-        var alingment: NSTextAlignment
-        var identifier: String
-        var text: String
-        
-        init(_ alingment: NSTextAlignment, _ identifier: String, _ text: String){
-            self.alingment = alingment
-            self.identifier = identifier
-            self.text = text
-        }
-        
-    }
-    
-    
-    //Delegate part
-    func didReceiveMessage(socket : socketManager ,message: String){
-        //Parse received JSON(message)
-        var data = message.dataUsingEncoding(NSUTF16StringEncoding, allowLossyConversion: false)
-        var localError: NSError?
-        var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: &localError)
-        if let dict = json as? [String: AnyObject] {
-            println(dict["message"] as! String)
-            var textMessage : String = dict["message"] as! String
-            var relID : Int = dict["relation_id"] as! Int
-            var senderID : Int = dict["senderID"] as! Int
-            var receiverID : Int = dict["receiverID"] as! Int
-            var sender_username : String = dict["sender_username"] as! String
-            
-            let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-            self.myUserName  = prefs.valueForKey("USERNAME") as! String
-            let (KeyChainData, error) = KeyChain.loadDataForUserAccount("\(self.myUserName)")
-            var token: AnyObject? = KeyChainData!["token"] as! String
-            var userIDasString = KeyChainData!["user_id"] as! String
-            
-            let UserIDasInt:Int? = NSNumberFormatter().numberFromString(userIDasString)?.integerValue
-            
-            if receiverID == UserIDasInt && senderID == self.partener_id{
-                
-                let infoMetas = self.cellMetas.filter{$0.identifier == "cell_info"}
-                
-                if infoMetas.count == 0 || infoMetas.last!.text != sender_username {
-                    self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_info", sender_username))
-                }
-                self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_message", textMessage))
-                
-                
-                
-                
-                if self.cellMetas.count >= 0{
-                    let delay = 0.1 * Double(NSEC_PER_SEC)
-                    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                    
-                    dispatch_after(time, dispatch_get_main_queue(), {
-                        self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
-                    })}
-                self.historyTable.reloadData()
-                
-                
-            }
-        }
-        
-        
-    }
-    
-    func didCancel(){
-        println("cenceled")
-    }
-    
-    
-    
-    @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomLayoutConstraintSendButton: NSLayoutConstraint!
-    
-    
-    
-    @IBOutlet var historyTable: UITableView!
-    let cellHistory = "cell_message"
-    let cellInfo = "cell_info"
     var user: String!
     var history:[History] = []
     var userInfo:NSArray = []
     var cellMetas:[CellMeta] = []
+    var relation_id : Int = 0
+    var partener_id : Int = 0
+    var partenerName : String = ""
+    var keyboardDismissTapGesture: UIGestureRecognizer?
+    
+    let cellHistory = "cell_message"
+    let cellInfo = "cell_info"
     
     @IBOutlet weak var userLabel: UILabel!
+    @IBOutlet weak var messageField: UITextField!
+    @IBOutlet weak var sendBtn: UIButton!
+    @IBOutlet weak var bottomLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomLayoutConstraintSendButton: NSLayoutConstraint!
+    @IBOutlet var historyTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,48 +43,6 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Do any additional setup after loading the view.
     }
     
-    @IBOutlet weak var messageField: UITextField!
-    @IBOutlet weak var sendBtn: UIButton!
-    @IBAction func sendButtonTapped(sender: AnyObject!) {
-        
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        self.myUserName  = prefs.valueForKey("USERNAME") as! String
-        let (KeyChainData, error) = KeyChain.loadDataForUserAccount("\(self.myUserName)")
-        var token: AnyObject? = KeyChainData!["token"] as! String
-        var userID:AnyObject? = KeyChainData!["user_id"] as! String
-        
-        
-        if messageField.text != ""{
-            var messageToSend = messageField.text
-            socketManager.sharedSocket.socket.writeString("{\"type\":\"msg\", \"message\":\"\(messageToSend)\", \"relation_id\":\(self.relation_id), \"senderID\":\(userID!), \"receiverID\":\(self.partener_id), \"sender_username\":\"\(self.myUserName)\"}")
-            
-            Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/insert_message.php", parameters: ["message" : "\(messageToSend)" , "relation_id"  : "\(self.relation_id)" , "senderID" : "\(userID!)"], encoding: .JSON).responseJSON {
-                _, _, JSON, _ in
-                //TODO check the result from insert_message.php which is ???"string"???
-            }
-            
-            
-            let infoMetas = self.cellMetas.filter{$0.identifier == "cell_info"}
-            
-            if infoMetas.count == 0 || infoMetas.last!.text != self.myUserName {
-                self.cellMetas.append(CellMeta(NSTextAlignment.Right, "cell_info", self.myUserName))
-            }
-            self.cellMetas.append(CellMeta(NSTextAlignment.Right, "cell_message", messageToSend))
-            
-            if self.cellMetas.count >= 0{
-                let delay = 0.1 * Double(NSEC_PER_SEC)
-                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                
-                dispatch_after(time, dispatch_get_main_queue(), {
-                    self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
-                })}
-            self.historyTable.reloadData()
-            
-            messageField.text  = ""
-            
-        }
-        
-    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = userInfo[1] as? String
@@ -182,6 +65,101 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
+    
+    
+    /////Cell construct///////
+    struct CellMeta {
+        var alingment: NSTextAlignment
+        var identifier: String
+        var text: String
+        
+        init(_ alingment: NSTextAlignment, _ identifier: String, _ text: String){
+            self.alingment = alingment
+            self.identifier = identifier
+            self.text = text
+        }
+        
+    }
+    
+    //Delegate part
+    func didReceiveMessage(socket : socketManager ,message: String){
+        //Parse received JSON(message)
+        var data = message.dataUsingEncoding(NSUTF16StringEncoding, allowLossyConversion: false)
+        var localError: NSError?
+        var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: &localError)
+        if let dict = json as? [String: AnyObject] {
+            println(dict["message"] as! String)
+            var textMessage : String = dict["message"] as! String
+            var relID : Int = dict["relation_id"] as! Int
+            var senderID : Int = dict["senderID"] as! Int
+            var receiverID : Int = dict["receiverID"] as! Int
+            var sender_username : String = dict["sender_username"] as! String
+            
+            if receiverID == userID && senderID == self.partener_id{
+                
+                let infoMetas = self.cellMetas.filter{$0.identifier == "cell_info"}
+                
+                if infoMetas.count == 0 || infoMetas.last!.text != sender_username {
+                    self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_info", sender_username))
+                }
+                self.cellMetas.append(CellMeta(NSTextAlignment.Left, "cell_message", textMessage))
+                
+                
+                
+                
+                if self.cellMetas.count >= 0{
+                    
+                    let delay = 0.1 * Double(NSEC_PER_SEC)
+                    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                    
+                    dispatch_after(time, dispatch_get_main_queue(), {
+                        self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
+                    })}
+                self.historyTable.reloadData()
+            }
+        }
+    }
+    
+    func didCancel(){
+        println("cenceled")
+    }
+    
+    @IBAction func sendButtonTapped(sender: AnyObject!) {
+        
+        if messageField.text != ""{
+            var messageToSend = messageField.text
+            socketManager.sharedSocket.socket.writeString("{\"type\":\"msg\", \"message\":\"\(messageToSend)\", \"relation_id\":\(self.relation_id), \"senderID\":\(userID), \"receiverID\":\(self.partener_id), \"sender_username\":\"\(myUserName)\"}")
+            
+            Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/insert_message.php", parameters: ["message" : "\(messageToSend)" , "relation_id"  : "\(self.relation_id)" , "senderID" : "\(userID)", "token":"\(token)"], encoding: .JSON).responseJSON {
+                _, _, JSON, _ in
+                //TODO check the result from insert_message.php which is ???"string"???
+            }
+            
+            
+            let infoMetas = self.cellMetas.filter{$0.identifier == "cell_info"}
+            
+            if infoMetas.count == 0 || infoMetas.last!.text != myUserName {
+                self.cellMetas.append(CellMeta(NSTextAlignment.Right, "cell_info", myUserName))
+            }
+            self.cellMetas.append(CellMeta(NSTextAlignment.Right, "cell_message", messageToSend))
+            
+            if self.cellMetas.count >= 0{
+                
+                let delay = 0.1 * Double(NSEC_PER_SEC)
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                
+                dispatch_after(time, dispatch_get_main_queue(), {
+                    self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
+                })}
+            
+            self.historyTable.reloadData()
+            messageField.text  = ""
+            
+        }
+        
+    }
+    
+    
     ////////////////Constraint TextField To Keyboard////////////////////
     
     func keyboardWillShowNotification(notification: NSNotification) {
@@ -229,22 +207,13 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }, completion: nil)
     }
     
-    
-    
     //////Populate Class History, populate cells/////////////////
     func checkRelation(){
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        self.myUserName  = prefs.valueForKey("USERNAME") as! String
-        let (isSessionToken, error) = KeyChain.loadDataForUserAccount("\(self.myUserName)")
-        var token: AnyObject? = isSessionToken!["token"] as! String
-        var userID:AnyObject? = isSessionToken!["user_id"] as! String
-
         //Get History
-        Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/history.php", parameters: ["identifier": "\(userInfo[0])" , "loggedUsername":"\(self.myUserName)", "token":"\(token!)", "uid":"\(userID!)"], encoding: .JSON)
+        Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/history.php", parameters: ["identifier": "\(userInfo[0])" , "loggedUsername":"\(myUserName)", "token":"\(token)", "uid":"\(userID)"], encoding: .JSON)
             .responseJSON { _, _, JSON, _ in
                 var status = JSON?.valueForKey("status") as! Int
                 self.relation_id = JSON?.valueForKey("relation_id") as! Int
-//                loggedUserID = JSON?.valueForKey("loggedUserID") as! Int
                 if let jsonResult = JSON?.valueForKey("history") as? Array<Dictionary<String,String>>{
                     var i = 0
                     self.history = []
@@ -268,14 +237,14 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     let partnerUserName = self.userInfo[1] as! String
                     var currentFromUserId = -1000
                     
-                    //                    var currINFO = FriendLIST(id_c: self.relation_id, friendUsername: partnerUserName)
-                    //                    FriendshipINFO.append(currINFO)
+                    // var currINFO = FriendLIST(id_c: self.relation_id, friendUsername: partnerUserName)
+                    // FriendshipINFO.append(currINFO)
                     
                     for historyItem in self.history {
                         
                         if historyItem._from != currentFromUserId {
                             currentFromUserId = historyItem._from
-                            self.cellMetas.append(CellMeta( self.partener_id == currentFromUserId ? NSTextAlignment.Left : NSTextAlignment.Right, "cell_info", self.partener_id == currentFromUserId ? self.partenerName  : self.myUserName))
+                            self.cellMetas.append(CellMeta( self.partener_id == currentFromUserId ? NSTextAlignment.Left : NSTextAlignment.Right, "cell_info", self.partener_id == currentFromUserId ? self.partenerName  : myUserName))
                         }
                         
                         self.cellMetas.append(CellMeta( self.partener_id == historyItem._from ? NSTextAlignment.Left : NSTextAlignment.Right, "cell_message", historyItem.message))
@@ -324,9 +293,6 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         return cell
     }
-    
-    
-    
 }
 
 extension ChatViewController : UITextFieldDelegate {
@@ -334,5 +300,4 @@ extension ChatViewController : UITextFieldDelegate {
         sendButtonTapped(nil)
         return true
     }
-    
 }

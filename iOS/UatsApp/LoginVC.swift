@@ -21,6 +21,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     var keyboardDismissTapGesture: UIGestureRecognizer?
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         FBButton.delegate = self
@@ -174,7 +175,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                                 
                                 let SessionToken:String = JSON?.valueForKey("token") as! String
                                 let user_id:Int = JSON?.valueForKey("FBUserID") as! Int
-                                let isSessionToken = KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(userName)")
+                                KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(userName)")
                                 
                             }
                             
@@ -281,12 +282,13 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         prefs.setObject(username, forKey: "USERNAME")
                         prefs.setInteger(1, forKey: "ISLOGGEDIN")
                         prefs.synchronize()
-                        println(username)
                         let user_id:Int = jsonData.valueForKey("user_id") as! Int
                         let SessionToken:String = jsonData.valueForKey("token") as! String
-                        let isSessionToken = KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)" ], forUserAccount: "\(username)")
+                        
+                        KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
+                        
                         NSLog("Login SUCCESS");
-
+                        
                         var alertView:UIAlertView = UIAlertView()
                         alertView.title = "Success!"
                         alertView.message = "You are logged in!"
