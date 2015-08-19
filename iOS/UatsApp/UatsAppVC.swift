@@ -15,60 +15,33 @@ class UatsAppVC: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        if loggedUserID == -1000 {
-//            var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//            var user : String = prefs.valueForKey("USERNAME") as! String
-//            Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/returnLoggedUseID.php", parameters: ["username" : "\(user)"], encoding: .JSON).responseJSON {
-//                _, _, JSON, _ in
-//                if JSON != nil{
-//                    loggedUserID = JSON?.valueForKey("loggedUseID") as! Int
-//                    socketManager.sharedSocket.socket.connect()
-//                }
-//            }
-//        }else{
-//            
-//        }
         socketManager.sharedSocket.socket.connect()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        var LoggedUseUserName = prefs.valueForKey("USERNAME") as! String
-        
-        self.navigationItem.title = LoggedUseUserName
+        self.navigationItem.title = myUserName
     }
     
-    
     @IBOutlet var logoutBtn: UIButton!
-    
     @IBAction func logoutAction(sender: UIButton) {
         
         
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
         
-        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        var LoggedUseUserName = prefs.valueForKey("USERNAME") as! String
-        
-        let (keychainData, error) = KeyChain.loadDataForUserAccount("\(LoggedUseUserName)")
-        var token: AnyObject? = keychainData!["token"] as! String
-        var userID:AnyObject? = keychainData!["user_id"] as! String
-        
-        Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(token!)", "id":"\(userID!)"], encoding: .JSON).responseJSON{
+        Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(token)", "id":"\(userID)"], encoding: .JSON).responseJSON{
             _, _, JSON, _ in
             let succes:Int = JSON?.valueForKey("succes") as! Int
             let log:String = JSON?.valueForKey("log") as! String
             println("\(succes)","\(log)")
-            let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(LoggedUseUserName)")
+            let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(myUserName)")
             if succes == 1{
-                
-                let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(LoggedUseUserName)")
+                socketManager.sharedSocket.socket.disconnect()
+                let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(myUserName)")
                 
                 let appDomain = NSBundle.mainBundle().bundleIdentifier
                 NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)

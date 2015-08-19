@@ -17,20 +17,17 @@ class FriendListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         FriendListTable.delegate = self
         FriendListTable.dataSource = self
         self.FriendListTable.reloadData()
-//        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//        prefs.setObject(FriendshipINFO, forKey: "Friends")
-//        let fukingFriends:[FriendLIST]  = prefs.valueForKey("Friends") as! [FriendLIST]
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.FriendListTable.reloadData()
+        
     }
 
     
     let cellIdentif = "cell_text"
-    
     var testInfo = ["paul", "cata", "clau"]
     
     @IBOutlet weak var FriendListTable: UITableView!

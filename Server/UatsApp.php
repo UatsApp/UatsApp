@@ -2,7 +2,7 @@
 session_start();
 //header('Content-type: application/json');
 if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
-
+	echo 'You are log in as:'.$_SESSION['user'];
 }else{
 	echo "user session NOT set";
 
@@ -15,30 +15,19 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 <head>
 	<meta charset="utf-8">
 	<title>UatsApp Demo</title>
-<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="stylesheets/style.css">
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 
 <body>
-
-	<p class="navbar-text" id = "profile">Signed in as <?php echo $_SESSION["user"]?></p><br>
-
-	<div id="page-wrapper">
-		<div id ="chat-div">
+	<div id="page-wrapper" >
 		<div class="chat-header">
-			<h1>UatsApp Demo</h1>
-			<p id = "chat-partener" class = "chat-partener"></p>
-		</div>
+		<h1>UatsApp Demo</h1>
+		<p id = "status" class = "chat-partener"></p>
+	</div>
 
-		<ul id="log"></ul>
+		<ul id="log" style = "overflow-y: scroll; overflow-x: hidden; height:30%;"></ul>
 
 		<form id="message-form">
 
@@ -48,18 +37,17 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 			<button type="button" id="close" onClick = "logOut()">Close Connection</button>
 
 		</form>
+
+
 	</div>
-		<div id = "usersList" class = "list-group">
+
+	<div id = "usersList" class = "usersList">
 		<p>Full list of database users:</p>
 		<ul id = "row">
 			
 		</ul>
-		</div>
+
 	</div>
-
-	
-
-	
 
 
 	<script src="fancywebsocket.js"></script>
@@ -72,7 +60,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 	var my_username = '<?php echo $_SESSION["user"] ?>';
 	var my_id = parseInt('<?php echo $_SESSION["user_id"] ?>');
 	var currentMsgFloat = -1;
-	var previousMsgFloat = 2;
+ 	var previousMsgFloat = 2;
 
 
 	$('#page-wrapper').show();
@@ -98,16 +86,17 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 
 
 		function logMessage(text, temp, temp2){
-			$log = $('#log');
-			if (temp == temp2){
-				$ul = $('#log ul:last-child');
-				$ul.append(text);
-			}else{
-				$log.append("<ul></ul>");
-				$ul = $('#log ul:last-child');
-				$ul.append(text);
-			}
-			$log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
+			debugger;
+				$log = $('#log');
+		if (temp == temp2){
+			$ul = $('#log ul:last-child');
+			$ul.append(text);
+		}else{
+			$log.append("<ul></ul>");
+			$ul = $('#log ul:last-child');
+			$ul.append(text);
+		}
+		$log[0].scrollTop = $log[0].scrollHeight - $log[0].clientHeight;
 		}
 
 		function send( text ) {
@@ -138,17 +127,18 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 			//Received a new message
 			Server.bind('message', function( payload ) {
 				try{
+					debugger;
 					var received_obj = JSON.parse(payload);
 					currentMsgFloat = 0;
 					console.log(JSON.stringify(received_obj));
 						//check if you should receive a message and if you have a chat windows opened with the sender
 						if(received_obj["receiverID"] == my_id && received_obj["relation_id"] == window_chat.getAttribute('data-identifier')){ 
 							if($('#log ul:last-child li:last-child').hasClass("received")){
-								previousMsgFloat = 0;
-							}else{
-								previousMsgFloat = 1;
-							}
-							logMessage('<li class="received">'+received_obj["message"]+'</li>',currentMsgFloat, previousMsgFloat);
+							previousMsgFloat = 0;
+						}else{
+							previousMsgFloat = 1;
+						}
+						logMessage('<li class="received">'+received_obj["message"]+'</li>',currentMsgFloat, previousMsgFloat);
 
 						}else{
    							//Check if you have a chat window opened and someone else sends you a message
@@ -158,12 +148,8 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
    									
     								//Check which user sent the message and update users list 
     								if(users[i].getAttribute('data-userid') == received_obj["senderID"]){
-    									debugger;
-    									var msgNumber = parseInt($(users[i]).data("receivedMessages")) + 1;
-    									$(users[i]).find('span').text(msgNumber)
-    									//$(users[i]).append('<span class="badge">'+msgNumber+'</span>');
     									$(users[i]).data("receivedMessages",parseInt($(users[i]).data("receivedMessages")) + 1);
-    									//$(users[i]).text(received_obj["sender_username"] + "\n" +$(users[i]).data("receivedMessages") + " new messages ");
+    									$(users[i]).text(received_obj["sender_username"] + "\n" +$(users[i]).data("receivedMessages") + " new messages ");
     								}
     							}
     						}
@@ -172,7 +158,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['user_id'])){
 
 
 
-    				}catch (exception){
+}catch (exception){
 	//alert("cannot parse json");
 }
 
@@ -189,10 +175,10 @@ function submitMessage(){
 	currentMsgFloat = 0;
 	if(relation_id !=0 && text != ""){
 		if($('#log ul:last-child li:last-child').hasClass("sent")){
-			previousMsgFloat = 0;
-		}else{
-			previousMsgFloat = 1;
-		}
+							previousMsgFloat = 0;
+						}else{
+							previousMsgFloat = 1;
+						}
 		logMessage('<li class="sent"> '+text+'</li>',currentMsgFloat, previousMsgFloat);
 
 		var dataForServer = new Object();
@@ -225,17 +211,17 @@ function submitMessage(){
 $(document).ready(function(){
 	populateUsers();
 	window_chat = document.getElementById('page-wrapper');
-}).on('click','#row a', function(){
-	debugger;
+}).on('click','#row li', function(){
+	
 	partener_username = $(this).data("username");
-	document.getElementById('chat-partener').innerHTML = partener_username;
+	document.getElementById('status').innerHTML = partener_username;
 	userid = $(this).data('userid');
 	$(this).data("receivedMessages",0);
 
 	$(this).text($(this).data("username"));
 	document.getElementById('log').innerHTML = "";
 
-	$('#row a').removeClass('active');
+	$('#row li').removeClass('active');
 	$(this).addClass('active');
 	var dataForHistory = new Object();
 	dataForHistory.identifier = userid;
@@ -256,10 +242,10 @@ $(document).ready(function(){
         				//check who is the sender and who's the receiver
         				if(value._from == my_id){
         					currentMsgFloat = 0;
-        					logMessage('<li class="sent"> ' + value.message.toString() + '</li>',currentMsgFloat, previousMsgFloat);
+								logMessage('<li class="sent"> ' + value.message.toString() + '</li>',currentMsgFloat, previousMsgFloat);
         				}else{
         					currentMsgFloat = 1;
-        					logMessage('<li class="received"> ' + value.message.toString() + '</li>',currentMsgFloat, previousMsgFloat);
+								logMessage('<li class="received"> ' + value.message.toString() + '</li>',currentMsgFloat, previousMsgFloat);
         				}
         				previousMsgFloat = currentMsgFloat;
         			});
@@ -280,14 +266,12 @@ function populateUsers(){
 	$.getJSON('get_users.php', function(data) {
 
 		$.each(data, function(key, value) {
-			$('#row').append('<a href="#" data-userid="' + value.id + '" data-username="' + value.username + '"  class="list-group-item" >' + value.username + '</li>');
-			
-			$('#row a').data("receivedMessages",0);
-			$('#row a').attr("data-receivedMessages",0);
+			$('#row').append('<li data-userid="' + value.id + '" data-username="' + value.username + '">' + value.username + '</li>');
+			$('#row li').data("receivedMessages",0);
+			$('#row li').attr("data-receivedMessages",0);
 
 
 		});
-			$('#row a').append('<span class="badge"></span>');
 	});
 
 }

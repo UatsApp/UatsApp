@@ -1,5 +1,5 @@
 //
-//  socketMagager.swift
+//  SocketMagager.swift
 //  UatsApp
 //
 //  Created by test on 28/07/15.
@@ -15,7 +15,6 @@ typealias JSONArray = Array<JSON>
 protocol ReceivedMessageDelegate : NSObjectProtocol {
     func didReceiveMessage(socket : socketManager, message : String)
     func didCancel()
-    
 }
 
 
@@ -23,14 +22,10 @@ protocol ReceivedMessageDelegate : NSObjectProtocol {
 class socketManager: WebSocketDelegate {
     var socket : WebSocket
     static let sharedSocket = socketManager()
-    
-    
-    //Delegate part
     var delegate : ReceivedMessageDelegate?
     
     func ReceivedMessage(message: String){
         self.delegate?.didReceiveMessage(self, message: message)
-        
     }
     
     func cancel(){
@@ -48,17 +43,9 @@ class socketManager: WebSocketDelegate {
     // MARK: Websocket Delegate Methods.
     
     func websocketDidConnect(ws: WebSocket) {
-        
-        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let myUserName:String  = prefs.valueForKey("USERNAME") as! String
-        let (isSessionToken, error) = KeyChain.loadDataForUserAccount("\(myUserName)")
-        var token: AnyObject? = isSessionToken!["token"] as! String
-        var userID:AnyObject? = isSessionToken!["user_id"] as! String
         println("websocket is connected")
-        println("{\"type\":\"handShake\", \"senderID\":\"\(userID!)\"}")
-        self.socket.writeString("{\"type\":\"handShake\", \"senderID\":\"\(userID!)\"}")
-        //send id to sv
-        
+        println("{\"type\":\"handShake\", \"senderID\":\"\(userID)\"}")
+        self.socket.writeString("{\"type\":\"handShake\", \"senderID\":\"\(userID)\"}")
     }
     
     func websocketDidDisconnect(ws: WebSocket, error: NSError?) {

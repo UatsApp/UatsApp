@@ -31,17 +31,17 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
     
     func getUsers(){
         
-        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        var LoggedUseUserName = prefs.valueForKey("USERNAME") as! String
-        let (isSessionToken, error) = KeyChain.loadDataForUserAccount("\(LoggedUseUserName)")
-        var token: AnyObject? = isSessionToken!["token"] as! String
-        var userID:AnyObject? = isSessionToken!["user_id"] as! String
-        println("mueicupula\(userID!)")
-        println("mueicumizda\(token!)")
+//        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        var LoggedUseUserName = prefs.valueForKey("USERNAME") as! String
+//        let (isSessionToken, error) = KeyChain.loadDataForUserAccount("\(LoggedUseUserName)")
+//        var token: AnyObject? = isSessionToken!["token"] as! String
+//        var userID:AnyObject? = isSessionToken!["user_id"] as! String
+//        println("mueicupula\(userID)")
+//        println("mueicumizda\(token)")
         
        
         
-        Alamofire.request(.POST, "http://uatsapp.tk/accounts/get_users.php", parameters: ["token":"\(token!)", "uid":"\(userID!)"], encoding: .JSON)
+        Alamofire.request(.POST, "http://uatsapp.tk/accounts/get_users.php", parameters: ["token":"\(token)", "uid":"\(userID)"], encoding: .JSON)
             .responseJSON { _, _, JSON, _ in
                 if let jsonResult = JSON?.valueForKey("friends") as? Array<Dictionary<String,String>>{
                     var i = 0
