@@ -1,0 +1,39 @@
+# created by XCode 3
+*.pbxuser
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcclassmodel/
+
+# files created by Xcode 4
+xcuserdata/
+OneU.xcworkspace/xcshareddata/*
+OneUTuring.xcworkspace/xcshareddata/*
+# build products
+*.build/
+build/
+DerivedData/
+*.xccheckout
+*.xcscmblueprint
+
+# Misc
+.DS_Store
+
+# OneUCore bins
+Libs/OneUCore.framework.dSYM
+Libs/OneUCore.framework
+
+#custom & CocoaPods
+Podfile.lock
+Pods/
+
+#AppCode
+.idea
+
+# Docs
+docs/
+
+# Sublime shit
+oneu.sublime-project
+oneu.sublime-workspace
