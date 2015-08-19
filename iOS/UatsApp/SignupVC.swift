@@ -16,6 +16,8 @@ class SignupVC: UIViewController {
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtConfrimPassword: UITextField!
     @IBOutlet weak var txtEmail: UITextField!
+    @IBOutlet weak var txtNickName: UITextField!
+    
     var keyboardDismissTapGesture: UIGestureRecognizer?
     
     override func viewDidLoad() {
@@ -27,6 +29,7 @@ class SignupVC: UIViewController {
         self.txtPassword.delegate = self
         self.txtConfrimPassword.delegate = self
         self.txtEmail.delegate = self
+        self.txtNickName.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -69,6 +72,7 @@ class SignupVC: UIViewController {
         txtPassword?.resignFirstResponder()
         txtUsername?.resignFirstResponder()
         txtConfrimPassword?.resignFirstResponder()
+        txtNickName?.resignFirstResponder()
     }
     
     
@@ -92,8 +96,10 @@ class SignupVC: UIViewController {
     @IBAction func singupTapped(sender: AnyObject!){
         var username:NSString = txtUsername.text as NSString
         var password:NSString = txtPassword.text as NSString
-        var comfirm_password:NSString = txtConfrimPassword.text as NSString
-        var email:NSString = txtEmail.text as NSString
+        var comfirm_password:String = txtConfrimPassword.text as String
+        var email:String = txtEmail.text as String
+        var nickname:String = txtNickName.text as String
+        
         
         if(username.isEqualToString("") || password.isEqualToString(""))
         {
@@ -119,7 +125,7 @@ class SignupVC: UIViewController {
             alertView.show()
         }else {
             //var post:NSString = "username=\(username)&password=\(password)&c_password=\(comfirm_password)&email=\(email)"
-            var post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\",\"c_password\":\"\(comfirm_password)\",\"email\":\"\(email)\"}"
+            var post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\",\"c_password\":\"\(comfirm_password)\",\"email\":\"\(email)\",\"nickname\":\"\(nickname)\"}"
             NSLog("Post data: %@",post);
             
             var url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonsignup.php")!
@@ -221,13 +227,14 @@ class SignupVC: UIViewController {
 
 extension SignupVC:UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
         if (textField == txtUsername){
             txtPassword.becomeFirstResponder()
         }else if(textField == txtPassword){
             txtConfrimPassword.becomeFirstResponder()
         }else if (textField == txtConfrimPassword){
             txtEmail.becomeFirstResponder()
+        }else if(textField == txtEmail){
+            txtNickName.becomeFirstResponder()
         }else{
             singupTapped(nil)
         }
