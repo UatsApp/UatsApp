@@ -386,7 +386,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" bf7496d6c4cbd3a202d9c59daaf5182057f2657c e9a9a50682a6105e9da583194341232a18ab5cb877fcf5d4a0bef83684afbc11";
+			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 2074fab2253fb507cf85c5d79befed9568a1c80c d52da1513d8faf9c74ac44ee3b80a5e6ea085b68674dfd103a1f5ddb259ee5f0";
 		};
 		DFDA1B876B31063148ECDED6 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -569,6 +569,7 @@
 			baseConfigurationReference = 3080E396B577E8F1966CD697 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Uats App (6GMT7Y5A33)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -579,6 +580,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "74035e65-4f17-47a2-ae1d-9fd3187b6ec8";
 				SWIFT_OBJC_BRIDGING_HEADER = "UatsApp/Bridging-Header.h";
 			};
 			name = Debug;
@@ -588,6 +590,7 @@
 			baseConfigurationReference = C67D60E815D3BA9C502089EF /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Uats App (6GMT7Y5A33)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -598,6 +601,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "74035e65-4f17-47a2-ae1d-9fd3187b6ec8";
 				SWIFT_OBJC_BRIDGING_HEADER = "UatsApp/Bridging-Header.h";
 			};
 			name = Release;

@@ -9,6 +9,8 @@
 import UIKit
 
 class SignupVC: UIViewController {
+    
+    
 
     @IBOutlet weak var txtUsername: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
@@ -21,6 +23,9 @@ class SignupVC: UIViewController {
         self.signup.layer.cornerRadius = 5.0
         self.signup.layer.borderColor = UIColor.whiteColor().CGColor
         self.signup.layer.borderWidth = 0.2
+        self.txtUsername.delegate = self
+        self.txtPassword.delegate = self
+        self.txtConfrimPassword.delegate = self
         self.txtEmail.delegate = self
         // Do any additional setup after loading the view.
     }
@@ -80,8 +85,9 @@ class SignupVC: UIViewController {
     }
     
     
+    
     @IBOutlet weak var signup: UIButton!
-
+    
 
     @IBAction func singupTapped(sender: AnyObject!){
         var username:NSString = txtUsername.text as NSString
@@ -215,7 +221,16 @@ class SignupVC: UIViewController {
 
 extension SignupVC:UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        singupTapped(nil)
+        
+        if (textField == txtUsername){
+            txtPassword.becomeFirstResponder()
+        }else if(textField == txtPassword){
+            txtConfrimPassword.becomeFirstResponder()
+        }else if (textField == txtConfrimPassword){
+            txtEmail.becomeFirstResponder()
+        }else{
+            singupTapped(nil)
+        }
         return true
     }
 }

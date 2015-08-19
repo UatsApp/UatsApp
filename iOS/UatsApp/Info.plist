@@ -32,7 +32,7 @@
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
-		<string>bf7496d6c4cbd3a202d9c59daaf5182057f2657c</string>
+		<string>2074fab2253fb507cf85c5d79befed9568a1c80c</string>
 		<key>Kits</key>
 		<array>
 			<dict>
@@ -60,8 +60,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>

@@ -26,7 +26,7 @@ var token: String {
         var (KeyChainData, error) = KeyChain.loadDataForUserAccount("\(myUserName)")
         
         if let tokenString = KeyChainData!["token"] as? String {
-            println("Tokenul sessiunii este:\(tokenString)")
+            println("Tokenul sessiunii este: \(tokenString)")
             return tokenString
         } else {
             println("nu exista token")
@@ -41,7 +41,7 @@ get {
     
     if let IDString = KeyChainData!["user_id"] as? String{
         let userID:Int? = NSNumberFormatter().numberFromString(IDString)?.integerValue
-        println("Id-ul Sessiunii este:\(userID!)")
+        println("Id-ul Sessiunii este: \(userID!)")
         return userID!
     }else{
         println("Nu exista USERID IN KeyChain")
