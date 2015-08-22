@@ -1,16 +1,6 @@
 <?php session_start(); ?>
 
 
-<!-- TODO:
-	-modify html tags (use divs) ex:instead of <h3> tag use <div class="containerLogin">  
-	-add a index.css and define a template for index.php{background, alings, etc.} (use the div classes you declared)
-	-add Uatsapp logo somewhere on the page
-	-facebook login....
-
-
--->
-
-
 <html>
 
 <head>
@@ -24,6 +14,19 @@
 <body>
 
 <script>
+
+  $(document).ready(function(){
+    var session = '<?php if(isset($_SESSION["token"])){echo $_SESSION["token"];}?>';
+    var my_id = '<?php if(isset($_SESSION["user_id"])){echo $_SESSION["user_id"];}?>';
+    console.log("token from sessions is " + session);
+    console.log("user id: " + my_id);
+    debugger;
+    if (session == "" && isNan(my_id)){
+  
+    }else{
+          window.location.href = "UatsApp.php";
+    }
+  });
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -33,8 +36,9 @@
     // Full docs on the response object can be found in the documentation
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
+      debugger;
       // Logged into your app and Facebook.
-      testAPI();
+      //testAPI();
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       //document.getElementById('status').innerHTML = 'Please log ' +
@@ -51,12 +55,13 @@
   // Button.  See the onlogin handler attached to it in the sample
   // code below.
   function checkLoginState() {
+    debugger;
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
     });
   }
 
-   logInWithFacebook = function() {
+    function logInWithFacebook() {
     FB.login(function(response) {
       if (response.authResponse) {
         alert('You are logged in & cookie set!');
@@ -108,15 +113,13 @@
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
+    debugger;
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
 
-       
+       debugger;
         var user = response.name;
-        alert(user);
 		    var password = response.name;
 		    var c_password = response.name;
     		var email = response.email;
@@ -125,21 +128,19 @@
 		    dataToSend.password = password;
 		    dataToSend.c_password = c_password;
 		    dataToSend.email = email;
-
-
-
+        dataToSend.type = "FBLogin";
+        
 		if(dataToSend.username && dataToSend.password && dataToSend.c_password && dataToSend.email){
 		$.ajax({
    			type: 'POST',
-   			url: 'http://uatsapp.tk/UatsAppWeb/process_user.php',
+   			url: 'process.php',
    			// dataType: "application/json; charset=utf-8",
    			contentType: "application/json",
    			data: JSON.stringify(dataToSend),                      
    			success: function (result) {
    				debugger;
-   				if(result["success"] === 1 || dataToSend.email == email){
-            
-						window.location.href = "http://uatsapp.tk/UatsAppWeb/UatsApp.php";
+   				if(result["status"] === 1){            
+						window.location.href = "UatsApp.php";
 
 					}else{
 						alert(result["error"]);
@@ -155,9 +156,9 @@
     });
 
 
-     	FB.logout(function(response) {
-        // Person is now logged out
-    });
+    //  	FB.logout(function(response) {
+    //     // Person is now logged out
+    // });
   }
 </script>
 
@@ -173,14 +174,13 @@
 
 <div id="containerLogin" >
 <form action="action_page.php"> 
-Username:<br>
+<b>Username:<br>
 <input  id = "userName" type="text" placeholder="Username" required>
 <br><br>
 Password:<br>
 <input id = "userPass" type="password" placeholder="Password" required>
 </form>
-<a href="forgot_password.html" id = "forgot-password">Did you forget your password? </a>
-
+</b>
 
 <br><br>
 <form>
@@ -189,7 +189,7 @@ Password:<br>
 <br><br>
 
 <div id="containerLogin" >
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+<fb:login-button scope="public_profile,email" onlogin="testAPI();">
 </fb:login-button>
 </div>
 
@@ -201,36 +201,33 @@ Password:<br>
 <script type="text/javascript">
 
 
-$(document).ready(function() {
-			$('#forgot-password').hide();
-		});
-
 
 window.addEventListener('keydown',this.check,false);
 
 	function submitLogin(){
-
+    debugger;
 		var user = $('#userName').val();
 		var password = $('#userPass').val();
 		var dataToSend = new Object();
 		dataToSend.username = user;
 		dataToSend.password = password;
-
-
+    dataToSend.type = "simpleLogin";
+    
 		if(dataToSend.username && dataToSend.password){
 		$.ajax({
    			type: 'POST',
-   			url: 'process_user.php',
+   			url: 'process.php',
    			// dataType: "application/json; charset=utf-8",
    			contentType: "application/json",
    			xhrFields: {
          		withCredentials: true
     		},
    			data: JSON.stringify(dataToSend),                      
-   			success: function (result) {
-
+   			success: function(result) {
+           debugger;
+          console.log(JSON.stringify(result));
    				if(result["status"] === 1){
-					window.location.href = "http://uatsapp.tk/UatsAppWeb/UatsApp.php";
+					window.location.href = "UatsApp.php";
 					//alert("result[]")
 					}else{
 						alert(result["error"]);
@@ -245,9 +242,9 @@ window.addEventListener('keydown',this.check,false);
 		});
 	}else{
 		if(dataToSend.username){
-			alert("Please fill your password, retard.");
+			alert("Please fill your password.");
 		}else{
-			alert("Please fill your username, retard.");
+			alert("Please fill your username.");
 		}
 	}
 }

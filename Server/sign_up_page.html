@@ -3,7 +3,7 @@
 <head>
 	<script src="//code.jquery.com/jquery-1.11.3.min.js">
 	</script>
-	<link rel="stylesheet" type="text/css" href="stylesheets/index.css">
+	<link rel="stylesheet" href="stylesheets/index.css">
 </head>
 
 <body>
@@ -14,12 +14,8 @@
 
 
 -->
+<div id="signUP">
 
-<STYLE type="text/css">
-  H3 { text-align: center}
-</STYLE>
-
-<h3>
 	<form> 
 	E-mail:<br>
 	<input type="email" id="email" placeholder="E-mail" required>
@@ -32,41 +28,39 @@
 	<br>
 	Confirm password:<br>
 	<input type="password" id="c_password" placeholder="Confirm your password" required>
+	<br>
+	Nickname:<br>
+	<input type="text" id= "nickname" placeholder="Nickname" required>
 	<br><br>
-	<input type="submit" value="Sign up" onClick="signUP()">
+	<input type="button" value="Sign up" onClick="signUP()">
 
-	</form></h3> 
-
+	</form>
+</div>
 <script type="text/javascript">
 
 	function signUP(){
-		debugger;
-		var user = $('#username').val();
-		var password = $('#password').val();
-		var c_password = $('#c_password').val();
-		var email = $('#email').val();
 		var dataToSend = new Object();
-		dataToSend.username = user;
-		dataToSend.password = password;
-		dataToSend.c_password = c_password;
-		dataToSend.email = email;
-
+		dataToSend.username = $('#username').val();
+		dataToSend.password = $('#password').val();
+		dataToSend.c_password = $('#c_password').val();
+		dataToSend.email = $('#email').val();
+		dataToSend.nickname = $('#nickname').val();
 
 		if(dataToSend.username && dataToSend.password && dataToSend.c_password && dataToSend.email){
 		$.ajax({
    			type: 'POST',
-   			url: 'http://uatsapp.tk/registerDEV/jsonsignup.php',  
+   			url: 'http://uatsapp.tk/registerDEV/signup.php',  
    			contentType: "application/json",
-   			xhrFields: {
-         		withCredentials: true
-    		},
+   			dataType: "json",
+   			xhrFields: {withCredentials: true},
     		data: JSON.stringify(dataToSend),
    			success: function (result) {
    				debugger;
    				if(result["success"] === 1){
-						alert("Your account has been registred");
+						alert("Your account has been registred.\n Check your inbox and activate your accout.");
+						window.location.href = "index.php"
 					}else{
-						alert(result["error"]);
+						alert(result["error_message"]);
 					}
 
    				},
