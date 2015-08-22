@@ -1,16 +1,6 @@
 <?php session_start(); ?>
 
 
-<!-- TODO:
-	-modify html tags (use divs) ex:instead of <h3> tag use <div class="containerLogin">  
-	-add a index.css and define a template for index.php{background, alings, etc.} (use the div classes you declared)
-	-add Uatsapp logo somewhere on the page
-	-facebook login....
-
-
--->
-
-
 <html>
 
 <head>
@@ -24,6 +14,19 @@
 <body>
 
 <script>
+
+  $(document).ready(function(){
+    var session = '<?php if(isset($_SESSION["token"])){echo $_SESSION["token"];}?>';
+    var my_id = '<?php if(isset($_SESSION["user_id"])){echo $_SESSION["user_id"];}?>';
+    console.log("token from sessions is " + session);
+    console.log("user id: " + my_id);
+    debugger;
+    if (session == "" && isNan(my_id)){
+  
+    }else{
+          window.location.href = "UatsApp.php";
+    }
+  });
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -115,9 +118,8 @@
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
 
-       
+       debugger;
         var user = response.name;
-        alert(user);
 		    var password = response.name;
 		    var c_password = response.name;
     		var email = response.email;
@@ -126,21 +128,19 @@
 		    dataToSend.password = password;
 		    dataToSend.c_password = c_password;
 		    dataToSend.email = email;
-
-
-
+        dataToSend.type = "FBLogin";
+        
 		if(dataToSend.username && dataToSend.password && dataToSend.c_password && dataToSend.email){
 		$.ajax({
    			type: 'POST',
-   			url: 'http://uatsapp.tk/registerDEV/jsonsignup.php',
+   			url: 'process.php',
    			// dataType: "application/json; charset=utf-8",
    			contentType: "application/json",
    			data: JSON.stringify(dataToSend),                      
    			success: function (result) {
    				debugger;
-   				if(result["success"] === 1 || dataToSend.email == email){
-            
-						window.location.href = "http://uatsapp.tk/UatsAppWebDEV/UatsApp.php";
+   				if(result["status"] === 1){            
+						window.location.href = "UatsApp.php";
 
 					}else{
 						alert(result["error"]);
@@ -205,27 +205,29 @@ Password:<br>
 window.addEventListener('keydown',this.check,false);
 
 	function submitLogin(){
-
+    debugger;
 		var user = $('#userName').val();
 		var password = $('#userPass').val();
 		var dataToSend = new Object();
 		dataToSend.username = user;
 		dataToSend.password = password;
-
+    dataToSend.type = "simpleLogin";
+    
 		if(dataToSend.username && dataToSend.password){
 		$.ajax({
    			type: 'POST',
-   			url: 'process_user.php',
+   			url: 'process.php',
    			// dataType: "application/json; charset=utf-8",
    			contentType: "application/json",
    			xhrFields: {
          		withCredentials: true
     		},
    			data: JSON.stringify(dataToSend),                      
-   			success: function (result) {
+   			success: function(result) {
+           debugger;
           console.log(JSON.stringify(result));
    				if(result["status"] === 1){
-					window.location.href = "http://uatsapp.tk/UatsAppWebDEV/UatsApp.php";
+					window.location.href = "UatsApp.php";
 					//alert("result[]")
 					}else{
 						alert(result["error"]);
@@ -240,9 +242,9 @@ window.addEventListener('keydown',this.check,false);
 		});
 	}else{
 		if(dataToSend.username){
-			alert("Please fill your password, retard.");
+			alert("Please fill your password.");
 		}else{
-			alert("Please fill your username, retard.");
+			alert("Please fill your username.");
 		}
 	}
 }

@@ -1,14 +1,13 @@
 #containerLogin{
   text-align: center;
-  color:white;
 }
-
-body  {
-    background-image: url("http://www.planwallpaper.com/static/images/494303a2cb59b5103ed095867f3d5dbd.jpg");
-    background-color: #cccccc;
-}
-
-#signUP{
-	text-align: center;
-	color: white;
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: white; 
+  height: 100%;
+  background-image:url("http://www.planwallpaper.com/static/images/494303a2cb59b5103ed095867f3d5dbd.jpg");
 }
