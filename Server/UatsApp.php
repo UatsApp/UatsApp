@@ -13,7 +13,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['token'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
+		<meta charset="utf-8">
 	<title>UatsApp Demo</title>
 <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -29,31 +29,32 @@ if(isset($_SESSION['user']) && isset($_SESSION['token'])){
 
 <body>
 
+	
 	<p class="navbar-text" id = "profile">Signed in as <?php echo $_SESSION["user"]?></p><br>
 
 	<div id="page-wrapper">
 		<div id ="chat-div">
-		<div class="chat-header">
-			<h1>UatsApp Demo</h1>
-			<p id = "chat-partener" class = "chat-partener"></p>
+			<div class="chat-header">
+				<h1>UatsApp Demo</h1>
+				<p id = "chat-partener" class = "chat-partener"></p>
+			</div>
+
+			<ul id="log"></ul>
+
+			<form id="message-form">
+
+				<textarea id="message" placeholder="Write your message here..."></textarea>
+
+				<button type="button" onClick="submitMessage();">Send Message</button>
+				<button type="button" id="close" onClick = "logOut();">Close Connection</button>
+
+			</form>
 		</div>
-
-		<ul id="log"></ul>
-
-		<form id="message-form">
-
-			<textarea id="message" placeholder="Write your message here..."></textarea>
-
-			<button type="button" onClick="submitMessage();">Send Message</button>
-			<button type="button" id="close" onClick = "logOut()">Close Connection</button>
-
-		</form>
-	</div>
 		<div id = "usersList" class = "list-group">
-		<p>Full list of database users:</p>
-		<ul id = "row">
-			
-		</ul>
+			<p>Full list of database users:</p>
+			<ul id = "row">
+
+			</ul>
 		</div>
 	</div>
 
@@ -71,6 +72,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['token'])){
 	var partener_username = "";
 	var my_username = '<?php echo $_SESSION["user"] ?>';
 	var my_id = parseInt('<?php echo $_SESSION["user_id"] ?>');
+	console.log("user id:"+ my_id);
 	var currentMsgFloat = -1;
 	var previousMsgFloat = 2;
 	var active_token = '';
@@ -139,6 +141,7 @@ if(isset($_SESSION['user']) && isset($_SESSION['token'])){
 			//Received a new message
 			Server.bind('message', function( payload ) {
 				try{
+					debugger;
 					var received_obj = JSON.parse(payload);
 					currentMsgFloat = 0;
 					console.log(JSON.stringify(received_obj));
@@ -161,10 +164,9 @@ if(isset($_SESSION['user']) && isset($_SESSION['token'])){
     								if(users[i].getAttribute('data-userid') == received_obj["senderID"]){
     									debugger;
     									var msgNumber = parseInt($(users[i]).data("receivedMessages")) + 1;
-    									$(users[i]).find('span').text(msgNumber)
-    									//$(users[i]).append('<span class="badge">'+msgNumber+'</span>');
+										$(users[i]).find('span').remove();
+    									$(users[i]).append('<span class="badge">'+msgNumber+'</span>');
     									$(users[i]).data("receivedMessages",parseInt($(users[i]).data("receivedMessages")) + 1);
-    									//$(users[i]).text(received_obj["sender_username"] + "\n" +$(users[i]).data("receivedMessages") + " new messages ");
     								}
     							}
     						}
@@ -174,7 +176,6 @@ if(isset($_SESSION['user']) && isset($_SESSION['token'])){
 
 
     				}catch (exception){
-	//alert("cannot parse json");
 }
 
 
@@ -195,28 +196,59 @@ function submitMessage(){
 			previousMsgFloat = 1;
 		}
 		logMessage('<li class="sent"> '+text+'</li>',currentMsgFloat, previousMsgFloat);
-
+		debugger;
 		var dataForServer = new Object();
-		dataForServer.type = "msg";
 		dataForServer.message = text;
 		dataForServer.relation_id = relation_id;
 		dataForServer.senderID = my_id;
-		dataForServer.receiverID = userid;
-		dataForServer.sender_username = my_username;
-
+		dataForServer.token = active_token;
 		$.ajax({
 			type:'POST',
 			url:'insert_message.php',
+			contentType:'application/json; charset=utf-8',
+			dataType:'json',
 			data: JSON.stringify(dataForServer),
 			error: function(data){
 				console.log("There was an error while inserting the message in DB: " + data);
 			},
 			success: function(success){
-				document.getElementById('message').value = "";
-				send(JSON.stringify(dataForServer));
+				debugger;
+				if(success["status"] == 1){
+					var dataToSend = new Object();
+					dataToSend.type = "msg";
+					dataToSend.message = text;
+					dataToSend.relation_id = relation_id;
+					dataToSend.senderID = my_id;
+					dataToSend.receiverID = userid;
+					dataToSend.sender_username = my_username;
+					
+					send(JSON.stringify(dataToSend));
+
+				}else{
+					alert("You've been disconnected");
+					var callObject = new Object();
+					callObject.invalidator = active_token;
+					callObject.id = my_id; 
+					$.ajax({
+						type:"POST",
+						url:'http://uatsapp.tk/registerDEV/invalidate.php',
+						dataType:"json",
+						ContentType:"application/json; charset=utf-8",
+						data: JSON.stringify(callObject),
+						success: function(response){
+							if(response["status"] == 1){
+								window.location.href = "index.php";
+							}
+						}
+					});
+				}
+				
+
+				
 			}
 
 		});
+		document.getElementById('message').value = "";
 
 	}	
 
@@ -225,6 +257,9 @@ function submitMessage(){
 
 $(document).ready(function(){
 	active_token = '<?php echo $_SESSION["token"] ?>' ;
+	if(active_token == ""  || isNaN(my_id)){
+		window.location.href = "index.php";
+	}
 	console.log("token : " + active_token);
 	populateUsers();
 	window_chat = document.getElementById('page-wrapper');
@@ -242,7 +277,10 @@ $(document).ready(function(){
 	var dataForHistory = new Object();
 	dataForHistory.identifier = userid;
 	dataForHistory.loggedUsername = my_username; 
+	dataForHistory.token = active_token;
+	dataForHistory.uid = my_id;
 	previousMsgFloat = -1;
+	console.log(JSON.stringify(dataForHistory));
 	$.ajax({
 		type:'POST',
 		url:'history.php',
@@ -250,11 +288,13 @@ $(document).ready(function(){
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(dataForHistory),
 		success: function(success){
-			relation_id = success["relation_id"];
-			window_chat.setAttribute("data-identifier", relation_id);
-			jQuery.fn.reverse = [].reverse;
-			$.each(success["history"], function(key, value) {
-				console.log(value);
+			if(success["status"] == 1){
+				debugger;
+				window_chat.setAttribute("data-identifier", success["relation_id"]);
+				relation_id = success["relation_id"];
+				jQuery.fn.reverse = [].reverse;
+				$.each(success["history"], function(key, value) {
+					console.log(value);
         				//check who is the sender and who's the receiver
         				if(value._from == my_id){
         					currentMsgFloat = 0;
@@ -265,7 +305,26 @@ $(document).ready(function(){
         				}
         				previousMsgFloat = currentMsgFloat;
         			});
-			$('#page-wrapper').show();
+				$('#page-wrapper').show();
+			}else{
+				alert("You've been disconnected.");
+				var callObject = new Object();
+				callObject.invalidator = active_token;
+				callObject.id = my_id; 
+				$.ajax({
+					type:"POST",
+					url:'http://uatsapp.tk/registerDEV/invalidate.php',
+					dataType:"json",
+					ContentType:"application/json; charset=utf-8",
+					data: JSON.stringify(callObject),
+					success: function(response){
+						if(response["status"] == 1){
+							window.location.href = "index.php";
+						}
+					}
+				});
+			}
+			
 		},
 		error: function(data){
 			console.log("There was an error retrieving your history :::" + data);
@@ -293,14 +352,17 @@ function populateUsers(){
 		success: function(response){
 			if(response["status"] == 1){
 
-			$.each(response["friends"], function(key, value) {
-			$('#row').append('<a href="#" data-userid="' + value.id + '" data-username="' + value.username + '"  class="list-group-item" >' + value.username + '</li>');
-			
-			$('#row a').data("receivedMessages",0);
-			$('#row a').attr("data-receivedMessages",0);
-});
+				$.each(response["friends"], function(key, value) {
+					$('#row').append('<a href="#" data-userid="' + value.id + '" data-username="' + value.username + '"  class="list-group-item" >' + value.username + '</li>');
+
+					$('#row a').data("receivedMessages",0);
+					$('#row a').attr("data-receivedMessages",0);
+				});
 			}else{
 				if(response["status"] == -1000){
+					debugger;
+					alert("You've been disconnected.");
+					console.log("token issue");
 					var callObject = new Object();
 					callObject.invalidator = active_token;
 					callObject.id = my_id; 
@@ -310,8 +372,13 @@ function populateUsers(){
 						dataType:"json",
 						ContentType:"application/json; charset=utf-8",
 						data: JSON.stringify(callObject),
+						success: function(response){
+							if (response["status"] == 1){
+								window.location.href = "index.php";
+							}
+						}
 					});
-					window.location.href = "http://uatsapp.tk/UatsAppWebDEV/index.php";
+					
 				} 
 			}
 		},
@@ -324,8 +391,31 @@ function populateUsers(){
 }
 
 function logOut(){
-	window.location.href = "http://uatsapp.tk/UatsAppWeb/index.php";
+	debugger;
+	var dataToSend = new Object();
+	dataToSend.invalidator = active_token;
+	dataToSend.id = my_id;
+		$.ajax({
+		type:"POST",
+		url:'http://uatsapp.tk/registerDEV/invalidate.php',
+		dataType:"json",
+		contentType: "application/json; charset=utf-8",
+		data:JSON.stringify(dataToSend),
+		success: function(response){
+			if(response["status"] == 1){
+					window.location.href = "index.php";
+					alert("Log out, Successful!");
+				}
+				else
+				{
+					if(response["status"] == 0){
+						alert("Oops, Someting went wrong");
+					}
+				}
+			}
+		});
 }
+
 
 
 </script>

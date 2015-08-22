@@ -58,6 +58,7 @@
    				debugger;
    				if(result["success"] === 1){
 						alert("Your account has been registred.\n Check your inbox and activate your accout.");
+						window.location.href = "index.php"
 					}else{
 						alert(result["error_message"]);
 					}
