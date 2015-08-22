@@ -122,12 +122,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "UatsApp/SignupVC.swift"
-            timestampString = "461592738.632515"
+            timestampString = "461701692.457476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "singupTapped(_:)"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "dismissKeyboard(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UatsApp/ImagePicker.swift"
+            timestampString = "461786530.118274"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "imageTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

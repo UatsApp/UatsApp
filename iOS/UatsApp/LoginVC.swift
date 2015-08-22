@@ -25,6 +25,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         FBButton.delegate = self
+        self.txtUsername.delegate = self
         self.txtPassword.delegate = self
         self.FBButton.layer.cornerRadius = 15.0
         self.signin.layer.cornerRadius = 5.0
@@ -351,7 +352,11 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
 
 extension LoginVC:UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        signinTapped(nil)
+        if (textField == txtUsername){
+            txtPassword.becomeFirstResponder()
+        }else{
+            signinTapped(nil)
+        }
         return true
     }
 }
