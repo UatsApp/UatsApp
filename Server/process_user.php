@@ -12,6 +12,7 @@ $data = json_decode(file_get_contents('php://input'));
 $username   = $data->{"username"};
 $password   = $data->{"password"};
 
+
 $db_name     = 'UatsApp';
 $db_user     = 'root';
 $db_password = 'Uatsapp2014';
@@ -19,78 +20,64 @@ $server_url  = '127.0.0.1';
 
 
 $mysqli = new mysqli('127.0.0.1', $db_user, $db_password, $db_name);
+if (mysqli_connect_errno()) {
 
-$stmt = $mysqli->prepare("SELECT username FROM users WHERE username = ? and password = ?");
-$acc_status = $mysqli->prepare("SELECT status FROM users WHERE username = ?");
+	$response_array["error"] = "Connect with DB failed";
+	$response_array["status"] = 0;
 
-if($username){
-	$acc_status->bind_param("s", $username);
-	$acc_status->execute();
+} else {
 
-	$acc_status->bind_result($stat);
-	$acc_status->fetch();
-	$acc_status->close();
-	if($stat > 0) {
+	$token = uniqid($username.time());
 
-		$response_array;
-		$response_array["user_id"] = 0;
+	$stmt = $mysqli->prepare("SELECT username,status,id FROM users WHERE username = ? and password = ?");
+	//$acc_status = $mysqli->prepare("SELECT status FROM users WHERE username = ?");
+	//$update_token = $mysqli->prepare("UPDATE sessions SET token = '$token' WHERE id = '1'");
+	
 
+	if($username && $password){
 
-		if($username && $password) {
-			error_log($username);
-			if (mysqli_connect_errno()) {
-				$response_array["error"] = "Connect with DB failed";
-				$response_array["status"] = 0;
+		$password = md5($password);
+		$stmt->bind_param("ss", $username, $password);
+		$stmt->execute();
+		$stmt->bind_result($id,$stat,$idfortoken);
+		$stmt->fetch();
+		$stmt->close();
+
+		$update_token = $mysqli->prepare("INSERT INTO sessions(uid,token) VALUES('$idfortoken','$token')");
+
+		if($id) {
+
+			$response_array;
+			$response_array["user_id"] = 0;
+
+			if ($stat > 0) {
+				
+				$update_token->execute();
+				$update_token->close();
+				$response_array["user_id"] = $idfortoken;
+				$_SESSION["user_id"] = $idfortoken;
+				$response_array["token"] = $token;
+				$response_array["status"] = 1;
 			} else {
-				if ($stmt) {
-					$password = md5($password);
-					$stmt->bind_param("ss", $username, $password);
-					$stmt->execute();
-					$stmt->bind_result($id);
-					$stmt->fetch();
-					$stmt->close();
-				}
-				if ($id) {
-					$response_array["status"] = 1;
+				$response_array["status"] = 0;
+				$response_array["error"] = "Please Activate Your account!";
+			}	
 
-				} else {
-					$response_array["status"] = 0;
-					$response_array["error"] = "Invalid Username/Password.";
-				}	
-			}
+		}else {
+			$response_array["status"] = 0;
+			$response_array["error"] = "Invalid Username/Password.";
 		}
 
-	}else {
+	}else{
 		$response_array["status"] = 0;
-		$response_array["error"] = "Please Activate Your account!";
+		$response_array["error"] = "Invalid Data.";
 	}
-
-}else{
-	$response_array["status"] = 0;
-	$response_array["error"] = "Invalid Data.";
 }
-
-
-
-//Get user id from database
-if ($stmt = $mysqli->prepare("SELECT id FROM users WHERE username = ?")) {
-	$stmt->bind_param("s", $username);
-	$stmt->execute();
-	$stmt->bind_result($id);
-	$stmt->fetch();
-	$stmt->close();
-}
-if($id){
-	$_SESSION["user_id"] = $id;
-	$response_array["user_id"] = $id;
-}
-
-
-
 
 
 if($response_array["status"] == 1){
 	$_SESSION["user"] = $username;
+	$_SESSION["token"] = $token;
 }else{
 	$response_array["status"] = 0;
 }
