@@ -8,16 +8,30 @@
 
 import Foundation
 
+
+
 var myUserName: String{
-get {
-    let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    get {
+        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
-    if let myUserName  = prefs.valueForKey("USERNAME") as? String{
-        return myUserName
-    }else{
-        return "Nu exista Username in Preferitne"
+        if let myUserName  = prefs.valueForKey("USERNAME") as? String{
+            return myUserName
+        }else{
+            return "Nu exista Username in Preferitne"
+        }
     }
 }
+
+var userAvatar: String{
+    get{
+        var (KeyChainData, error) = KeyChain.loadDataForUserAccount("profileIMG")
+        
+        if let imagePath = KeyChainData!["userImage"] as? String{
+            return imagePath
+        }else{
+            return ""
+        }
+    }
 }
 
 

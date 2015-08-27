@@ -35,11 +35,11 @@ class UatsAppVC: UITabBarController {
         
         Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(token)", "id":"\(userID)"], encoding: .JSON).responseJSON{
             _, _, JSON, _ in
-            let succes:Int = JSON?.valueForKey("succes") as! Int
+            let status:Int = JSON?.valueForKey("status") as! Int
             let log:String = JSON?.valueForKey("log") as! String
-            println("\(succes)","\(log)")
+            println("\(status)","\(log)")
             let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(myUserName)")
-            if succes == 1{
+            if status == 1{
                 socketManager.sharedSocket.socket.disconnect()
                 let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(myUserName)")
                 

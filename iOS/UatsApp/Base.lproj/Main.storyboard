@@ -128,7 +128,7 @@
                         <outlet property="signin" destination="28U-Fx-bqN" id="S8v-AM-P4Y"/>
                         <outlet property="txtPassword" destination="WR5-Yk-rQs" id="B00-yw-gDQ"/>
                         <outlet property="txtUsername" destination="gLz-u8-5U3" id="2z1-fo-FCK"/>
-                        <segue destination="isW-LT-Ljx" kind="modal" identifier="goApp" id="YnA-Y4-nrJ"/>
+                        <segue destination="XhR-NL-vcT" kind="push" identifier="goApp" id="E0T-b4-Plr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2B-fG-26b" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -282,7 +282,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggo-12-mZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="597.5" y="287.5"/>
+            <point key="canvasLocation" x="598" y="276"/>
         </scene>
         <!--Users ListVC-->
         <scene sceneID="95H-jp-Fcn">
@@ -567,6 +567,7 @@
         <scene sceneID="eUV-ql-xXJ">
             <objects>
                 <navigationController id="isW-LT-Ljx" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="FFy-DL-QcP"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hb7-DU-GaZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -580,7 +581,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hti-z1-2WX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="621" y="1111"/>
+            <point key="canvasLocation" x="633" y="1111"/>
         </scene>
         <!--Image Picker-->
         <scene sceneID="2JL-ec-CsK">
@@ -636,7 +637,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1093" y="1111"/>
+            <point key="canvasLocation" x="1166" y="1111"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="R0n-PN-FVB">
@@ -676,5 +677,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Ocb-iI-cdH"/>
+        <segue reference="ObL-L8-E3f"/>
     </inferredMetricsTieBreakers>
 </document>

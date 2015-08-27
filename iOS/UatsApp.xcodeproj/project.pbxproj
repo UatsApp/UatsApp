@@ -18,6 +18,7 @@
 		3F1DD7891B28A4320081FE34 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7871B28A4320081FE34 /* LaunchScreen.xib */; };
 		3F1DD7951B28A4330081FE34 /* UatsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */; };
 		3F6560641B5D3BE4001BF3C1 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6560631B5D3BE4001BF3C1 /* History.swift */; };
+		3F7458EE1B888551003C772A /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7458ED1B888551003C772A /* Gif.swift */; };
 		3F7585DC1B5A96C400192B1C /* tab_messages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */; };
 		3F7DE5561B558281005954FC /* msg.ico in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DE5551B558281005954FC /* msg.ico */; };
 		3F7DE5581B5582CE005954FC /* msg@2x.ico in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DE5571B5582CE005954FC /* msg@2x.ico */; };
@@ -73,6 +74,7 @@
 		3F1DD7931B28A4330081FE34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UatsAppTests.swift; sourceTree = "<group>"; };
 		3F6560631B5D3BE4001BF3C1 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		3F7458ED1B888551003C772A /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_messages@2x.png"; sourceTree = "<group>"; };
 		3F7DE5551B558281005954FC /* msg.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = msg.ico; sourceTree = "<group>"; };
 		3F7DE5571B5582CE005954FC /* msg@2x.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = "msg@2x.ico"; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 		3F7DE5611B57BFC1005954FC /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3F7458ED1B888551003C772A /* Gif.swift */,
 				3F7DE5621B57BFE2005954FC /* Users.swift */,
 				3F6560631B5D3BE4001BF3C1 /* History.swift */,
 				525762281B676E39008CC78F /* socketManager.swift */,
@@ -446,6 +449,7 @@
 				3F845E431B8627F100C5B050 /* ImagePicker.swift in Sources */,
 				3F9B21361B6FED6900D5123E /* FriendList.swift in Sources */,
 				3FC813F31B824922000507FB /* Globals.swift in Sources */,
+				3F7458EE1B888551003C772A /* Gif.swift in Sources */,
 				3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */,
 				3F154E4A1B7E19B600494114 /* KeyChain.swift in Sources */,
 				3F154E491B7E19B600494114 /* KeyChainRequest.swift in Sources */,

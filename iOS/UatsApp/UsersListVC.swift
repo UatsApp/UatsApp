@@ -107,7 +107,6 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
         let row = indexPath.row
         let user_id = usersList[row].user_id
         let username = usersList[row].username
-        
 
         let data: NSArray = [user_id, username]
         self.performSegueWithIdentifier("call", sender: data)
