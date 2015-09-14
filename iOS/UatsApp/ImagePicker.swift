@@ -20,7 +20,7 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
         self.imageView.layer.cornerRadius = self.imageView.frame.size.height/2
         self.imageView.clipsToBounds = true
         self.imageView.layer.borderWidth = 3.0
-        var color:UIColor = UIColor.whiteColor()
+        let color:UIColor = UIColor.whiteColor()
         self.imageView.layer.borderColor = color.CGColor
         self.nameTxt.text = myUserName
         // Do any additional setup after loading the view.
@@ -30,8 +30,8 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
         super.viewWillAppear(animated)
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(userAvatar){
-            println("FILE AVAILABLE AT WIEWWILLAPPEAR")
-            var image = loadImageFromPath(imagePath)
+            print("FILE AVAILABLE AT WIEWWILLAPPEAR")
+            let image = loadImageFromPath(imagePath)
             imageView.image = image
         }
     }
@@ -44,7 +44,7 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @IBAction func imageTapped(sender: AnyObject) {
         
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary){
-            println("Choosing IMAGE")
+            print("Choosing IMAGE")
             
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
@@ -57,7 +57,7 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
             
         })
         
-        saveImage(image, imagePath)
+        saveImage(image, path: imagePath)
         KeyChain.updateData(["userImage": "\(imagePath)"], forUserAccount: "profileIMG")
         
         
@@ -85,7 +85,7 @@ func saveImage (image: UIImage, path: String ) -> Bool{
 }
 
 func documentsDirectory() -> String {
-    let documentsFolderPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as! String
+    let documentsFolderPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] 
     return documentsFolderPath
 }
 // Get path for a file in the directory
@@ -104,7 +104,7 @@ func loadImageFromPath(path: String) -> UIImage? {
     
     if image == nil {
         
-        println("missing image at: \(path)")
+        print("missing image at: \(path)")
     }
     //println("\(path)") // this is just for you to see the path in case you want to go to the directory, using Finder.
     return image

@@ -54,13 +54,13 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
                         var currentUser = Users()
                         currentUser.username = username!
                         currentUser.email = email!
-                        currentUser.user_id = id!.toInt()!
+                        currentUser.user_id = Int(id!)!
                         self.usersList.append(currentUser)
-                        println(username)
+                        print(username)
                     }
                     self.tableView.reloadData()
                 }
-                println(JSON)
+                print(JSON)
         }
 //        var alertview:UIAlertView = UIAlertView()
 //        alertview.title = "Token!"
@@ -91,7 +91,7 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) 
         let row = indexPath.row
         let urr = usersList.map({$0.username})
         cell.textLabel?.text = urr[row]

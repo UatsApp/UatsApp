@@ -63,7 +63,7 @@ extension UIImage {
         
         // Swap for modulo
         if a < b {
-            var c = a
+            let c = a
             a = b
             b = c
         }
@@ -130,7 +130,7 @@ extension UIImage {
         var frame: UIImage
         var frameCount: Int
         for i in 0..<count {
-            frame = UIImage(CGImage: images[Int(i)])!
+            frame = UIImage(CGImage: images[Int(i)])
             frameCount = Int(delays[Int(i)] / gcd)
             
             for j in 0..<frameCount {

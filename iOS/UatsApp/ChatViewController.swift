@@ -48,7 +48,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.navigationItem.title = userInfo[1] as? String
         historyTable.delegate = self
         historyTable.dataSource = self
-        println(userInfo[1])
+        print(userInfo[1])
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShowNotification:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHideNotification:", name: UIKeyboardWillHideNotification, object: nil)
         self.checkRelation()
@@ -84,16 +84,22 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //Delegate part
     func didReceiveMessage(socket : socketManager ,message: String){
         //Parse received JSON(message)
-        var data = message.dataUsingEncoding(NSUTF16StringEncoding, allowLossyConversion: false)
+        let data = message.dataUsingEncoding(NSUTF16StringEncoding, allowLossyConversion: false)
         var localError: NSError?
-        var json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments, error: &localError)
+        var json: AnyObject!
+        do {
+            json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments)
+        } catch let error as NSError {
+            localError = error
+            json = nil
+        }
         if let dict = json as? [String: AnyObject] {
-            println(dict["message"] as! String)
-            var textMessage : String = dict["message"] as! String
+            print(dict["message"] as! String)
+            let textMessage : String = dict["message"] as! String
             var relID : Int = dict["relation_id"] as! Int
-            var senderID : Int = dict["senderID"] as! Int
-            var receiverID : Int = dict["receiverID"] as! Int
-            var sender_username : String = dict["sender_username"] as! String
+            let senderID : Int = dict["senderID"] as! Int
+            let receiverID : Int = dict["receiverID"] as! Int
+            let sender_username : String = dict["sender_username"] as! String
             
             if receiverID == userID && senderID == self.partener_id{
                 
@@ -121,7 +127,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func didCancel(){
-        println("cenceled")
+        print("cenceled")
     }
     
     @IBAction func sendButtonTapped(sender: AnyObject!) {
@@ -202,7 +208,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             dispatch_after(time, dispatch_get_main_queue(), {
                 self.historyTable.scrollToRowAtIndexPath(NSIndexPath(forRow: self.cellMetas.count-1 , inSection: 0), atScrollPosition: .Bottom, animated: false)
             })}
-        UIView.animateWithDuration(animationDuration, delay: 0.0, options: .BeginFromCurrentState | animationCurve, animations: {
+        UIView.animateWithDuration(animationDuration, delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState.union(animationCurve), animations: {
             self.view.layoutIfNeeded()
             }, completion: nil)
     }
@@ -225,13 +231,13 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         let message = jsonResult[i]["message"]
                         let time = jsonResult[i]["_time"]
                         
-                        var currentHistory = History(id_c: self.relation_id, _from: from!.toInt()!, _to: to!.toInt()!, message: message!, _time: time!);
+                        var currentHistory = History(id_c: self.relation_id, _from: Int(from!)!, _to: Int(to!)!, message: message!, _time: time!);
                         
                         self.history.append(currentHistory);
                         
                     }
                 }
-                println(JSON) //History JSON
+                print(JSON) //History JSON
                 if self.history.count > 0 {
                     
                     let partnerUserName = self.userInfo[1] as! String
@@ -286,7 +292,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let meta = cellMetas[indexPath.row]
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(meta.identifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(meta.identifier, forIndexPath: indexPath) 
         
         cell.textLabel?.text = meta.text
         cell.textLabel?.textAlignment = meta.alingment

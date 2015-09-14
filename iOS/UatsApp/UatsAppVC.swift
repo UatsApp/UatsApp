@@ -37,7 +37,7 @@ class UatsAppVC: UITabBarController {
             _, _, JSON, _ in
             let status:Int = JSON?.valueForKey("status") as! Int
             let log:String = JSON?.valueForKey("log") as! String
-            println("\(status)","\(log)")
+            print("\(status)","\(log)")
             let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(myUserName)")
             if status == 1{
                 socketManager.sharedSocket.socket.disconnect()
