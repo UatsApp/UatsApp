@@ -33,20 +33,22 @@ class UatsAppVC: UITabBarController {
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
         
-        Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(token)", "id":"\(userID)"], encoding: .JSON).responseJSON{
-            _, _, JSON, _ in
-            let status:Int = JSON?.valueForKey("status") as! Int
-            let log:String = JSON?.valueForKey("log") as! String
-            print("\(status)","\(log)")
-            let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(myUserName)")
-            if status == 1{
-                socketManager.sharedSocket.socket.disconnect()
-                let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(myUserName)")
-                
-                let appDomain = NSBundle.mainBundle().bundleIdentifier
-                NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
-            }
-        }
+//        Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(token)", "id":"\(userID)"], encoding: .JSON)
+//            .responseJSON { _, _, JSON in
+//                
+//            let status:Int = JSON.value!["status"] as! Int
+//            let log:String = JSON.valueForKey("log") as! String
+//            print("\(status)","\(log)")
+//            let deleteKeyChain = try KeyChain.deleteDataForUserAccount("\(myUserName)")
+//            if status == 1{
+//                socketManager.sharedSocket.socket.disconnect()
+//                let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(myUserName)")
+//                
+//                let appDomain = NSBundle.mainBundle().bundleIdentifier
+//                NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+//            }
+//                print(JSON)
+//        }
         
         self.performSegueWithIdentifier("goto_login", sender: logoutBtn)
     }

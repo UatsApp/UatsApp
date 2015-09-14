@@ -24,10 +24,10 @@ var myUserName: String{
 
 var userAvatar: String{
     get{
-        var (KeyChainData, error) = KeyChain.loadDataForUserAccount("profileIMG")
+        let KeyChainData = KeyChain.loadDataForUserAccount("profileIMG")
         
-        if let imagePath = KeyChainData!["userImage"] as? String{
-            return imagePath
+        if let imagePath = KeyChainData!["userImage"]{
+            return imagePath as! String
         }else{
             return ""
         }
@@ -37,11 +37,11 @@ var userAvatar: String{
 
 var token: String {
     get {
-        var (KeyChainData, error) = KeyChain.loadDataForUserAccount("\(myUserName)")
+        var KeyChainData = KeyChain.loadDataForUserAccount("\(myUserName)")
         
-        if let tokenString = KeyChainData!["token"] as? String {
+        if let tokenString = KeyChainData!["token"] {
             print("Tokenul sessiunii este: \(tokenString)")
-            return tokenString
+            return tokenString as! String
         } else {
             print("nu exista token")
             return "OMG"
@@ -51,10 +51,10 @@ var token: String {
 
 var userID: Int {
 get {
-    var (KeyChainData, error) = KeyChain.loadDataForUserAccount("\(myUserName)")
+    let KeyChainData = KeyChain.loadDataForUserAccount("\(myUserName)")
     
-    if let IDString = KeyChainData!["user_id"] as? String{
-        let userID:Int? = NSNumberFormatter().numberFromString(IDString)?.integerValue
+    if let IDString = KeyChainData!["user_id"]{
+        let userID:Int? = NSNumberFormatter().numberFromString(IDString as! String)?.integerValue
         print("Id-ul Sessiunii este: \(userID!)")
         return userID!
     }else{

@@ -42,8 +42,8 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
        
         
         Alamofire.request(.POST, "http://uatsapp.tk/accounts/get_users.php", parameters: ["token":"\(token)", "uid":"\(userID)"], encoding: .JSON)
-            .responseJSON { _, _, JSON, _ in
-                if let jsonResult = JSON?.valueForKey("friends") as? Array<Dictionary<String,String>>{
+            .responseJSON { _, _, JSON in
+                if let jsonResult = JSON.value!["friends"] as? Array<Dictionary<String,String>>{
                     var i = 0
                     for (i = 0; i < jsonResult.count; i++)
                     {
@@ -51,7 +51,7 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
                         let email = jsonResult[i]["email"]
                         let id = jsonResult[i]["id"]
                         
-                        var currentUser = Users()
+                        let currentUser = Users()
                         currentUser.username = username!
                         currentUser.email = email!
                         currentUser.user_id = Int(id!)!

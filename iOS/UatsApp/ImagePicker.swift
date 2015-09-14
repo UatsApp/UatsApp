@@ -58,7 +58,7 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
         })
         
         saveImage(image, path: imagePath)
-        KeyChain.updateData(["userImage": "\(imagePath)"], forUserAccount: "profileIMG")
+        try! KeyChain.updateData(["userImage": "\(imagePath)"], forUserAccount: "profileIMG")
         
         
     }
@@ -76,11 +76,9 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
 }
 
 func saveImage (image: UIImage, path: String ) -> Bool{
-    
-    //let pngImageData = UIImagePNGRepresentation(image)
+    //let pngImageData = UIImagePNGRepresentation(image)       // if you want to save as PNG
     let jpgImageData = UIImageJPEGRepresentation(image, 1.0)   // if you want to save as JPEG
-    let result = jpgImageData.writeToFile(path, atomically: true)
-    
+    let result = jpgImageData!.writeToFile(path, atomically: true)
     return result
 }
 
@@ -91,7 +89,10 @@ func documentsDirectory() -> String {
 // Get path for a file in the directory
 
 func fileInDocumentsDirectory(filename: String) -> String {
-    return documentsDirectory().stringByAppendingPathComponent(filename)
+    //return documentsFolderPath.URLByAppendingPathComponent(filename)
+    let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+    let fileURL = documentsURL.URLByAppendingPathComponent("test.sqlite")
+    return ""
 }
 
 // Define the specific path, image name

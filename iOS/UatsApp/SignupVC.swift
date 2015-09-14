@@ -94,11 +94,11 @@ class SignupVC: UIViewController {
     
 
     @IBAction func singupTapped(sender: AnyObject!){
-        let username:NSString = txtUsername.text as NSString
-        let password:NSString = txtPassword.text as NSString
-        let comfirm_password:String = txtConfrimPassword.text as String
-        let email:String = txtEmail.text as String
-        let nickname:String = txtNickName.text as String
+        let username:NSString = txtUsername.text!
+        let password:NSString = txtPassword.text!
+        let comfirm_password:String = txtConfrimPassword.text!
+        let email:String = txtEmail.text!
+        let nickname:String = txtNickName.text!
         
         
         if(username.isEqualToString("") || password.isEqualToString(""))
@@ -116,7 +116,7 @@ class SignupVC: UIViewController {
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
-        }else if (isValidEmail(txtEmail.text)){
+        }else if (isValidEmail(txtEmail.text!)){
             let alertView:UIAlertView = UIAlertView()
             alertView.title = "Sign up Failed!"
             alertView.message = "Invalid email!"
@@ -154,7 +154,7 @@ class SignupVC: UIViewController {
                 if(res.statusCode >= 200 && res.statusCode < 300){
                     let responseData:NSString = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
                     NSLog("Response ==> %@", responseData)
-                    var error:NSError?
+                    let error:NSError?
                     let jsonData:NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(urlData!, options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
                     let success:NSInteger = jsonData.valueForKey("success") as! NSInteger
                     

@@ -33,8 +33,8 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         self.signin.layer.borderWidth = 0.2
         
         if DataForAutoComplete.count != 0 {
-            self.txtUsername.text = DataForAutoComplete[0] as! String
-            self.txtPassword.text = DataForAutoComplete[1] as! String
+            self.txtUsername.text = DataForAutoComplete[0] as? String
+            self.txtPassword.text = DataForAutoComplete[1] as? String
         }
         
         
@@ -114,7 +114,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
-                self.checkFacebookUser()
+                //self.checkFacebookUser()
             }
         }
     }
@@ -147,78 +147,76 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         })
     }
     
-    func checkFacebookUser(){
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,name,picture.width(480).height(480)"])
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            
-            if ((error) != nil)
-            {
-                // Process error
-                print("Error: \(error)")
-            }
-            else
-            {
-                print("fetched facebook user: \(result)")
-                let userName : String = result.valueForKey("name") as! String
-                let userEmail : String = result.valueForKey("email") as! String
-                
-                
-                //Validate  Facebook User
-                Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/jsonsignup.php", parameters: ["username": "\(userName)", "password" : "\(userName)", "c_password": "\(userName)", "email" : "\(userEmail)"], encoding: .JSON)
-                    .responseJSON { _, _, JSON, _ in
-                        print(JSON)
-                        let jsonResult = JSON?.valueForKey("success") as? Int
-                        if((jsonResult) != nil){
-                            var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-                            prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
-                            prefs.setObject(userName, forKey: "USERNAME")
-                            if JSON?.valueForKey("FBUserID") != nil {
-                                
-                                let SessionToken:String = JSON?.valueForKey("token") as! String
-                                let user_id:Int = JSON?.valueForKey("FBUserID") as! Int
-                                KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(userName)")
-                                
-                            }
-                            
-                            self.performSegueWithIdentifier("goApp", sender: self)
-                            
-                            var alertView:UIAlertView = UIAlertView()
-                            alertView.title = "Success!"
-                            alertView.message = "You are logged in!"
-                            alertView.delegate = self
-                            alertView.addButtonWithTitle("OK")
-                            alertView.show()
-                        }
-                        
-                        
-                        
-                        
-                }
-                
-                
-                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-                prefs.setObject(userName, forKey: "USERNAME")
-                
-            }
-        })
-        
-        
-    }
+//func checkFacebookUser(){
+//        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,name,picture.width(480).height(480)"])
+//        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+//            
+//            if ((error) != nil)
+//            {
+//                // Process error
+//                print("Error: \(error)")
+//            }
+//            else
+//            {
+//                print("fetched facebook user: \(result)")
+//                let userName : String = result.valueForKey("name") as! String
+//                let userEmail : String = result.valueForKey("email") as! String
+//                
+//                
+//                //Validate  Facebook User
+//                Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/jsonsignup.php", parameters: ["username": "\(userName)", "password" : "\(userName)", "c_password": "\(userName)", "email" : "\(userEmail)"], encoding: .JSON)
+//                   .responseJSON { _, _, JSON in
+//                    
+//                        //print(JSON)
+//                        let jsonResult = JSON.value!["success"] as? Int
+//                        if((jsonResult) != nil){
+//                            var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//                            prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
+//                            prefs.setObject(userName, forKey: "USERNAME")
+//                            if JSON?.valueForKey("FBUserID") != nil {
+//                                
+//                                let SessionToken:String = JSON?.valueForKey("token") as! String
+//                                let user_id:Int = JSON?.valueForKey("FBUserID") as! Int
+//                                try KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(userName)")
+//                                
+//                            }
+//                            
+//                            self.performSegueWithIdentifier("goApp", sender: self)
+//                            
+//                            var alertView:UIAlertView = UIAlertView()
+//                            alertView.title = "Success!"
+//                            alertView.message = "You are logged in!"
+//                            alertView.delegate = self
+//                            alertView.addButtonWithTitle("OK")
+//                            alertView.show()
+//                        }
+//
+//                }
+//                
+//                
+//                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//                prefs.setObject(userName, forKey: "USERNAME")
+//                
+//            }
+//        })
+//        
+//        
+//}
     
     
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+//    override func didReceiveMemoryWarning() {
+//        super.didReceiveMemoryWarning()
+//        // Dispose of any resources that can be recreated.
+//    }
     
     
     @IBOutlet weak var signin: UIButton!
     
     @IBAction func signinTapped(sender: AnyObject?) {
-        let username:NSString = txtUsername.text
-        let password:NSString = txtPassword.text
+        let username:NSString = txtUsername.text!
+        let password:NSString = txtPassword.text!
         
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
             
@@ -292,7 +290,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         let user_id:Int = jsonData.valueForKey("user_id") as! Int
                         let SessionToken:String = jsonData.valueForKey("token") as! String
                         
-                        KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
+                        try! KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
                         
                         NSLog("Login SUCCESS");
                         

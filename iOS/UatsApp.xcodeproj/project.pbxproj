@@ -17,6 +17,12 @@
 		3F1DD7861B28A4320081FE34 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7851B28A4320081FE34 /* Images.xcassets */; };
 		3F1DD7891B28A4320081FE34 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7871B28A4320081FE34 /* LaunchScreen.xib */; };
 		3F1DD7951B28A4330081FE34 /* UatsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */; };
+		3F52DCBF1BA718CD00DD5921 /* KeyChainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCBE1BA718CD00DD5921 /* KeyChainError.swift */; settings = {ASSET_TAGS = (); }; };
+		3F52DCC51BA719E400DD5921 /* Dictionary_Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCC01BA719E400DD5921 /* Dictionary_Initializers.swift */; settings = {ASSET_TAGS = (); }; };
+		3F52DCC61BA719E400DD5921 /* KeyChainAccessibleOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCC11BA719E400DD5921 /* KeyChainAccessibleOption.swift */; settings = {ASSET_TAGS = (); }; };
+		3F52DCC71BA719E400DD5921 /* KeyChainInternetAuthenticationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCC21BA719E400DD5921 /* KeyChainInternetAuthenticationType.swift */; settings = {ASSET_TAGS = (); }; };
+		3F52DCC81BA719E400DD5921 /* KeyChainInternetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCC31BA719E400DD5921 /* KeyChainInternetProtocol.swift */; settings = {ASSET_TAGS = (); }; };
+		3F52DCC91BA719E400DD5921 /* KeyChainSecurityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCC41BA719E400DD5921 /* KeyChainSecurityClass.swift */; settings = {ASSET_TAGS = (); }; };
 		3F6560641B5D3BE4001BF3C1 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6560631B5D3BE4001BF3C1 /* History.swift */; };
 		3F7458EE1B888551003C772A /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7458ED1B888551003C772A /* Gif.swift */; };
 		3F7585DC1B5A96C400192B1C /* tab_messages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */; };
@@ -73,6 +79,12 @@
 		3F1DD78E1B28A4330081FE34 /* UatsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UatsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1DD7931B28A4330081FE34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UatsAppTests.swift; sourceTree = "<group>"; };
+		3F52DCBE1BA718CD00DD5921 /* KeyChainError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainError.swift; sourceTree = "<group>"; };
+		3F52DCC01BA719E400DD5921 /* Dictionary_Initializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary_Initializers.swift; sourceTree = "<group>"; };
+		3F52DCC11BA719E400DD5921 /* KeyChainAccessibleOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainAccessibleOption.swift; sourceTree = "<group>"; };
+		3F52DCC21BA719E400DD5921 /* KeyChainInternetAuthenticationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainInternetAuthenticationType.swift; sourceTree = "<group>"; };
+		3F52DCC31BA719E400DD5921 /* KeyChainInternetProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainInternetProtocol.swift; sourceTree = "<group>"; };
+		3F52DCC41BA719E400DD5921 /* KeyChainSecurityClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainSecurityClass.swift; sourceTree = "<group>"; };
 		3F6560631B5D3BE4001BF3C1 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		3F7458ED1B888551003C772A /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_messages@2x.png"; sourceTree = "<group>"; };
@@ -133,6 +145,12 @@
 		3F154E461B7E19A500494114 /* KeyChainWrapper */ = {
 			isa = PBXGroup;
 			children = (
+				3F52DCC01BA719E400DD5921 /* Dictionary_Initializers.swift */,
+				3F52DCC11BA719E400DD5921 /* KeyChainAccessibleOption.swift */,
+				3F52DCC21BA719E400DD5921 /* KeyChainInternetAuthenticationType.swift */,
+				3F52DCC31BA719E400DD5921 /* KeyChainInternetProtocol.swift */,
+				3F52DCC41BA719E400DD5921 /* KeyChainSecurityClass.swift */,
+				3F52DCBE1BA718CD00DD5921 /* KeyChainError.swift */,
 				3F154E471B7E19B600494114 /* KeyChainRequest.swift */,
 				3F154E481B7E19B600494114 /* KeyChain.swift */,
 			);
@@ -448,21 +466,27 @@
 				3F1DD7811B28A4320081FE34 /* ViewController.swift in Sources */,
 				525762291B676E39008CC78F /* socketManager.swift in Sources */,
 				3F7DE5631B57BFE2005954FC /* Users.swift in Sources */,
+				3F52DCC91BA719E400DD5921 /* KeyChainSecurityClass.swift in Sources */,
 				3F845E431B8627F100C5B050 /* ImagePicker.swift in Sources */,
 				3F9B21361B6FED6900D5123E /* FriendList.swift in Sources */,
 				3FC813F31B824922000507FB /* Globals.swift in Sources */,
 				3F7458EE1B888551003C772A /* Gif.swift in Sources */,
 				3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */,
+				3F52DCC81BA719E400DD5921 /* KeyChainInternetProtocol.swift in Sources */,
+				3F52DCC61BA719E400DD5921 /* KeyChainAccessibleOption.swift in Sources */,
+				3F52DCBF1BA718CD00DD5921 /* KeyChainError.swift in Sources */,
 				3F154E4A1B7E19B600494114 /* KeyChain.swift in Sources */,
 				3F154E491B7E19B600494114 /* KeyChainRequest.swift in Sources */,
 				3F8ACEEE1B61323900B412CC /* UatsAppVC.swift in Sources */,
 				3F9B21341B6FEA4700D5123E /* FriendListVC.swift in Sources */,
+				3F52DCC51BA719E400DD5921 /* Dictionary_Initializers.swift in Sources */,
 				3F6560641B5D3BE4001BF3C1 /* History.swift in Sources */,
 				3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */,
 				5284F05E1B67EABF0038583B /* ReceivedMessageDelegate.swift in Sources */,
 				3F1DD77F1B28A4320081FE34 /* UatsApp.xcdatamodeld in Sources */,
 				3FD49D401B28C9FE0029218E /* LoginVC.swift in Sources */,
 				3F7DE55E1B56B8DF005954FC /* UsersListVC.swift in Sources */,
+				3F52DCC71BA719E400DD5921 /* KeyChainInternetAuthenticationType.swift in Sources */,
 				3F1DD77C1B28A4320081FE34 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -635,6 +659,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -655,6 +680,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

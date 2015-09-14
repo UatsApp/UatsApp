@@ -133,11 +133,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func sendButtonTapped(sender: AnyObject!) {
         
         if messageField.text != ""{
-            var messageToSend = messageField.text
+            let messageToSend = messageField.text
             socketManager.sharedSocket.socket.writeString("{\"type\":\"msg\", \"message\":\"\(messageToSend)\", \"relation_id\":\(self.relation_id), \"senderID\":\(userID), \"receiverID\":\(self.partener_id), \"sender_username\":\"\(myUserName)\"}")
             
             Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/insert_message.php", parameters: ["message" : "\(messageToSend)" , "relation_id"  : "\(self.relation_id)" , "senderID" : "\(userID)", "token":"\(token)"], encoding: .JSON).responseJSON {
-                _, _, JSON, _ in
+                _, _, JSON in
                 //TODO check the result from insert_message.php which is ???"string"???
             }
             
@@ -147,7 +147,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if infoMetas.count == 0 || infoMetas.last!.text != myUserName {
                 self.cellMetas.append(CellMeta(NSTextAlignment.Right, "cell_info", myUserName))
             }
-            self.cellMetas.append(CellMeta(NSTextAlignment.Right, "cell_message", messageToSend))
+            self.cellMetas.append(CellMeta(NSTextAlignment.Right, "cell_message", messageToSend!))
             
             if self.cellMetas.count >= 0{
                 
@@ -217,10 +217,11 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func checkRelation(){
         //Get History
         Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/history.php", parameters: ["identifier": "\(userInfo[0])" , "loggedUsername":"\(myUserName)", "token":"\(token)", "uid":"\(userID)"], encoding: .JSON)
-            .responseJSON { _, _, JSON, _ in
-                var status = JSON?.valueForKey("status") as! Int
-                self.relation_id = JSON?.valueForKey("relation_id") as! Int
-                if let jsonResult = JSON?.valueForKey("history") as? Array<Dictionary<String,String>>{
+            .responseJSON { _, _, JSON in
+        
+                var status = JSON.value!["status"] as! Int
+                self.relation_id = JSON.value!["relation_id"] as! Int
+                if let jsonResult = JSON.value!["history"] as? Array<Dictionary<String,String>>{
                     var i = 0
                     self.history = []
                     self.cellMetas = []
