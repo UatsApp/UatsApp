@@ -27,6 +27,8 @@
 			</array>
 		</dict>
 	</array>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>CFBundleVersion</key>
 	<string>3</string>
 	<key>Fabric</key>
@@ -61,5 +63,23 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+	  <key>NSExceptionDomains</key>
+	  <dict>
+	    <key>uatsapp.tk</key>
+	    <dict>
+	      <!--Include to allow subdomains-->
+	      <key>NSIncludesSubdomains</key>
+	      <true/>
+	      <!--Include to allow insecure HTTP requests-->
+	      <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+	      <true/>
+	      <!--Include to specify minimum TLS version-->
+	      <key>NSTemporaryExceptionMinimumTLSVersion</key>
+	      <string>TLSv1.1</string>
+	    </dict>
+	  </dict>
+	</dict>
 </dict>
 </plist>

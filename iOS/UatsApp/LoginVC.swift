@@ -290,7 +290,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         let user_id:Int = jsonData.valueForKey("user_id") as! Int
                         let SessionToken:String = jsonData.valueForKey("token") as! String
                         
-                        try! KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
+                 //       try! KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
                         
                         NSLog("Login SUCCESS");
                         

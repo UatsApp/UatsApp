@@ -16,7 +16,6 @@
 		3F1DD7811B28A4320081FE34 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD7801B28A4320081FE34 /* ViewController.swift */; };
 		3F1DD7861B28A4320081FE34 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7851B28A4320081FE34 /* Images.xcassets */; };
 		3F1DD7891B28A4320081FE34 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7871B28A4320081FE34 /* LaunchScreen.xib */; };
-		3F1DD7951B28A4330081FE34 /* UatsAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */; };
 		3F52DCBF1BA718CD00DD5921 /* KeyChainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCBE1BA718CD00DD5921 /* KeyChainError.swift */; settings = {ASSET_TAGS = (); }; };
 		3F52DCC51BA719E400DD5921 /* Dictionary_Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCC01BA719E400DD5921 /* Dictionary_Initializers.swift */; settings = {ASSET_TAGS = (); }; };
 		3F52DCC61BA719E400DD5921 /* KeyChainAccessibleOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCC11BA719E400DD5921 /* KeyChainAccessibleOption.swift */; settings = {ASSET_TAGS = (); }; };
@@ -36,32 +35,24 @@
 		3F845E451B8637AF00C5B050 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F845E441B8637AF00C5B050 /* Icon-72.png */; };
 		3F845E471B863BFD00C5B050 /* 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F845E461B863BFD00C5B050 /* 1024x1024.png */; };
 		3F845E491B863E4C00C5B050 /* profile-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F845E481B863E4C00C5B050 /* profile-bg.png */; };
-		3F8ACEE61B60E2C600B412CC /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8ACEE21B60E2C600B412CC /* Bolts.framework */; };
-		3F8ACEE71B60E2C600B412CC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8ACEE31B60E2C600B412CC /* FBSDKCoreKit.framework */; };
-		3F8ACEE81B60E2C600B412CC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8ACEE41B60E2C600B412CC /* FBSDKLoginKit.framework */; };
-		3F8ACEE91B60E2C600B412CC /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8ACEE51B60E2C600B412CC /* FBSDKMessengerShareKit.framework */; };
 		3F8ACEEE1B61323900B412CC /* UatsAppVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8ACEED1B61323900B412CC /* UatsAppVC.swift */; };
 		3F9B21341B6FEA4700D5123E /* FriendListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B21331B6FEA4700D5123E /* FriendListVC.swift */; };
 		3F9B21361B6FED6900D5123E /* FriendList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B21351B6FED6900D5123E /* FriendList.swift */; };
 		3FC813F31B824922000507FB /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC813F21B824922000507FB /* Globals.swift */; };
+		3FD0616F1BA8052C00070223 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD061681BA8052C00070223 /* Bolts.framework */; settings = {ASSET_TAGS = (); }; };
+		3FD061701BA8052C00070223 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3FD061691BA8052C00070223 /* FacebookSDKStrings.bundle */; settings = {ASSET_TAGS = (); }; };
+		3FD061711BA8052C00070223 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD0616A1BA8052C00070223 /* FBAudienceNetwork.framework */; settings = {ASSET_TAGS = (); }; };
+		3FD061721BA8052C00070223 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD0616B1BA8052C00070223 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		3FD061731BA8052C00070223 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD0616C1BA8052C00070223 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		3FD061741BA8052C00070223 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD0616D1BA8052C00070223 /* FBSDKMessengerShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		3FD061751BA8052C00070223 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FD0616E1BA8052C00070223 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
 		3FD49D3E1B28BCC80029218E /* enrollment_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */; };
 		3FD49D401B28C9FE0029218E /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D3F1B28C9FE0029218E /* LoginVC.swift */; };
 		3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD49D411B28CBE10029218E /* SignupVC.swift */; };
 		3FD49D471B28D82D0029218E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD49D451B28D82D0029218E /* Main.storyboard */; };
-		5230A1FBE479994D0A10C1DF /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		525762291B676E39008CC78F /* socketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525762281B676E39008CC78F /* socketManager.swift */; };
 		5284F05E1B67EABF0038583B /* ReceivedMessageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5284F05D1B67EABF0038583B /* ReceivedMessageDelegate.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3F1DD78F1B28A4330081FE34 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3F1DD76E1B28A4310081FE34 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3F1DD7751B28A4310081FE34;
-			remoteInfo = UatsApp;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3080E396B577E8F1966CD697 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -76,7 +67,6 @@
 		3F1DD7801B28A4320081FE34 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3F1DD7851B28A4320081FE34 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3F1DD7881B28A4320081FE34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		3F1DD78E1B28A4330081FE34 /* UatsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UatsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1DD7931B28A4330081FE34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UatsAppTests.swift; sourceTree = "<group>"; };
 		3F52DCBE1BA718CD00DD5921 /* KeyChainError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainError.swift; sourceTree = "<group>"; };
@@ -98,15 +88,18 @@
 		3F845E441B8637AF00C5B050 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		3F845E461B863BFD00C5B050 /* 1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1024x1024.png; sourceTree = "<group>"; };
 		3F845E481B863E4C00C5B050 /* profile-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-bg.png"; sourceTree = "<group>"; };
-		3F8ACEE21B60E2C600B412CC /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = UatsApp/Bolts.framework; sourceTree = "<group>"; };
-		3F8ACEE31B60E2C600B412CC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = UatsApp/FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		3F8ACEE41B60E2C600B412CC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = UatsApp/FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		3F8ACEE51B60E2C600B412CC /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = UatsApp/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
 		3F8ACEEA1B60E3AC00B412CC /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		3F8ACEED1B61323900B412CC /* UatsAppVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UatsAppVC.swift; sourceTree = "<group>"; };
 		3F9B21331B6FEA4700D5123E /* FriendListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListVC.swift; sourceTree = "<group>"; };
 		3F9B21351B6FED6900D5123E /* FriendList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendList.swift; sourceTree = "<group>"; };
 		3FC813F21B824922000507FB /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		3FD061681BA8052C00070223 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		3FD061691BA8052C00070223 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
+		3FD0616A1BA8052C00070223 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
+		3FD0616B1BA8052C00070223 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		3FD0616C1BA8052C00070223 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		3FD0616D1BA8052C00070223 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
+		3FD0616E1BA8052C00070223 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		3FD49D3D1B28BCC80029218E /* enrollment_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = enrollment_background.jpg; sourceTree = "<group>"; };
 		3FD49D3F1B28C9FE0029218E /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		3FD49D411B28CBE10029218E /* SignupVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
@@ -114,7 +107,6 @@
 		525762281B676E39008CC78F /* socketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = socketManager.swift; sourceTree = "<group>"; };
 		5284F05D1B67EABF0038583B /* ReceivedMessageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceivedMessageDelegate.swift; sourceTree = "<group>"; };
 		C67D60E815D3BA9C502089EF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,20 +114,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5230A1FBE479994D0A10C1DF /* Pods.framework in Frameworks */,
-				3F8ACEE71B60E2C600B412CC /* FBSDKCoreKit.framework in Frameworks */,
-				3F8ACEE91B60E2C600B412CC /* FBSDKMessengerShareKit.framework in Frameworks */,
-				3F8ACEE81B60E2C600B412CC /* FBSDKLoginKit.framework in Frameworks */,
-				3F8ACEE61B60E2C600B412CC /* Bolts.framework in Frameworks */,
+				3FD061751BA8052C00070223 /* FBSDKShareKit.framework in Frameworks */,
+				3FD061721BA8052C00070223 /* FBSDKCoreKit.framework in Frameworks */,
+				3FD0616F1BA8052C00070223 /* Bolts.framework in Frameworks */,
+				3FD061731BA8052C00070223 /* FBSDKLoginKit.framework in Frameworks */,
 				375C89041B8237460087693B /* Fabric.framework in Frameworks */,
 				375C89051B8237460087693B /* Crashlytics.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3F1DD78B1B28A4330081FE34 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				3FD061711BA8052C00070223 /* FBAudienceNetwork.framework in Frameworks */,
+				3FD061741BA8052C00070223 /* FBSDKMessengerShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				3F1DD7761B28A4320081FE34 /* UatsApp.app */,
-				3F1DD78E1B28A4330081FE34 /* UatsAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -279,11 +264,13 @@
 		E91833B9ABA142E7327506FB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3F8ACEE21B60E2C600B412CC /* Bolts.framework */,
-				3F8ACEE31B60E2C600B412CC /* FBSDKCoreKit.framework */,
-				3F8ACEE41B60E2C600B412CC /* FBSDKLoginKit.framework */,
-				3F8ACEE51B60E2C600B412CC /* FBSDKMessengerShareKit.framework */,
-				E6105AEB7DC7FA7B69A9B7C6 /* Pods.framework */,
+				3FD061681BA8052C00070223 /* Bolts.framework */,
+				3FD061691BA8052C00070223 /* FacebookSDKStrings.bundle */,
+				3FD0616A1BA8052C00070223 /* FBAudienceNetwork.framework */,
+				3FD0616B1BA8052C00070223 /* FBSDKCoreKit.framework */,
+				3FD0616C1BA8052C00070223 /* FBSDKLoginKit.framework */,
+				3FD0616D1BA8052C00070223 /* FBSDKMessengerShareKit.framework */,
+				3FD0616E1BA8052C00070223 /* FBSDKShareKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -312,24 +299,6 @@
 			productReference = 3F1DD7761B28A4320081FE34 /* UatsApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3F1DD78D1B28A4330081FE34 /* UatsAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3F1DD79B1B28A4330081FE34 /* Build configuration list for PBXNativeTarget "UatsAppTests" */;
-			buildPhases = (
-				3F1DD78A1B28A4330081FE34 /* Sources */,
-				3F1DD78B1B28A4330081FE34 /* Frameworks */,
-				3F1DD78C1B28A4330081FE34 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3F1DD7901B28A4330081FE34 /* PBXTargetDependency */,
-			);
-			name = UatsAppTests;
-			productName = UatsAppTests;
-			productReference = 3F1DD78E1B28A4330081FE34 /* UatsAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -343,10 +312,6 @@
 				TargetAttributes = {
 					3F1DD7751B28A4310081FE34 = {
 						CreatedOnToolsVersion = 6.3.2;
-					};
-					3F1DD78D1B28A4330081FE34 = {
-						CreatedOnToolsVersion = 6.3.2;
-						TestTargetID = 3F1DD7751B28A4310081FE34;
 					};
 				};
 			};
@@ -364,7 +329,6 @@
 			projectRoot = "";
 			targets = (
 				3F1DD7751B28A4310081FE34 /* UatsApp */,
-				3F1DD78D1B28A4330081FE34 /* UatsAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -377,6 +341,7 @@
 				3F1DD7891B28A4320081FE34 /* LaunchScreen.xib in Resources */,
 				3F7DE5651B5802AD005954FC /* bck.jpg in Resources */,
 				3F845E471B863BFD00C5B050 /* 1024x1024.png in Resources */,
+				3FD061701BA8052C00070223 /* FacebookSDKStrings.bundle in Resources */,
 				3F845E451B8637AF00C5B050 /* Icon-72.png in Resources */,
 				3F1DD7861B28A4320081FE34 /* Images.xcassets in Resources */,
 				3F7DE5581B5582CE005954FC /* msg@2x.ico in Resources */,
@@ -385,13 +350,6 @@
 				3FD49D471B28D82D0029218E /* Main.storyboard in Resources */,
 				3F7585DC1B5A96C400192B1C /* tab_messages@2x.png in Resources */,
 				3F7DE5561B558281005954FC /* msg.ico in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3F1DD78C1B28A4330081FE34 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,23 +449,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3F1DD78A1B28A4330081FE34 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3F1DD7951B28A4330081FE34 /* UatsAppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3F1DD7901B28A4330081FE34 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3F1DD7751B28A4310081FE34 /* UatsApp */;
-			targetProxy = 3F1DD78F1B28A4330081FE34 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3F1DD7871B28A4320081FE34 /* LaunchScreen.xib */ = {
@@ -622,6 +564,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/UatsApp",
 					"$(PROJECT_DIR)/Pods/Fabric",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = UatsApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -644,6 +587,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/UatsApp",
 					"$(PROJECT_DIR)/Pods/Fabric",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = UatsApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -652,44 +596,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "74035e65-4f17-47a2-ae1d-9fd3187b6ec8";
 				SWIFT_OBJC_BRIDGING_HEADER = "UatsApp/Bridging-Header.h";
-			};
-			name = Release;
-		};
-		3F1DD79C1B28A4330081FE34 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = UatsAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UatsApp.app/UatsApp";
-			};
-			name = Debug;
-		};
-		3F1DD79D1B28A4330081FE34 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = UatsAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UatsApp.app/UatsApp";
 			};
 			name = Release;
 		};
@@ -710,15 +616,6 @@
 			buildConfigurations = (
 				3F1DD7991B28A4330081FE34 /* Debug */,
 				3F1DD79A1B28A4330081FE34 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3F1DD79B1B28A4330081FE34 /* Build configuration list for PBXNativeTarget "UatsAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3F1DD79C1B28A4330081FE34 /* Debug */,
-				3F1DD79D1B28A4330081FE34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
