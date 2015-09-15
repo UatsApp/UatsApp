@@ -129,7 +129,7 @@
                         <outlet property="signin" destination="28U-Fx-bqN" id="S8v-AM-P4Y"/>
                         <outlet property="txtPassword" destination="WR5-Yk-rQs" id="B00-yw-gDQ"/>
                         <outlet property="txtUsername" destination="gLz-u8-5U3" id="2z1-fo-FCK"/>
-                        <segue destination="XhR-NL-vcT" kind="push" identifier="goApp" id="E0T-b4-Plr"/>
+                        <segue destination="NEy-BI-WFf" kind="modal" identifier="goApp" id="Iae-9N-hzw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2B-fG-26b" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -679,6 +679,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ocb-iI-cdH"/>
-        <segue reference="ObL-L8-E3f"/>
     </inferredMetricsTieBreakers>
 </document>

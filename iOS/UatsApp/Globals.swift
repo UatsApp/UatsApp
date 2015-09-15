@@ -27,6 +27,7 @@ var userAvatar: String{
         let KeyChainData = KeyChain.loadDataForUserAccount("profileIMG")
         
         if let imagePath = KeyChainData!["userImage"]{
+            //print(imagePath)
             return imagePath as! String
         }else{
             return ""

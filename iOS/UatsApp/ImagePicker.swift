@@ -30,7 +30,7 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
         super.viewWillAppear(animated)
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(userAvatar){
-            print("FILE AVAILABLE AT WIEWWILLAPPEAR")
+            print("FILE AVAILABLE AT viewWillAppear")
             let image = loadImageFromPath(imagePath)
             imageView.image = image
         }
@@ -89,10 +89,11 @@ func documentsDirectory() -> String {
 // Get path for a file in the directory
 
 func fileInDocumentsDirectory(filename: String) -> String {
-    //return documentsFolderPath.URLByAppendingPathComponent(filename)
     let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
-    let fileURL = documentsURL.URLByAppendingPathComponent("test.sqlite")
-    return ""
+    let fileURL = documentsURL.URLByAppendingPathComponent("\(filename)")
+    let path = fileURL.path!
+    print(path)
+    return path
 }
 
 // Define the specific path, image name

@@ -96,7 +96,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let dict = json as? [String: AnyObject] {
             print(dict["message"] as! String)
             let textMessage : String = dict["message"] as! String
-            var relID : Int = dict["relation_id"] as! Int
+            //var relID : Int = dict["relation_id"] as! Int
             let senderID : Int = dict["senderID"] as! Int
             let receiverID : Int = dict["receiverID"] as! Int
             let sender_username : String = dict["sender_username"] as! String
@@ -232,7 +232,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         let message = jsonResult[i]["message"]
                         let time = jsonResult[i]["_time"]
                         
-                        var currentHistory = History(id_c: self.relation_id, _from: Int(from!)!, _to: Int(to!)!, message: message!, _time: time!);
+                        let currentHistory = History(id_c: self.relation_id, _from: Int(from!)!, _to: Int(to!)!, message: message!, _time: time!);
                         
                         self.history.append(currentHistory);
                         
@@ -241,7 +241,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print(JSON) //History JSON
                 if self.history.count > 0 {
                     
-                    let partnerUserName = self.userInfo[1] as! String
+                    //let partnerUserName = self.userInfo[1] as! String
                     var currentFromUserId = -1000
                     
                     // var currINFO = FriendLIST(id_c: self.relation_id, friendUsername: partnerUserName)
