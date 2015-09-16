@@ -25,8 +25,6 @@
 		3F6560641B5D3BE4001BF3C1 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6560631B5D3BE4001BF3C1 /* History.swift */; };
 		3F7458EE1B888551003C772A /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7458ED1B888551003C772A /* Gif.swift */; };
 		3F7585DC1B5A96C400192B1C /* tab_messages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */; };
-		3F7DE5561B558281005954FC /* msg.ico in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DE5551B558281005954FC /* msg.ico */; };
-		3F7DE5581B5582CE005954FC /* msg@2x.ico in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DE5571B5582CE005954FC /* msg@2x.ico */; };
 		3F7DE55E1B56B8DF005954FC /* UsersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE55D1B56B8DF005954FC /* UsersListVC.swift */; };
 		3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE55F1B56C518005954FC /* ChatViewController.swift */; };
 		3F7DE5631B57BFE2005954FC /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE5621B57BFE2005954FC /* Users.swift */; };
@@ -78,8 +76,6 @@
 		3F6560631B5D3BE4001BF3C1 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		3F7458ED1B888551003C772A /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_messages@2x.png"; sourceTree = "<group>"; };
-		3F7DE5551B558281005954FC /* msg.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = msg.ico; sourceTree = "<group>"; };
-		3F7DE5571B5582CE005954FC /* msg@2x.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = "msg@2x.ico"; sourceTree = "<group>"; };
 		3F7DE55D1B56B8DF005954FC /* UsersListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersListVC.swift; sourceTree = "<group>"; };
 		3F7DE55F1B56C518005954FC /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		3F7DE5621B57BFE2005954FC /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
@@ -222,8 +218,6 @@
 				3F845E461B863BFD00C5B050 /* 1024x1024.png */,
 				3F845E441B8637AF00C5B050 /* Icon-72.png */,
 				3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */,
-				3F7DE5571B5582CE005954FC /* msg@2x.ico */,
-				3F7DE5551B558281005954FC /* msg.ico */,
 			);
 			name = Res;
 			path = ../UatsApp.xcodeproj;
@@ -344,12 +338,10 @@
 				3FD061701BA8052C00070223 /* FacebookSDKStrings.bundle in Resources */,
 				3F845E451B8637AF00C5B050 /* Icon-72.png in Resources */,
 				3F1DD7861B28A4320081FE34 /* Images.xcassets in Resources */,
-				3F7DE5581B5582CE005954FC /* msg@2x.ico in Resources */,
 				3FD49D3E1B28BCC80029218E /* enrollment_background.jpg in Resources */,
 				3F845E491B863E4C00C5B050 /* profile-bg.png in Resources */,
 				3FD49D471B28D82D0029218E /* Main.storyboard in Resources */,
 				3F7585DC1B5A96C400192B1C /* tab_messages@2x.png in Resources */,
-				3F7DE5561B558281005954FC /* msg.ico in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

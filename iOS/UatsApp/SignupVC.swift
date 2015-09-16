@@ -25,11 +25,11 @@ class SignupVC: UIViewController {
         self.signup.layer.cornerRadius = 5.0
         self.signup.layer.borderColor = UIColor.whiteColor().CGColor
         self.signup.layer.borderWidth = 0.2
-        self.txtUsername.delegate = self
+        //self.txtUsername.delegate = self
         self.txtPassword.delegate = self
         self.txtConfrimPassword.delegate = self
         self.txtEmail.delegate = self
-        self.txtNickName.delegate = self
+        //self.txtNickName.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -94,18 +94,18 @@ class SignupVC: UIViewController {
     
 
     @IBAction func singupTapped(sender: AnyObject!){
-        let username:NSString = txtUsername.text!
+        //let username:NSString = txtUsername.text!
         let password:NSString = txtPassword.text!
         let comfirm_password:String = txtConfrimPassword.text!
-        let email:String = txtEmail.text!
-        let nickname:String = txtNickName.text!
+        let email:NSString = txtEmail.text!
+        //let nickname:String = txtNickName.text!
         
         
-        if(username.isEqualToString("") || password.isEqualToString(""))
+        if(email.isEqualToString("") || password.isEqualToString(""))
         {
             let alertView:UIAlertView = UIAlertView()
             alertView.title = "Sign up Failed!"
-            alertView.message = "Please enter username and password"
+            alertView.message = "Please enter email and password"
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
@@ -125,7 +125,7 @@ class SignupVC: UIViewController {
             alertView.show()
         }else {
             //var post:NSString = "username=\(username)&password=\(password)&c_password=\(comfirm_password)&email=\(email)"
-            let post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\",\"c_password\":\"\(comfirm_password)\",\"email\":\"\(email)\",\"nickname\":\"\(nickname)\"}"
+            let post:String = "{\"password\":\"\(password)\",\"c_password\":\"\(comfirm_password)\",\"email\":\"\(email)\"}"
             NSLog("Post data: %@",post);
             
             let url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonsignup.php")!
@@ -168,7 +168,7 @@ class SignupVC: UIViewController {
                         alertView.delegate = self
                         alertView.addButtonWithTitle("OK")
                         alertView.show()
-                        let data:NSArray = [username, password]
+                        let data:NSArray = [email, password]
                         self.performSegueWithIdentifier("BackToLogin", sender: data)
                        // self.dismissViewControllerAnimated(true, completion: nil)
                     }else{
@@ -233,14 +233,10 @@ class SignupVC: UIViewController {
 
 extension SignupVC:UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if (textField == txtUsername){
+        if (textField == txtEmail){
             txtPassword.becomeFirstResponder()
         }else if(textField == txtPassword){
             txtConfrimPassword.becomeFirstResponder()
-        }else if (textField == txtConfrimPassword){
-            txtEmail.becomeFirstResponder()
-        }else if(textField == txtEmail){
-            txtNickName.becomeFirstResponder()
         }else{
             singupTapped(nil)
         }
