@@ -133,7 +133,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func sendButtonTapped(sender: AnyObject!) {
         
         if messageField.text != ""{
-            let messageToSend = messageField.text
+            let messageToSend = messageField.text!
             socketManager.sharedSocket.socket.writeString("{\"type\":\"msg\", \"message\":\"\(messageToSend)\", \"relation_id\":\(self.relation_id), \"senderID\":\(userID), \"receiverID\":\(self.partener_id), \"sender_username\":\"\(myUserName)\"}")
             
             Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/insert_message.php", parameters: ["message" : "\(messageToSend)" , "relation_id"  : "\(self.relation_id)" , "senderID" : "\(userID)", "token":"\(token)"], encoding: .JSON).responseJSON {
@@ -147,7 +147,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if infoMetas.count == 0 || infoMetas.last!.text != myUserName {
                 self.cellMetas.append(CellMeta(NSTextAlignment.Right, "cell_info", myUserName))
             }
-            self.cellMetas.append(CellMeta(NSTextAlignment.Right, "cell_message", messageToSend!))
+            self.cellMetas.append(CellMeta(NSTextAlignment.Right, "cell_message", messageToSend))
             
             if self.cellMetas.count >= 0{
                 
