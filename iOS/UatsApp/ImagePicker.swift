@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Alamofire
 
 
 class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameTxt: UITextField!
     var imagePicker = UIImagePickerController()
@@ -28,6 +30,7 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(userAvatar){
             print("FILE AVAILABLE AT viewWillAppear")
@@ -60,7 +63,11 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
         saveImage(image, path: imagePath)
         try! KeyChain.updateData(["userImage": "\(imagePath)"], forUserAccount: "profileIMG")
         
-        
+    }
+    
+
+    @IBAction func continueButtonTapped(sender: AnyObject) {
+        self.performSegueWithIdentifier("enroll", sender: self)
     }
     
     /*

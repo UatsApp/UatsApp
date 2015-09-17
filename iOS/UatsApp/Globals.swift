@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 var myUserName: String{
     get {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -63,4 +61,15 @@ get {
         return 0
     }
   }
+}
+
+func rootVC(){
+    UIApplication.sharedApplication().windows[0].rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+}
+
+func deleteKeychainAccess(){
+    socketManager.sharedSocket.socket.disconnect()
+    try! KeyChain.deleteDataForUserAccount("\(myUserName)")
+    let appDomain = NSBundle.mainBundle().bundleIdentifier
+    NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
 }

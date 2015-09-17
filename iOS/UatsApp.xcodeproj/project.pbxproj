@@ -23,6 +23,7 @@
 		3F52DCC81BA719E400DD5921 /* KeyChainInternetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCC31BA719E400DD5921 /* KeyChainInternetProtocol.swift */; settings = {ASSET_TAGS = (); }; };
 		3F52DCC91BA719E400DD5921 /* KeyChainSecurityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCC41BA719E400DD5921 /* KeyChainSecurityClass.swift */; settings = {ASSET_TAGS = (); }; };
 		3F6560641B5D3BE4001BF3C1 /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6560631B5D3BE4001BF3C1 /* History.swift */; };
+		3F73CBAE1BAB34D50068E552 /* NamePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F73CBAD1BAB34D50068E552 /* NamePicker.swift */; settings = {ASSET_TAGS = (); }; };
 		3F7458EE1B888551003C772A /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7458ED1B888551003C772A /* Gif.swift */; };
 		3F7585DC1B5A96C400192B1C /* tab_messages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */; };
 		3F7DE55E1B56B8DF005954FC /* UsersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DE55D1B56B8DF005954FC /* UsersListVC.swift */; };
@@ -74,6 +75,7 @@
 		3F52DCC31BA719E400DD5921 /* KeyChainInternetProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainInternetProtocol.swift; sourceTree = "<group>"; };
 		3F52DCC41BA719E400DD5921 /* KeyChainSecurityClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainSecurityClass.swift; sourceTree = "<group>"; };
 		3F6560631B5D3BE4001BF3C1 /* History.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		3F73CBAD1BAB34D50068E552 /* NamePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NamePicker.swift; path = ../NamePicker.swift; sourceTree = "<group>"; };
 		3F7458ED1B888551003C772A /* Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
 		3F7585DB1B5A96C400192B1C /* tab_messages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_messages@2x.png"; sourceTree = "<group>"; };
 		3F7DE55D1B56B8DF005954FC /* UsersListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersListVC.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				3F7DE55F1B56C518005954FC /* ChatViewController.swift */,
 				3F9B21331B6FEA4700D5123E /* FriendListVC.swift */,
 				3F845E421B8627F100C5B050 /* ImagePicker.swift */,
+				3F73CBAD1BAB34D50068E552 /* NamePicker.swift */,
 			);
 			path = UatsApp;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				3F154E491B7E19B600494114 /* KeyChainRequest.swift in Sources */,
 				3F8ACEEE1B61323900B412CC /* UatsAppVC.swift in Sources */,
 				3F9B21341B6FEA4700D5123E /* FriendListVC.swift in Sources */,
+				3F73CBAE1BAB34D50068E552 /* NamePicker.swift in Sources */,
 				3F52DCC51BA719E400DD5921 /* Dictionary_Initializers.swift in Sources */,
 				3F6560641B5D3BE4001BF3C1 /* History.swift in Sources */,
 				3FD49D421B28CBE10029218E /* SignupVC.swift in Sources */,
