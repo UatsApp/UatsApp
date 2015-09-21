@@ -39,10 +39,10 @@ var token: String {
         var KeyChainData = KeyChain.loadDataForUserAccount("\(myUserName)")
         
         if let tokenString = KeyChainData!["token"] {
-            print("Tokenul sessiunii este: \(tokenString)")
+            NSLog("Tokenul sessiunii este: \(tokenString)")
             return tokenString as! String
         } else {
-            print("nu exista token")
+            NSLog("nu exista token")
             return "OMG"
         }
     }
@@ -54,10 +54,10 @@ get {
     
     if let IDString = KeyChainData!["user_id"]{
         let userID:Int? = NSNumberFormatter().numberFromString(IDString as! String)?.integerValue
-        print("Id-ul Sessiunii este: \(userID!)")
+        NSLog("Id-ul Sessiunii este: \(userID!)")
         return userID!
     }else{
-        print("Nu exista USERID IN KeyChain")
+        NSLog("Nu exista USERID IN KeyChain")
         return 0
     }
   }
@@ -71,7 +71,7 @@ get{
         let enroll:Int? = NSNumberFormatter().numberFromString(enrollmentStep as! String)?.integerValue
         return enroll!
     }else{
-        print("Oops, Enroll is fucked up!")
+        NSLog("Oops, Enroll is fucked up!")
         return 0
     }
 }

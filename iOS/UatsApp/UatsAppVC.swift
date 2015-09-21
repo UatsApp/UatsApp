@@ -44,7 +44,7 @@ class UatsAppVC: UITabBarController {
                     let appDomain = NSBundle.mainBundle().bundleIdentifier
                     NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
                 }else{
-                    print(log)
+                    NSLog(log)
                 }
                 
                 print(JSON)

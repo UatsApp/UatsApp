@@ -41,7 +41,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
         let isFacebookLoggedIn :Int = prefs.integerForKey("ISFACEBOOKLOGGED") as Int
         //try! KeyChain.deleteDataForUserAccount("enroll")
-        //        try! KeyChain.updateData(["enroll":"0"], forUserAccount: "enroll")
+        try! KeyChain.updateData(["enroll":"1"], forUserAccount: "enroll")
         print(enrollStep)
         //        deleteKeychainAccess()
         if enrollStep == 0{
@@ -299,7 +299,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         let SessionToken:String = jsonData.valueForKey("token") as! String
                         
                         //try! KeyChain.updateData(["enroll":"1"], forUserAccount: "enroll")
-                        //                        try! KeyChain.deleteDataForUserAccount("\(myUserName)")
+                                                try! KeyChain.deleteDataForUserAccount("\(myUserName)")
                         //                        deleteKeychainAccess()
                         try! KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
                         
