@@ -35,7 +35,8 @@ class namePicker: UIViewController {
             let status = JSON.value!["status"] as! Int
             
             if status == 1{
-                self.performSegueWithIdentifier("enrollProcessStep3", sender: self)
+                self.performSegueWithIdentifier("enrollment3", sender: self)
+                try! KeyChain.updateData(["enroll":"2"], forUserAccount: "enroll")
             }else{
                 deleteKeychainAccess()
                 rootVC()

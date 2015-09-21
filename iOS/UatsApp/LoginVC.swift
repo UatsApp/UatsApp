@@ -37,14 +37,22 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             self.txtPassword.text = DataForAutoComplete[1] as? String
         }
         
-        
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
         let isFacebookLoggedIn :Int = prefs.integerForKey("ISFACEBOOKLOGGED") as Int
-        
+       // try! KeyChain.deleteDataForUserAccount("enroll")
+        //try! KeyChain.updateData(["enroll":"1"], forUserAccount: "enroll")
+        print(enrollStep)
         if(isLoggedin == 1 || isFacebookLoggedIn == 1){
             self.performSegueWithIdentifier("goApp", sender: self)//////////DE PUS LOGOUT IN APP SI SCBHIMBAT '!=' IN '==';////////////////
-            
+        }else if(enrollStep == 4){
+            self.performSegueWithIdentifier("goApp", sender: self)
+        }else if(enrollStep == 1){
+            self.performSegueWithIdentifier("gotoEnroll", sender: self)
+        }else if(enrollStep == 2){
+            self.performSegueWithIdentifier("gotoEnroll2", sender: self)
+        }else{
+            self.performSegueWithIdentifier("gotoEnroll3", sender: self)
         }
         
         //FB login
@@ -147,69 +155,69 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         })
     }
     
-//func checkFacebookUser(){
-//        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,name,picture.width(480).height(480)"])
-//        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-//            
-//            if ((error) != nil)
-//            {
-//                // Process error
-//                print("Error: \(error)")
-//            }
-//            else
-//            {
-//                print("fetched facebook user: \(result)")
-//                let userName : String = result.valueForKey("name") as! String
-//                let userEmail : String = result.valueForKey("email") as! String
-//                
-//                
-//                //Validate  Facebook User
-//                Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/jsonsignup.php", parameters: ["username": "\(userName)", "password" : "\(userName)", "c_password": "\(userName)", "email" : "\(userEmail)"], encoding: .JSON)
-//                   .responseJSON { _, _, JSON in
-//                    
-//                        //print(JSON)
-//                        let jsonResult = JSON.value!["success"] as? Int
-//                        if((jsonResult) != nil){
-//                            var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//                            prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
-//                            prefs.setObject(userName, forKey: "USERNAME")
-//                            if JSON?.valueForKey("FBUserID") != nil {
-//                                
-//                                let SessionToken:String = JSON?.valueForKey("token") as! String
-//                                let user_id:Int = JSON?.valueForKey("FBUserID") as! Int
-//                                try KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(userName)")
-//                                
-//                            }
-//                            
-//                            self.performSegueWithIdentifier("goApp", sender: self)
-//                            
-//                            var alertView:UIAlertView = UIAlertView()
-//                            alertView.title = "Success!"
-//                            alertView.message = "You are logged in!"
-//                            alertView.delegate = self
-//                            alertView.addButtonWithTitle("OK")
-//                            alertView.show()
-//                        }
-//
-//                }
-//                
-//                
-//                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//                prefs.setObject(userName, forKey: "USERNAME")
-//                
-//            }
-//        })
-//        
-//        
-//}
+    //func checkFacebookUser(){
+    //        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,name,picture.width(480).height(480)"])
+    //        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+    //
+    //            if ((error) != nil)
+    //            {
+    //                // Process error
+    //                print("Error: \(error)")
+    //            }
+    //            else
+    //            {
+    //                print("fetched facebook user: \(result)")
+    //                let userName : String = result.valueForKey("name") as! String
+    //                let userEmail : String = result.valueForKey("email") as! String
+    //
+    //
+    //                //Validate  Facebook User
+    //                Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/jsonsignup.php", parameters: ["username": "\(userName)", "password" : "\(userName)", "c_password": "\(userName)", "email" : "\(userEmail)"], encoding: .JSON)
+    //                   .responseJSON { _, _, JSON in
+    //
+    //                        //print(JSON)
+    //                        let jsonResult = JSON.value!["success"] as? Int
+    //                        if((jsonResult) != nil){
+    //                            var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    //                            prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
+    //                            prefs.setObject(userName, forKey: "USERNAME")
+    //                            if JSON?.valueForKey("FBUserID") != nil {
+    //
+    //                                let SessionToken:String = JSON?.valueForKey("token") as! String
+    //                                let user_id:Int = JSON?.valueForKey("FBUserID") as! Int
+    //                                try KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(userName)")
+    //
+    //                            }
+    //
+    //                            self.performSegueWithIdentifier("goApp", sender: self)
+    //
+    //                            var alertView:UIAlertView = UIAlertView()
+    //                            alertView.title = "Success!"
+    //                            alertView.message = "You are logged in!"
+    //                            alertView.delegate = self
+    //                            alertView.addButtonWithTitle("OK")
+    //                            alertView.show()
+    //                        }
+    //
+    //                }
+    //
+    //
+    //                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    //                prefs.setObject(userName, forKey: "USERNAME")
+    //
+    //            }
+    //        })
+    //
+    //
+    //}
     
     
     
     
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
+    //    override func didReceiveMemoryWarning() {
+    //        super.didReceiveMemoryWarning()
+    //        // Dispose of any resources that can be recreated.
+    //    }
     
     
     @IBOutlet weak var signin: UIButton!
@@ -270,7 +278,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                     
                     NSLog("Response ==> %@", responseData);
                     
-                    var error: NSError?
+                    var _: NSError?
                     
                     let jsonData:NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers )) as! NSDictionary
                     
@@ -288,7 +296,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         let user_id:Int = jsonData.valueForKey("user_id") as! Int
                         let SessionToken:String = jsonData.valueForKey("token") as! String
                         
-                        //try! KeyChain.deleteDataForUserAccount("\(username)")
+                        try! KeyChain.deleteDataForUserAccount("enroll")
                         
                         try! KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
                         

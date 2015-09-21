@@ -63,6 +63,20 @@ get {
   }
 }
 
+var enrollStep: Int{
+get{
+    let KeyChainData = KeyChain.loadDataForUserAccount("enroll")
+    
+    if let enrollmentStep = KeyChainData!["enroll"]{
+        let enroll:Int? = NSNumberFormatter().numberFromString(enrollmentStep as! String)?.integerValue
+        return enroll!
+    }else{
+        print("Oops, Enroll is fucked up!")
+        return 0
+    }
+}
+}
+
 func rootVC(){
     UIApplication.sharedApplication().windows[0].rootViewController?.dismissViewControllerAnimated(true, completion: nil)
 }

@@ -154,7 +154,7 @@ class SignupVC: UIViewController {
                 if(res.statusCode >= 200 && res.statusCode < 300){
                     let responseData:NSString = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
                     NSLog("Response ==> %@", responseData)
-                    let error:NSError?
+                    let _ :NSError?
                     let jsonData:NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(urlData!, options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
                     let success:NSInteger = jsonData.valueForKey("success") as! NSInteger
                     

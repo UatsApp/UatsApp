@@ -67,7 +67,8 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
 
     @IBAction func continueButtonTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("enroll", sender: self)
+        self.performSegueWithIdentifier("enrollment2", sender: self)
+        try! KeyChain.updateData(["enroll":"2"], forUserAccount: "enroll")
     }
     
     /*
