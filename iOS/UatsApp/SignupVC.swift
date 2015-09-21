@@ -92,12 +92,9 @@ class SignupVC: UIViewController {
     
 
     @IBAction func singupTapped(sender: AnyObject!){
-        //let username:NSString = txtUsername.text!
         let password:NSString = txtPassword.text!
         let comfirm_password:String = txtConfrimPassword.text!
         let email:NSString = txtEmail.text!
-        //let nickname:String = txtNickName.text!
-        
         
         if(email.isEqualToString("") || password.isEqualToString(""))
         {

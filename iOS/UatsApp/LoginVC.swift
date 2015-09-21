@@ -238,13 +238,12 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             alertView.addButtonWithTitle("OK")
             alertView.show()
         } else {
-            
             //var post:NSString = "username=\(username)&password=\(password)"
-            let post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\"}"
+            let post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\",\"type\":\"simpleLogin\"}"
             
             NSLog("PostData: %@",post);
             
-            let url:NSURL = NSURL(string: "http://uatsapp.tk/UatsAppWebDEV/process_user.php")!
+            let url:NSURL = NSURL(string: "http://uatsapp.tk/UatsAppWebDEV/process.php")!
             
             
             let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
