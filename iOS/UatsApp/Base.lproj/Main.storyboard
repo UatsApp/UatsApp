@@ -334,10 +334,10 @@
             </objects>
             <point key="canvasLocation" x="2299" y="1968"/>
         </scene>
-        <!--View Controller-->
+        <!--Contact Picker-->
         <scene sceneID="p5i-ei-pCb">
             <objects>
-                <viewController id="nxb-V1-q14" sceneMemberID="viewController">
+                <viewController id="nxb-V1-q14" customClass="ContactPicker" customModule="UatsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gyb-Y0-NCJ"/>
                         <viewControllerLayoutGuide type="bottom" id="16q-P2-H0e"/>
@@ -345,9 +345,22 @@
                     <view key="view" contentMode="scaleToFill" id="jYZ-79-4pn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jSQ-T0-f9g">
+                                <rect key="frame" x="137" y="420" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="continueButtonTapped:" destination="nxb-V1-q14" eventType="touchUpInside" id="rRM-qk-mH2"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="lcz-YV-3et"/>
+                    <connections>
+                        <outlet property="continueButton" destination="jSQ-T0-f9g" id="8e1-5a-dEc"/>
+                        <segue destination="NEy-BI-WFf" kind="modal" identifier="goinApp" id="f9W-Zt-oEh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iio-al-uq7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -612,7 +625,7 @@
                         <outlet property="continueButton" destination="XZb-86-W4a" id="Cuf-fM-agn"/>
                         <outlet property="fullNameTxt" destination="4ec-IH-rHH" id="XF0-gl-Rq9"/>
                         <outlet property="nickNameTxt" destination="vDh-lW-M2p" id="UOu-2S-U8g"/>
-                        <segue destination="nxb-V1-q14" kind="push" identifier="enrollment3" id="V1G-TO-d7m"/>
+                        <segue destination="nxb-V1-q14" kind="modal" identifier="enrollment3" id="V1G-TO-d7m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8WF-pK-1gI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -725,8 +738,9 @@
         <image name="enrollment_background.jpg" width="1080" height="1920"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qEG-eS-AN2"/>
-        <segue reference="ruc-Ha-uHl"/>
+        <segue reference="f9W-Zt-oEh"/>
         <segue reference="V1G-TO-d7m"/>
+        <segue reference="b1M-fh-urT"/>
+        <segue reference="qEG-eS-AN2"/>
     </inferredMetricsTieBreakers>
 </document>

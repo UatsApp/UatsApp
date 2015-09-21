@@ -25,11 +25,9 @@ class SignupVC: UIViewController {
         self.signup.layer.cornerRadius = 5.0
         self.signup.layer.borderColor = UIColor.whiteColor().CGColor
         self.signup.layer.borderWidth = 0.2
-        //self.txtUsername.delegate = self
         self.txtPassword.delegate = self
         self.txtConfrimPassword.delegate = self
         self.txtEmail.delegate = self
-        //self.txtNickName.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -169,6 +167,7 @@ class SignupVC: UIViewController {
                         alertView.addButtonWithTitle("OK")
                         alertView.show()
                         let data:NSArray = [email, password]
+                        try! KeyChain.updateData(["enroll":"1"], forUserAccount: "enroll")
                         self.performSegueWithIdentifier("BackToLogin", sender: data)
                        // self.dismissViewControllerAnimated(true, completion: nil)
                     }else{

@@ -16,8 +16,7 @@ class namePicker: UIViewController {
     @IBOutlet weak var continueButton: UIButton!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-
+        super.viewDidLoad() 
         // Do any additional setup after loading the view.
     }
 
@@ -29,6 +28,7 @@ class namePicker: UIViewController {
     @IBAction func continueButtonTapped(sender: AnyObject) {
         let fullname = fullNameTxt.text!
         let nickname = nickNameTxt.text!
+        print(token)
         Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/enrollProcess.php", parameters: ["token":"\(token)", "id":"\(userID)", "enrollStep": "2", "name":"\(fullname)", "nickname":"\(nickname)"], encoding: .JSON) .responseJSON {
             _, _, JSON in
             
@@ -36,10 +36,10 @@ class namePicker: UIViewController {
             
             if status == 1{
                 self.performSegueWithIdentifier("enrollment3", sender: self)
-                try! KeyChain.updateData(["enroll":"2"], forUserAccount: "enroll")
+                try! KeyChain.updateData(["enroll":"3"], forUserAccount: "enroll")
             }else{
-                deleteKeychainAccess()
-                rootVC()
+//                deleteKeychainAccess()
+//                rootVC()
                 //TODO GO TO ROOOT VIEW CONTROLLER
             }
         }
