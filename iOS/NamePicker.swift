@@ -26,10 +26,13 @@ class namePicker: UIViewController {
     }
     
     @IBAction func continueButtonTapped(sender: AnyObject) {
-        let fullname = fullNameTxt.text!
-        let nickname = nickNameTxt.text!
+        let fullname:String = fullNameTxt.text!
+        let nickname:String = nickNameTxt.text!
         print(token)
-        if (fullNameTxt.text == "" && nickNameTxt.text == ""){
+        if (fullname.isEmpty || nickname.isEmpty){
+            let alertView:UIAlertView = UIAlertView(title: "Oops!", message: "Please enter Nickname and Fullname", delegate: nil, cancelButtonTitle: "Ok")
+            alertView.show()
+        }else{
             Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/enrollProcess.php", parameters: ["token":"\(token)", "id":"\(userID)", "enrollStep": "2", "name":"\(fullname)", "nickname":"\(nickname)"], encoding: .JSON) .responseJSON {
                 _, _, JSON in
                 
@@ -43,9 +46,6 @@ class namePicker: UIViewController {
                     print(log)
                 }
             }
-        }else{
-            let alertView:UIAlertView = UIAlertView(title: "Oops!", message: "Please enter Nickname and Full Name", delegate: nil, cancelButtonTitle: "Ok")
-            alertView.show()
         }
     }
     

@@ -41,7 +41,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
         let isFacebookLoggedIn :Int = prefs.integerForKey("ISFACEBOOKLOGGED") as Int
         //try! KeyChain.deleteDataForUserAccount("enroll")
-        try! KeyChain.updateData(["enroll":"1"], forUserAccount: "enroll")
+        //try! KeyChain.updateData(["enroll":"3"], forUserAccount: "enroll")
         print(enrollStep)
         //        deleteKeychainAccess()
         if enrollStep == 0{
@@ -239,7 +239,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             alertView.show()
         } else {
             //var post:NSString = "username=\(username)&password=\(password)"
-            let post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\",\"type\":\"simpleLogin\"}"
+            let post:String = "{\"(username\":\"\(username)\",\"password\":\"\(password)\",\"type\":\"simpleLogin\"}"
             
             NSLog("PostData: %@",post);
             

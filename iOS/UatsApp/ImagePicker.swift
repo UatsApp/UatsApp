@@ -98,21 +98,10 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
         return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
     }
     
-
     @IBAction func continueButtonTapped(sender: AnyObject) {
-        //self.performSegueWithIdentifier("enrollment2", sender: self)
-        //try! KeyChain.updateData(["enroll":"2"], forUserAccount: "enroll")
-        var parameters = [
-            "task": "task",
-            "variable1": "var"
-        ]
-        
-        // add addtionial parameters
-        parameters["userId"] = "27"
-        parameters["body"] = "This is the body text."
+        let parameters = ["token":"\(token)", "uid":"\(userID)", "user":"\(myUserName)"]
         
         // example image data
-        _ = UIImage(named: "Save.png")
         let image2 = loadImageFromPath(imagePath)
         let imageData = UIImagePNGRepresentation(image2!)
         
@@ -121,7 +110,7 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
         // CREATE AND SEND REQUEST ----------
         
         let urlRequest = urlRequestWithComponents("http://uatsapp.tk/accounts/upload.php", parameters: parameters, imageData: imageData!)
-        
+        NSLog("\(parameters)")
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
                 print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
@@ -130,6 +119,17 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 print("REQUEST \(request)")
                 print("RESPONSE \(response)")
                 print("JSON \(JSON)")
+                if let post = JSON.value!["status"] as? Int{
+                NSLog("---------------------------------POST---------------------------------")
+                    if post == 1{
+                        print("BRAvO")
+                        try! KeyChain.updateData(["enroll":"2"], forUserAccount: "enroll")
+                        self.performSegueWithIdentifier("enrollment2", sender: self)
+                    }
+                }
+                if let status = JSON.value!["log"] as? String{
+                    NSLog(status)
+                }
                 //print("ERROR \(error)")
         }
     }
