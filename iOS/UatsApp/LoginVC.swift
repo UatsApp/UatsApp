@@ -40,16 +40,9 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
         let isFacebookLoggedIn :Int = prefs.integerForKey("ISFACEBOOKLOGGED") as Int
-        //try! KeyChain.deleteDataForUserAccount("enroll")
-        //try! KeyChain.updateData(["enroll":"3"], forUserAccount: "enroll")
         print(enrollStep)
-        //        deleteKeychainAccess()
-        if enrollStep == 0{
-            //deleteKeychainAccess()
-        }
         if((isLoggedin == 1 || isFacebookLoggedIn == 1) && enrollStep == 4){
             self.performSegueWithIdentifier("goApp", sender: self)//////////DE PUS LOGOUT IN APP SI SCBHIMBAT '!=' IN '==';////////////////
-            
         }else if(enrollStep == 1){
             self.performSegueWithIdentifier("gotoEnroll", sender: self)
         }else if(enrollStep == 2){
@@ -239,7 +232,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             alertView.show()
         } else {
             //var post:NSString = "username=\(username)&password=\(password)"
-            let post:String = "{\"(username\":\"\(username)\",\"password\":\"\(password)\",\"type\":\"simpleLogin\"}"
+            let post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\",\"type\":\"simpleLogin\"}"
             
             NSLog("PostData: %@",post);
             
@@ -298,9 +291,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         let user_id:Int = jsonData.valueForKey("user_id") as! Int
                         let SessionToken:String = jsonData.valueForKey("token") as! String
                         
-                        //try! KeyChain.updateData(["enroll":"1"], forUserAccount: "enroll")
-                                                try! KeyChain.deleteDataForUserAccount("\(myUserName)")
-                        //                        deleteKeychainAccess()
+                        try! KeyChain.updateData(["enroll":"1"], forUserAccount: "enroll")
                         try! KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
                         
                         NSLog("Login SUCCESS");

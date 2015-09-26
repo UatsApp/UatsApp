@@ -86,8 +86,6 @@ class SignupVC: UIViewController {
         
     }
     
-    
-    
     @IBOutlet weak var signup: UIButton!
     
 
