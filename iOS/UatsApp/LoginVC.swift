@@ -31,7 +31,6 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         self.signin.layer.cornerRadius = 5.0
         self.signin.layer.borderColor = UIColor.whiteColor().CGColor
         self.signin.layer.borderWidth = 0.2
-        
         if DataForAutoComplete.count != 0 {
             self.txtUsername.text = DataForAutoComplete[0] as? String
             self.txtPassword.text = DataForAutoComplete[1] as? String
@@ -290,8 +289,6 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         prefs.synchronize()
                         let user_id:Int = jsonData.valueForKey("user_id") as! Int
                         let SessionToken:String = jsonData.valueForKey("token") as! String
-                        
-                        try! KeyChain.updateData(["enroll":"1"], forUserAccount: "enroll")
                         try! KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
                         
                         NSLog("Login SUCCESS");
