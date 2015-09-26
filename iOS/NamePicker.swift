@@ -25,6 +25,7 @@ class namePicker: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
     @IBAction func continueButtonTapped(sender: AnyObject) {
         let fullname:String = fullNameTxt.text!
         let nickname:String = nickNameTxt.text!

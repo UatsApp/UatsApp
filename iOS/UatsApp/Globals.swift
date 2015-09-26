@@ -39,11 +39,16 @@ get{
 var token: String {
 get {
     var KeyChainData = KeyChain.loadDataForUserAccount("\(myUserName)")
-    
-    if let tokenString = KeyChainData!["token"] {
+    if KeyChainData != nil{
+        let tokenString = KeyChainData!["token"]
         NSLog("Tokenul sessiunii este: \(tokenString)")
         return tokenString as! String
     } else {
+        deleteKeychainAccess()
+        rootVC()
+        try! KeyChain.updateData(["enroll":"1"], forUserAccount: "enroll")
+        let alertView:UIAlertView = UIAlertView(title: "Oops!", message: "Something went wrong.\nPlease log in again", delegate: nil, cancelButtonTitle: "Ok")
+        alertView.show()
         NSLog("nu exista token")
         return "OMG"
     }
@@ -54,7 +59,8 @@ var userID: Int {
 get {
     let KeyChainData = KeyChain.loadDataForUserAccount("\(myUserName)")
     
-    if let IDString = KeyChainData!["user_id"]{
+    if KeyChainData != nil{
+        let IDString = KeyChainData!["user_id"]
         let userID:Int? = NSNumberFormatter().numberFromString(IDString as! String)?.integerValue
         NSLog("Id-ul Sessiunii este: \(userID!)")
         return userID!
