@@ -30,7 +30,6 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         let fileManager = NSFileManager.defaultManager()
         if fileManager.fileExistsAtPath(userAvatar){
             print("FILE AVAILABLE AT viewWillAppear")
@@ -120,7 +119,7 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
                 print("RESPONSE \(response)")
                 print("JSON \(JSON)")
                 if let post = JSON.value!["status"] as? Int{
-                NSLog("---------------------------------POST---------------------------------")
+                    NSLog("---------------------------------POST---------------------------------")
                     if post == 1{
                         print("BRAvO")
                         try! KeyChain.updateData(["enroll":"2"], forUserAccount: "enroll")
@@ -154,7 +153,7 @@ func saveImage (image: UIImage, path: String ) -> Bool{
 }
 
 func documentsDirectory() -> String {
-    let documentsFolderPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] 
+    let documentsFolderPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
     return documentsFolderPath
 }
 // Get path for a file in the directory
@@ -176,8 +175,10 @@ func loadImageFromPath(path: String) -> UIImage? {
     let image = UIImage(contentsOfFile: path)
     
     if image == nil {
-        
         print("missing image at: \(path)")
+        let defaultImageURL = NSBundle.mainBundle().URLForResource("1024x1024", withExtension: "png")
+        let image = UIImage(contentsOfFile: defaultImageURL!.path!)
+        return image
     }
     //println("\(path)") // this is just for you to see the path in case you want to go to the directory, using Finder.
     return image
