@@ -168,7 +168,7 @@ func fileInDocumentsDirectory(filename: String) -> String {
 
 // Define the specific path, image name
 
-let imagePath = fileInDocumentsDirectory("Save.png")
+let imagePath = fileInDocumentsDirectory("\(myUserName).png")
 
 func loadImageFromPath(path: String) -> UIImage? {
     
