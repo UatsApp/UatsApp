@@ -36,7 +36,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             self.txtPassword.text = DataForAutoComplete[1] as? String
         }
         
-       try! KeyChain.updateData(["enroll":"3"], forUserAccount: "enroll")
+        //try! KeyChain.updateData(["enroll":"3"], forUserAccount: "enroll")
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int

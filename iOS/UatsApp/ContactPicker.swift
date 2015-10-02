@@ -9,17 +9,32 @@
 import UIKit
 import AddressBook
 
-class ContactPicker: UIViewController {
+class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var contactList: UITableView!
     @IBOutlet weak var continueButton: UIButton!
+    
+    var contacts = [String]()
+    var checked = [Bool]()
+    
+    var cellIdentifier = "cellIdentifier"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        contactList.delegate = self
+        contactList.dataSource = self
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        getAddressBookNames()
+        self.contactList.reloadData()
     }
     
     func getAddressBookNames() {
@@ -53,7 +68,6 @@ class ContactPicker: UIViewController {
         
         let contactList: NSArray = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue()
         print("records in the array \(contactList.count)")
-        
         for record:ABRecordRef in contactList {
             processAddressbookRecord(record)
         }
@@ -70,6 +84,8 @@ class ContactPicker: UIViewController {
         for (var j = 0; j < ABMultiValueGetCount(emailArray); ++j) {
             let emailAdd = ABMultiValueCopyValueAtIndex(emailArray, j)
             let myString = extractABEmailAddress(emailAdd)
+            contacts.append(myString!)
+            self.contactList.reloadData()
             NSLog("email: \(myString!)")
         }
     }
@@ -94,11 +110,59 @@ class ContactPicker: UIViewController {
         }
         return nil
     }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        while(checked.count != contacts.count)
+        {
+            checked.append(false)
+        }
+        return contacts.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.contactList.dequeueReusableCellWithIdentifier("cellIdentifier")
+//      let row = indexPath.row
+        print("-----------------------------------\(contacts)---------------------------------")
+        
+        
+        
+        if checked[indexPath.row] == false {
+            
+            cell!.accessoryType = .None
+        }
+        else if checked[indexPath.row] == true {
+            
+            cell!.accessoryType = .Checkmark
+        }
+        
+        cell!.textLabel?.text = contacts[indexPath.row]
 
+        return cell!
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+            if cell.accessoryType == .Checkmark
+            {
+                cell.accessoryType = .None
+                checked[indexPath.row] = false
+            }
+            else
+            {
+                cell.accessoryType = .Checkmark
+                checked[indexPath.row] = true
+            }
+        }    
+    }
+    
     @IBAction func continueButtonTapped(sender: AnyObject) {
-        //self.performSegueWithIdentifier("goinApp", sender: self)
-        //try! KeyChain.updateData(["enroll":"4"], forUserAccount: "enroll")
-        getAddressBookNames()
+        self.performSegueWithIdentifier("goinApp", sender: self)
+        try! KeyChain.updateData(["enroll":"4"], forUserAccount: "enroll")
     }
     
     var adbk : ABAddressBook!
