@@ -10,7 +10,7 @@ import UIKit
 import AddressBook
 
 class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var contactList: UITableView!
     @IBOutlet weak var continueButton: UIButton!
     
@@ -25,7 +25,7 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
         contactList.dataSource = self
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -125,10 +125,7 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.contactList.dequeueReusableCellWithIdentifier("cellIdentifier")
-//      let row = indexPath.row
         print("-----------------------------------\(contacts)---------------------------------")
-        
-        
         
         if checked[indexPath.row] == false {
             
@@ -138,14 +135,15 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
             
             cell!.accessoryType = .Checkmark
         }
-        
         cell!.textLabel?.text = contacts[indexPath.row]
-
+        self.contactList.tableFooterView = UIView(frame: CGRectZero)
+        
         return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
+        contactList.deselectRowAtIndexPath(indexPath, animated: true)
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             if cell.accessoryType == .Checkmark
             {
@@ -157,26 +155,24 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
                 cell.accessoryType = .Checkmark
                 checked[indexPath.row] = true
             }
-        }    
+        }
     }
     
     @IBAction func continueButtonTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("goinApp", sender: self)
-        try! KeyChain.updateData(["enroll":"4"], forUserAccount: "enroll")
+        //        self.performSegueWithIdentifier("goinApp", sender: self)
+        //        try! KeyChain.updateData(["enroll":"4"], forUserAccount: "enroll")
     }
     
     var adbk : ABAddressBook!
     
-    
-    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
