@@ -40,9 +40,9 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
-        let isFacebookLoggedIn :Int = prefs.integerForKey("ISFACEBOOKLOGGED") as Int
         print(enrollStep)
-        if((isLoggedin == 1 || isFacebookLoggedIn == 1) && enrollStep == 4){
+        
+        if(isLoggedin == 1 && enrollStep == 4){
             self.performSegueWithIdentifier("goApp", sender: self)//////////DE PUS LOGOUT IN APP SI SCBHIMBAT '!=' IN '==';////////////////
         }else if(enrollStep == 1){
             self.performSegueWithIdentifier("gotoEnroll", sender: self)
@@ -119,7 +119,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
-                //self.checkFacebookUser()
+                self.returnUserData()
             }
         }
     }
@@ -141,6 +141,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             else
             {
                 print("fetched facebook user: \(result)")
+                // TODO skip enroll steps, register with fb credentials and profile image.
                 //                let userName : NSString = result.valueForKey("name") as! NSString
                 //                println("User name is: \(userName)")
                 //                let userEmail : NSString = result.valueForKey("email") as! NSString
@@ -151,65 +152,6 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             }
         })
     }
-    
-    //func checkFacebookUser(){
-    //        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,name,picture.width(480).height(480)"])
-    //        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-    //
-    //            if ((error) != nil)
-    //            {
-    //                // Process error
-    //                print("Error: \(error)")
-    //            }
-    //            else
-    //            {
-    //                print("fetched facebook user: \(result)")
-    //                let userName : String = result.valueForKey("name") as! String
-    //                let userEmail : String = result.valueForKey("email") as! String
-    //
-    //
-    //                //Validate  Facebook User
-    //                Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/jsonsignup.php", parameters: ["username": "\(userName)", "password" : "\(userName)", "c_password": "\(userName)", "email" : "\(userEmail)"], encoding: .JSON)
-    //                   .responseJSON { _, _, JSON in
-    //
-    //                        //print(JSON)
-    //                        let jsonResult = JSON.value!["success"] as? Int
-    //                        if((jsonResult) != nil){
-    //                            var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-    //                            prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
-    //                            prefs.setObject(userName, forKey: "USERNAME")
-    //                            if JSON?.valueForKey("FBUserID") != nil {
-    //
-    //                                let SessionToken:String = JSON?.valueForKey("token") as! String
-    //                                let user_id:Int = JSON?.valueForKey("FBUserID") as! Int
-    //                                try KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(userName)")
-    //
-    //                            }
-    //
-    //                            self.performSegueWithIdentifier("goApp", sender: self)
-    //
-    //                            var alertView:UIAlertView = UIAlertView()
-    //                            alertView.title = "Success!"
-    //                            alertView.message = "You are logged in!"
-    //                            alertView.delegate = self
-    //                            alertView.addButtonWithTitle("OK")
-    //                            alertView.show()
-    //                        }
-    //
-    //                }
-    //
-    //
-    //                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-    //                prefs.setObject(userName, forKey: "USERNAME")
-    //
-    //            }
-    //        })
-    //
-    //
-    //}
-    
-    
-    
     
     //    override func didReceiveMemoryWarning() {
     //        super.didReceiveMemoryWarning()
