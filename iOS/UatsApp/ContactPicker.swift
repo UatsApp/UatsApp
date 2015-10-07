@@ -8,6 +8,7 @@
 
 import UIKit
 import AddressBook
+import Alamofire
 
 class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -16,6 +17,7 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     var contacts = [String]()
     var checked = [Bool]()
+    var friendsToInvite = [String]()
     
     var cellIdentifier = "cellIdentifier"
     
@@ -147,11 +149,14 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             if cell.accessoryType == .Checkmark
             {
+
+                friendsToInvite.removeAtIndex(indexPath.row)
                 cell.accessoryType = .None
                 checked[indexPath.row] = false
             }
             else
             {
+                friendsToInvite.append(contacts[indexPath.row])
                 cell.accessoryType = .Checkmark
                 checked[indexPath.row] = true
             }
@@ -159,8 +164,24 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     @IBAction func continueButtonTapped(sender: AnyObject) {
+        //        let parameters = ["friends": friendsToInvite]
+        //        print("aasdadadada\(parameters)asdadadadasda")
         //        self.performSegueWithIdentifier("goinApp", sender: self)
         //        try! KeyChain.updateData(["enroll":"4"], forUserAccount: "enroll")
+        
+        Alamofire.request(.POST, "http://46.101.248.188/accounts/friendInvites.php", parameters: ["friends":"\(friendsToInvite)"], encoding: .JSON) .responseJSON {
+            request, response, JSON in
+            
+            print("REQUEST \(request)")
+            print("RESPONSE \(response)")
+            
+            if let status = JSON.value!["success"] as? String{
+                NSLog(status)
+            }
+            if let fail = JSON.value!["fail"] as? String{
+                NSLog(fail)
+            }
+        }
     }
     
     var adbk : ABAddressBook!

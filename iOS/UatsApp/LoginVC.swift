@@ -31,12 +31,13 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         self.signin.layer.cornerRadius = 5.0
         self.signin.layer.borderColor = UIColor.whiteColor().CGColor
         self.signin.layer.borderWidth = 0.2
+        
         if DataForAutoComplete.count != 0 {
             self.txtUsername.text = DataForAutoComplete[0] as? String
             self.txtPassword.text = DataForAutoComplete[1] as? String
         }
         
-        //try! KeyChain.updateData(["enroll":"3"], forUserAccount: "enroll")
+        try! KeyChain.updateData(["enroll":"3"], forUserAccount: "enroll")
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
@@ -179,7 +180,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             
             NSLog("PostData: %@",post);
             
-            let url:NSURL = NSURL(string: "http://uatsapp.tk/UatsAppWebDEV/process.php")!
+            let url:NSURL = NSURL(string: "http://46.101.248.188/UatsAppWebDEV/process.php")!
             
             
             let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
