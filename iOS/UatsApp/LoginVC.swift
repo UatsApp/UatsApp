@@ -37,6 +37,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             self.txtPassword.text = DataForAutoComplete[1] as? String
         }
         
+        //try! KeyChain.deleteDataForUserAccount("\(myUserName)")
         try! KeyChain.updateData(["enroll":"3"], forUserAccount: "enroll")
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -45,11 +46,11 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         
         if(isLoggedin == 1 && enrollStep == 4){
             self.performSegueWithIdentifier("goApp", sender: self)//////////DE PUS LOGOUT IN APP SI SCBHIMBAT '!=' IN '==';////////////////
-        }else if(enrollStep == 1){
+        }else if(isLoggedin == 1 && enrollStep == 1){
             self.performSegueWithIdentifier("gotoEnroll", sender: self)
-        }else if(enrollStep == 2){
+        }else if(isLoggedin == 1 && enrollStep == 2){
             self.performSegueWithIdentifier("gotoEnroll2", sender: self)
-        }else if(enrollStep == 3){
+        }else if(isLoggedin == 1 && enrollStep == 3){
             self.performSegueWithIdentifier("gotoEnroll3", sender: self)
         }
         

@@ -108,7 +108,7 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         // CREATE AND SEND REQUEST ----------
         
-        let urlRequest = urlRequestWithComponents("http://uatsapp.tk/accounts/upload.php", parameters: parameters, imageData: imageData!)
+        let urlRequest = urlRequestWithComponents("http://46.101.248.188/accounts/upload.php", parameters: parameters, imageData: imageData!)
         NSLog("\(parameters)")
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in

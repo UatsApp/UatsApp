@@ -41,7 +41,7 @@ get {
     var KeyChainData = KeyChain.loadDataForUserAccount("\(myUserName)")
     if KeyChainData != nil{
         let tokenString = KeyChainData!["token"]
-        NSLog("Tokenul sessiunii este: \(tokenString)")
+        NSLog("Tokenul sessiunii este: \(tokenString!)")
         return tokenString as! String
     } else {
         deleteKeychainAccess()
