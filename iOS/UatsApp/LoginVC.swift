@@ -20,8 +20,6 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     var DataForAutoComplete:NSArray = []
     var keyboardDismissTapGesture: UIGestureRecognizer?
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         FBButton.delegate = self

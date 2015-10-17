@@ -353,13 +353,29 @@
                                     <constraint firstAttribute="height" constant="420" id="EfG-Wp-cCN"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellIdentifier" editingAccessoryType="checkmark" id="Eal-vh-HlC">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="cellIdentifier" editingAccessoryType="checkmark" id="Eal-vh-HlC" customClass="TextInputTableViewCell" customModule="UatsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" tableViewCell="Eal-vh-HlC" id="Ez0-Bx-RWI">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email adress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="usf-ih-Ep1">
+                                                    <rect key="frame" x="16" y="7" width="304" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="usf-ih-Ep1" secondAttribute="trailing" id="6ZN-gc-U4b"/>
+                                                <constraint firstItem="usf-ih-Ep1" firstAttribute="leading" secondItem="Ez0-Bx-RWI" secondAttribute="leadingMargin" constant="8" id="kEv-Ao-RfM"/>
+                                                <constraint firstItem="usf-ih-Ep1" firstAttribute="centerY" secondItem="Ez0-Bx-RWI" secondAttribute="centerY" id="psd-av-NOt"/>
+                                                <constraint firstItem="usf-ih-Ep1" firstAttribute="top" secondItem="Ez0-Bx-RWI" secondAttribute="topMargin" constant="-1" id="rJV-ia-gru"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="emailTextField" destination="usf-ih-Ep1" id="U5x-G9-yMO"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -380,6 +396,12 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAn-HR-5iQ">
+                                <rect key="frame" x="289" y="28" width="22" height="22"/>
+                                <connections>
+                                    <action selector="addEmailAdressTapped:" destination="nxb-V1-q14" eventType="touchUpInside" id="xGf-mK-lzB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -387,15 +409,18 @@
                             <constraint firstAttribute="trailingMargin" secondItem="hnh-GH-NT0" secondAttribute="trailing" constant="46" id="7FD-W8-lHc"/>
                             <constraint firstItem="hnh-GH-NT0" firstAttribute="leading" secondItem="jYZ-79-4pn" secondAttribute="leadingMargin" constant="25" id="GKZ-xK-UZQ"/>
                             <constraint firstAttribute="trailing" secondItem="8Dd-dS-T7t" secondAttribute="trailing" id="aHn-Ih-nPW"/>
+                            <constraint firstItem="GAn-HR-5iQ" firstAttribute="leading" secondItem="hnh-GH-NT0" secondAttribute="trailing" constant="31" id="fiz-4u-TbL"/>
                             <constraint firstItem="8Dd-dS-T7t" firstAttribute="top" secondItem="hnh-GH-NT0" secondAttribute="bottom" constant="36" id="k9e-Jq-Ew0"/>
                             <constraint firstItem="8Dd-dS-T7t" firstAttribute="leading" secondItem="jYZ-79-4pn" secondAttribute="leading" id="pNe-VH-W4f"/>
                             <constraint firstItem="16q-P2-H0e" firstAttribute="top" secondItem="jSQ-T0-f9g" secondAttribute="bottom" constant="118" id="up8-Nk-e4s"/>
+                            <constraint firstItem="GAn-HR-5iQ" firstAttribute="top" secondItem="hnh-GH-NT0" secondAttribute="top" id="vFL-Ij-3rt"/>
                             <constraint firstItem="jSQ-T0-f9g" firstAttribute="centerX" secondItem="8Dd-dS-T7t" secondAttribute="centerX" id="wGZ-4X-PRl"/>
                             <constraint firstItem="hnh-GH-NT0" firstAttribute="top" secondItem="gyb-Y0-NCJ" secondAttribute="bottom" constant="8" symbolic="YES" id="zwe-WX-lkV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lcz-YV-3et"/>
                     <connections>
+                        <outlet property="addEmailAdress" destination="GAn-HR-5iQ" id="qKt-Em-O47"/>
                         <outlet property="contactList" destination="8Dd-dS-T7t" id="mN2-rx-hc7"/>
                         <outlet property="continueButton" destination="jSQ-T0-f9g" id="8e1-5a-dEc"/>
                         <segue destination="NEy-BI-WFf" kind="modal" identifier="goinApp" id="f9W-Zt-oEh"/>
@@ -777,9 +802,9 @@
         <image name="enrollment_background.jpg" width="1080" height="1920"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f9W-Zt-oEh"/>
-        <segue reference="V1G-TO-d7m"/>
-        <segue reference="ruc-Ha-uHl"/>
         <segue reference="Ocb-iI-cdH"/>
+        <segue reference="b1M-fh-urT"/>
+        <segue reference="3An-Je-WRT"/>
+        <segue reference="f9W-Zt-oEh"/>
     </inferredMetricsTieBreakers>
 </document>

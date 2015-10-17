@@ -37,6 +37,7 @@
 		3F845E471B863BFD00C5B050 /* 1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F845E461B863BFD00C5B050 /* 1024x1024.png */; };
 		3F845E491B863E4C00C5B050 /* profile-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F845E481B863E4C00C5B050 /* profile-bg.png */; };
 		3F8ACEEE1B61323900B412CC /* UatsAppVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8ACEED1B61323900B412CC /* UatsAppVC.swift */; };
+		3F8B70131BD2793A00463F7C /* TextInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8B70121BD2793A00463F7C /* TextInputTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		3F9B21341B6FEA4700D5123E /* FriendListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B21331B6FEA4700D5123E /* FriendListVC.swift */; };
 		3F9B21361B6FED6900D5123E /* FriendList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B21351B6FED6900D5123E /* FriendList.swift */; };
 		3FC813F31B824922000507FB /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC813F21B824922000507FB /* Globals.swift */; };
@@ -91,6 +92,7 @@
 		3F845E481B863E4C00C5B050 /* profile-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile-bg.png"; sourceTree = "<group>"; };
 		3F8ACEEA1B60E3AC00B412CC /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		3F8ACEED1B61323900B412CC /* UatsAppVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UatsAppVC.swift; sourceTree = "<group>"; };
+		3F8B70121BD2793A00463F7C /* TextInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputTableViewCell.swift; sourceTree = "<group>"; };
 		3F9B21331B6FEA4700D5123E /* FriendListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListVC.swift; sourceTree = "<group>"; };
 		3F9B21351B6FED6900D5123E /* FriendList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendList.swift; sourceTree = "<group>"; };
 		3FC813F21B824922000507FB /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				3F9B21331B6FEA4700D5123E /* FriendListVC.swift */,
 				3F845E421B8627F100C5B050 /* ImagePicker.swift */,
 				3F73CBAD1BAB34D50068E552 /* NamePicker.swift */,
+				3F8B70121BD2793A00463F7C /* TextInputTableViewCell.swift */,
 			);
 			path = UatsApp;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				3F1DD7811B28A4320081FE34 /* ViewController.swift in Sources */,
 				525762291B676E39008CC78F /* socketManager.swift in Sources */,
 				3F7DE5631B57BFE2005954FC /* Users.swift in Sources */,
+				3F8B70131BD2793A00463F7C /* TextInputTableViewCell.swift in Sources */,
 				3F52DCC91BA719E400DD5921 /* KeyChainSecurityClass.swift in Sources */,
 				3F845E431B8627F100C5B050 /* ImagePicker.swift in Sources */,
 				3F9B21361B6FED6900D5123E /* FriendList.swift in Sources */,
