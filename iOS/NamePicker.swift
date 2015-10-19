@@ -34,7 +34,7 @@ class namePicker: UIViewController {
             let alertView:UIAlertView = UIAlertView(title: "Oops!", message: "Please enter Nickname and Fullname", delegate: nil, cancelButtonTitle: "Ok")
             alertView.show()
         }else{
-            Alamofire.request(.POST, "http://46.101.248.188/registerDEV/enrollProcess.php", parameters: ["token":"\(token)", "id":"\(userID)", "enrollStep": "2", "name":"\(fullname)", "nickname":"\(nickname)"], encoding: .JSON) .responseJSON {
+            Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/enrollProcess.php", parameters: ["token":"\(token)", "id":"\(userID)", "enrollStep": "2", "name":"\(fullname)", "nickname":"\(nickname)"], encoding: .JSON) .responseJSON {
                 _, _, JSON in
                 
                 let status = JSON.value!["status"] as! Int

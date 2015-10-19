@@ -169,22 +169,9 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
                 cell.textLabel?.text = friendsToInvite[indexPath.row]
             }
         }
-        cell.emailTextField.delegate = self
+        //cell.emailTextField.delegate = self
         self.contactList.tableFooterView = UIView(frame: CGRectZero)
         return cell
-    }
-    
-    func isValidEmail(testStr:String) -> Bool {
-        
-        print("validate emilId: \(testStr)")
-        if testStr.isEmpty{
-            return false
-        }else{
-            let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
-            let range = testStr.rangeOfString(emailRegEx, options:.RegularExpressionSearch)
-            let result = range != nil ? true : false
-            return  !result
-        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
@@ -208,12 +195,25 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
     }
     
+    func isValidEmail(testStr:String) -> Bool {
+        
+        print("validate emilId: \(testStr)")
+        if testStr.isEmpty{
+            return false
+        }else{
+            let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+            let range = testStr.rangeOfString(emailRegEx, options:.RegularExpressionSearch)
+            let result = range != nil ? true : false
+            return  !result
+        }
+    }
+    
     func checkExistingFriends(){
         
         let parameters =  ["friends": contacts, "token":"\(token)", "uid":"\(userID)"]
         NSLog("JSON to send: \(parameters)")
         
-        Alamofire.request(.POST, "http://46.101.248.188/accounts/friendInvites.php", parameters: parameters as? [String : AnyObject], encoding: .JSON) .responseJSON {
+        Alamofire.request(.POST, "http://uatsapp.tk/accounts/friendInvites.php", parameters: parameters as? [String : AnyObject], encoding: .JSON) .responseJSON {
             _, _, result in
             switch result {
             case .Success(let JSON):

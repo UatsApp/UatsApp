@@ -33,7 +33,7 @@ class UatsAppVC: UITabBarController {
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
         
-        Alamofire.request(.POST, "http://46.101.248.188/registerDEV/invalidate.php", parameters: ["invalidator":"\(token)", "id":"\(userID)"], encoding: .JSON)
+        Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(token)", "id":"\(userID)"], encoding: .JSON)
             .responseJSON { _, _, JSON in
                 let status = JSON.value!["status"] as! Int
                 let log = JSON.value!["log"] as! String

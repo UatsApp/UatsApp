@@ -179,7 +179,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             
             NSLog("PostData: %@",post);
             
-            let url:NSURL = NSURL(string: "http://46.101.248.188/UatsAppWebDEV/process.php")!
+            let url:NSURL = NSURL(string: "http://uatsapp.tk/UatsAppWebDEV/process.php")!
             
             
             let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
