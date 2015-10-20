@@ -12,6 +12,7 @@ import UIKit
 public class TextInputTableViewCell: UITableViewCell, UITextFieldDelegate {
 
    
+    
     @IBOutlet weak var emailTextField: UITextField!
     
     public func configure(text: String?, placeholder: String) {

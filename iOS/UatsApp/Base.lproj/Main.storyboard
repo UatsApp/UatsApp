@@ -353,29 +353,46 @@
                                     <constraint firstAttribute="height" constant="420" id="EfG-Wp-cCN"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="cellIdentifier" editingAccessoryType="checkmark" id="Eal-vh-HlC" customClass="TextInputTableViewCell" customModule="UatsApp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="cellIdentifier" id="Eal-vh-HlC" customClass="TextInputTableViewCell" customModule="UatsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="left" tableViewCell="Eal-vh-HlC" id="Ez0-Bx-RWI">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" enabled="NO" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email adress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="usf-ih-Ep1">
-                                                    <rect key="frame" x="16" y="7" width="304" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email adress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1TQ-J2-1GR">
+                                                    <rect key="frame" x="17" y="5" width="295" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" enablesReturnKeyAutomatically="YES"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="usf-ih-Ep1" secondAttribute="trailing" constant="-47" id="5xX-KD-xfl"/>
-                                                <constraint firstItem="usf-ih-Ep1" firstAttribute="top" secondItem="Ez0-Bx-RWI" secondAttribute="topMargin" constant="-1" id="Hhw-Ca-ZXc"/>
-                                                <constraint firstItem="usf-ih-Ep1" firstAttribute="leading" secondItem="Ez0-Bx-RWI" secondAttribute="leadingMargin" constant="8" id="dUF-Du-jlx"/>
-                                                <constraint firstItem="usf-ih-Ep1" firstAttribute="centerY" secondItem="Ez0-Bx-RWI" secondAttribute="centerY" id="lam-Ed-aw2"/>
+                                                <constraint firstItem="1TQ-J2-1GR" firstAttribute="leading" secondItem="Ez0-Bx-RWI" secondAttribute="leadingMargin" constant="9" id="1Ge-vR-Phe"/>
+                                                <constraint firstItem="1TQ-J2-1GR" firstAttribute="trailing" secondItem="Ez0-Bx-RWI" secondAttribute="trailingMargin" id="VWY-LC-asH"/>
+                                                <constraint firstItem="1TQ-J2-1GR" firstAttribute="bottom" secondItem="Ez0-Bx-RWI" secondAttribute="bottomMargin" id="WdX-xk-ElY"/>
+                                                <constraint firstItem="1TQ-J2-1GR" firstAttribute="top" secondItem="Ez0-Bx-RWI" secondAttribute="topMargin" constant="-3" id="u2C-Rj-cel"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="emailTextField" destination="usf-ih-Ep1" id="U5x-G9-yMO"/>
+                                            <outlet property="emailTextField" destination="1TQ-J2-1GR" id="yp3-S5-7b1"/>
                                         </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="ExistingFriendCell" editingAccessoryType="checkmark" textLabel="TPA-8L-qop" style="IBUITableViewCellStyleDefault" id="RCr-r7-j8x" customClass="ExistingFriendTableViewCell" customModule="UatsApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="left" tableViewCell="RCr-r7-j8x" id="FuJ-Hv-frI">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TPA-8L-qop">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

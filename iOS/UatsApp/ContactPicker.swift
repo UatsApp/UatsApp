@@ -9,8 +9,9 @@
 import UIKit
 import AddressBook
 import Alamofire
-var friendsToInvite = [String]()
 
+var friendsToInvite = [String]()
+typealias ContactData = (email:String, checked: Bool)
 
 class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
@@ -19,9 +20,8 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var addEmailAdress: UIButton!
     
     
-    var contacts = [String]()
-    var checked = [Bool]()
-    var existingFriends:Array<String> = []
+    var contacts:[String] = []
+    var existingFriends:[ContactData] = []
     var cellIdentifier = "cellIdentifier"
     var userEmailInput:Int = 1
     
@@ -30,9 +30,8 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
         contactList.delegate = self
         contactList.dataSource = self
         let tapGesture = UITapGestureRecognizer(target: self, action: Selector("hideKeyboard"))
-        tapGesture.cancelsTouchesInView = true
+        tapGesture.cancelsTouchesInView = false
         contactList.addGestureRecognizer(tapGesture)
-        
         // Do any additional setup after loading the view.
     }
     
@@ -135,11 +134,6 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if existingFriends.count > 0{
-            while(checked.count != existingFriends.count)
-            {
-                checked.append(false)
-            }
-            print("Prietenii de pe server:\(existingFriends.count)")
             return existingFriends.count
         }else{
             return userEmailInput
@@ -147,52 +141,38 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.contactList.dequeueReusableCellWithIdentifier("cellIdentifier") as! TextInputTableViewCell
-        print("-----------------------------------\(existingFriends)---------------------------------")
-        if existingFriends.count > 0{
-            
-            if checked[indexPath.row] == false {
-                
-                cell.accessoryType = .None
-            }
-            else if checked[indexPath.row] == true {
-                
-                cell.accessoryType = .Checkmark
-            }
-            addEmailAdress.hidden = true
-            cell.textLabel?.text = existingFriends[indexPath.row]
-            cell.emailTextField.hidden = true
-        }else{
-            if friendsToInvite.count == 0{
-                cell.configure("", placeholder: "Email adress")
-            }else{
-                cell.textLabel?.text = friendsToInvite[indexPath.row]
-            }
-        }
-        //cell.emailTextField.delegate = self
+        print("----------------------------exsiting friends: \(existingFriends)---------------------------------")
         self.contactList.tableFooterView = UIView(frame: CGRectZero)
-        return cell
+        
+        if existingFriends.count == 0{
+            let textFieldCell = self.contactList.dequeueReusableCellWithIdentifier("cellIdentifier") as! TextInputTableViewCell
+            if friendsToInvite.count > 0{
+                textFieldCell.textLabel?.text = friendsToInvite[indexPath.row]
+            } else{
+                textFieldCell.configure("", placeholder: "Email adress")
+            }
+            textFieldCell.emailTextField.delegate = self
+            return textFieldCell
+        }else{
+            let cell = tableView.dequeueReusableCellWithIdentifier("ExistingFriendCell", forIndexPath: indexPath) as! ExistingFriendTableViewCell
+            cell.contactData = existingFriends[indexPath.row]
+            addEmailAdress.hidden = true
+            return cell
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        contactList.deselectRowAtIndexPath(indexPath, animated: true)
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            if existingFriends.count > 0{
-                if cell.accessoryType == .Checkmark
-                {
-                    friendsToInvite.removeAtIndex(indexPath.row)
-                    cell.accessoryType = .None
-                    checked[indexPath.row] = false
-                }
-                else
-                {
-                    friendsToInvite.append(existingFriends[indexPath.row])
-                    cell.accessoryType = .Checkmark
-                    checked[indexPath.row] = true
-                }
+        if existingFriends.count > 0 {
+            existingFriends[indexPath.row].checked = !existingFriends[indexPath.row].checked
+            if (existingFriends[indexPath.row].checked == true){
+                friendsToInvite.append(existingFriends[indexPath.row].email)
+            }else{
+                friendsToInvite.removeAtIndex(indexPath.row)
             }
+            tableView.reloadData()
         }
+        print("----------------------friends to invite: \(friendsToInvite)--------------------------")
     }
     
     func isValidEmail(testStr:String) -> Bool {
@@ -218,11 +198,12 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
             switch result {
             case .Success(let JSON):
                 print("Success with JSON: \(JSON)")
-                if let success = result.value!["success"] as? Array<Dictionary<String,String>>{
+                if let success = result.value!["success"] as? [[String:String]]{
                     var i = 0
                     for (i = 0; i < success.count; i++){
+                        
                         let email = success[i]["email"]
-                        self.existingFriends.append(email!)
+                        self.existingFriends.append(ContactData(email: email!, checked: false))
                         NSLog("\(self.existingFriends)")
                         self.contactList.reloadData()
                     }
@@ -249,23 +230,53 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     @IBAction func continueButtonTapped(sender: AnyObject!) {
-        //        let parameters = ["friends": friendsToInvite]
-        //self.performSegueWithIdentifier("goinApp", sender: self)
-        //try! KeyChain.updateData(["enroll":"4"], forUserAccount: "enroll")
         print("------------------friends to invite:\(friendsToInvite)----------------------")
+        if friendsToInvite.count == 0{
+            friendsToInvite = ["default"]
+        }
+        let parameters = ["friendsToInvite":  (friendsToInvite), "token":"\(token)", "uid":"\(userID)"]
+        
+        Alamofire.request(.POST, "http://uatsapp.tk/accounts/friendInvites.php", parameters: parameters as? [String : AnyObject], encoding: .JSON) .responseJSON{
+            _,_, result in
+            switch result {
+            case .Success(let JSON):
+                print("Success with JSON: \(JSON)")
+                if let success = result.value!["success"] as? Int{
+                    if success == 1{
+                        self.performSegueWithIdentifier("goinApp", sender: self)
+                        try! KeyChain.updateData(["enroll":"4"], forUserAccount: "enroll")
+                        NSLog("Friends to invite success, continuing in app")
+                    } else{
+                        let alertView:UIAlertView = UIAlertView(title: "Oops", message: "Something went wrong.\nPlease try again!", delegate: nil, cancelButtonTitle: "Ok")
+                        alertView.show()
+                    }
+                }
+                if let status = result.value!["status"] as? String{
+                    NSLog(status)
+                }
+            case .Failure(let data, let error):
+                print("Request failed with error: \(error)")
+                
+                if let data = data {
+                    print("Response data: \(NSString(data: data, encoding: NSUTF8StringEncoding)!)")
+                }
+            }
+        }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         if isValidEmail(textField.text!){
             let alertView:UIAlertView = UIAlertView(title: "Oops!", message: "Add a valid Email adress\n\"\(textField.text!)\" is not a valid email adress!", delegate: nil, cancelButtonTitle: "OK")
             alertView.show()
         }else{
             friendsToInvite.append(textField.text!)
-            continueButtonTapped(nil)
+            //continueButtonTapped(nil)
             hideKeyboard()
         }
         return true
     }
+    
     var adbk : ABAddressBook!
     
     /*

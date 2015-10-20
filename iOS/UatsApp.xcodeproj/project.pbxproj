@@ -18,6 +18,7 @@
 		3F1DD7861B28A4320081FE34 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7851B28A4320081FE34 /* Images.xcassets */; };
 		3F1DD7891B28A4320081FE34 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F1DD7871B28A4320081FE34 /* LaunchScreen.xib */; };
 		3F3240641BB0012E00DC8541 /* ContactPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3240631BB0012E00DC8541 /* ContactPicker.swift */; settings = {ASSET_TAGS = (); }; };
+		3F457FDE1BD55FD400508F05 /* ExistingFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F457FDD1BD55FD400508F05 /* ExistingFriendTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		3F52DCBF1BA718CD00DD5921 /* KeyChainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCBE1BA718CD00DD5921 /* KeyChainError.swift */; settings = {ASSET_TAGS = (); }; };
 		3F52DCC51BA719E400DD5921 /* Dictionary_Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCC01BA719E400DD5921 /* Dictionary_Initializers.swift */; settings = {ASSET_TAGS = (); }; };
 		3F52DCC61BA719E400DD5921 /* KeyChainAccessibleOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F52DCC11BA719E400DD5921 /* KeyChainAccessibleOption.swift */; settings = {ASSET_TAGS = (); }; };
@@ -72,6 +73,7 @@
 		3F1DD7931B28A4330081FE34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F1DD7941B28A4330081FE34 /* UatsAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UatsAppTests.swift; sourceTree = "<group>"; };
 		3F3240631BB0012E00DC8541 /* ContactPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactPicker.swift; sourceTree = "<group>"; };
+		3F457FDD1BD55FD400508F05 /* ExistingFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingFriendTableViewCell.swift; sourceTree = "<group>"; };
 		3F52DCBE1BA718CD00DD5921 /* KeyChainError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainError.swift; sourceTree = "<group>"; };
 		3F52DCC01BA719E400DD5921 /* Dictionary_Initializers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary_Initializers.swift; sourceTree = "<group>"; };
 		3F52DCC11BA719E400DD5921 /* KeyChainAccessibleOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainAccessibleOption.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				3F845E421B8627F100C5B050 /* ImagePicker.swift */,
 				3F73CBAD1BAB34D50068E552 /* NamePicker.swift */,
 				3F8B70121BD2793A00463F7C /* TextInputTableViewCell.swift */,
+				3F457FDD1BD55FD400508F05 /* ExistingFriendTableViewCell.swift */,
 			);
 			path = UatsApp;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				3FC813F31B824922000507FB /* Globals.swift in Sources */,
 				3F3240641BB0012E00DC8541 /* ContactPicker.swift in Sources */,
 				3F7458EE1B888551003C772A /* Gif.swift in Sources */,
+				3F457FDE1BD55FD400508F05 /* ExistingFriendTableViewCell.swift in Sources */,
 				3F7DE5601B56C518005954FC /* ChatViewController.swift in Sources */,
 				3F52DCC81BA719E400DD5921 /* KeyChainInternetProtocol.swift in Sources */,
 				3F52DCC61BA719E400DD5921 /* KeyChainAccessibleOption.swift in Sources */,
