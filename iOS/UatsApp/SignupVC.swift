@@ -10,8 +10,6 @@ import UIKit
 
 class SignupVC: UIViewController {
     
-    
-
     @IBOutlet weak var txtUsername: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtConfrimPassword: UITextField!
