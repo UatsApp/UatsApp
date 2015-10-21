@@ -61,7 +61,7 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
             let addressBook = !(ABAddressBookCreateWithOptions(nil, nil) != nil)
             ABAddressBookRequestAccessWithCompletion(addressBook,{success, error in
                 if success {
-                    self.processContactNames();
+                    self.processContactNames()
                 }
                 else {
                     NSLog("unable to request access")
@@ -84,8 +84,11 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
         
         let contactList: NSArray = ABAddressBookCopyArrayOfAllPeople(addressBook).takeRetainedValue()
         print("records in the array \(contactList.count)")
-        for record:ABRecordRef in contactList {
-            processAddressbookRecord(record)
+        for record in contactList {
+            let firstNameTemp = ABRecordCopyValue(record, kABPersonFirstNameProperty)
+            if (firstNameTemp != nil) {
+                processAddressbookRecord(record)
+            }
         }
     }
     
@@ -101,7 +104,6 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
             let emailAdd = ABMultiValueCopyValueAtIndex(emailArray, j)
             let myString = extractABEmailAddress(emailAdd)
             contacts.append(myString!)
-            self.contactList.reloadData()
             NSLog("email: \(myString!)")
         }
     }
@@ -126,6 +128,7 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
         }
         return nil
     }
+    
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -235,6 +238,7 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
             friendsToInvite = ["default"]
         }
         let parameters = ["friendsToInvite":  (friendsToInvite), "token":"\(token)", "uid":"\(userID)"]
+        NSLog("JSON to send: \(parameters)")
         
         Alamofire.request(.POST, "http://uatsapp.tk/accounts/friendInvites.php", parameters: parameters as? [String : AnyObject], encoding: .JSON) .responseJSON{
             _,_, result in
