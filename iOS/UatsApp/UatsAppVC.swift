@@ -33,19 +33,21 @@ class UatsAppVC: UITabBarController {
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
         
-        Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(token)", "id":"\(userID)"], encoding: .JSON).responseJSON{
-            _, _, JSON, _ in
-            let succes:Int = JSON?.valueForKey("succes") as! Int
-            let log:String = JSON?.valueForKey("log") as! String
-            println("\(succes)","\(log)")
-            let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(myUserName)")
-            if succes == 1{
-                socketManager.sharedSocket.socket.disconnect()
-                let deleteKeyChain = KeyChain.deleteDataForUserAccount("\(myUserName)")
+        Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(token)", "id":"\(userID)"], encoding: .JSON)
+            .responseJSON { _, _, JSON in
+                let status = JSON.value!["status"] as! Int
+                let log = JSON.value!["log"] as! String
                 
-                let appDomain = NSBundle.mainBundle().bundleIdentifier
-                NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
-            }
+                if status == 1{
+                    socketManager.sharedSocket.socket.disconnect()
+                    try! KeyChain.deleteDataForUserAccount("\(myUserName)")
+                    let appDomain = NSBundle.mainBundle().bundleIdentifier
+                    NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
+                }else{
+                    NSLog(log)
+                }
+                
+                print(JSON)
         }
         
         self.performSegueWithIdentifier("goto_login", sender: logoutBtn)

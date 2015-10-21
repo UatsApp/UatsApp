@@ -43,26 +43,26 @@ class socketManager: WebSocketDelegate {
     // MARK: Websocket Delegate Methods.
     
     func websocketDidConnect(ws: WebSocket) {
-        println("websocket is connected")
-        println("{\"type\":\"handShake\", \"senderID\":\"\(userID)\"}")
+        print("websocket is connected")
+        print("{\"type\":\"handShake\", \"senderID\":\"\(userID)\"}")
         self.socket.writeString("{\"type\":\"handShake\", \"senderID\":\"\(userID)\"}")
     }
     
     func websocketDidDisconnect(ws: WebSocket, error: NSError?) {
         if let e = error {
-            println("websocket is disconnected: \(e.localizedDescription)")
+            print("websocket is disconnected: \(e.localizedDescription)")
         } else {
-            println("websocket disconnected")
+            print("websocket disconnected")
         }
     }
     
     func websocketDidReceiveMessage(ws: WebSocket, text: String) {
-        println("Received text: \(text)")
+        print("Received text: \(text)")
         self.ReceivedMessage(text)
     }
     
     func websocketDidReceiveData(ws: WebSocket, data: NSData) {
-        println("Received data: \(data.length)")
+        print("Received data: \(data.length)")
     }
     
     

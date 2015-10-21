@@ -20,8 +20,6 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     var DataForAutoComplete:NSArray = []
     var keyboardDismissTapGesture: UIGestureRecognizer?
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         FBButton.delegate = self
@@ -33,18 +31,25 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         self.signin.layer.borderWidth = 0.2
         
         if DataForAutoComplete.count != 0 {
-            self.txtUsername.text = DataForAutoComplete[0] as! String
-            self.txtPassword.text = DataForAutoComplete[1] as! String
+            self.txtUsername.text = DataForAutoComplete[0] as? String
+            self.txtPassword.text = DataForAutoComplete[1] as? String
         }
         
+        //try! KeyChain.deleteDataForUserAccount("\(myUserName)")
+        //try! KeyChain.updateData(["enroll":"3"], forUserAccount: "enroll")
         
         let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let isLoggedin:Int = prefs.integerForKey("ISLOGGEDIN") as Int
-        let isFacebookLoggedIn :Int = prefs.integerForKey("ISFACEBOOKLOGGED") as Int
+        print(enrollStep)
         
-        if(isLoggedin == 1 || isFacebookLoggedIn == 1){
+        if(isLoggedin == 1 && enrollStep == 4){
             self.performSegueWithIdentifier("goApp", sender: self)//////////DE PUS LOGOUT IN APP SI SCBHIMBAT '!=' IN '==';////////////////
-            
+        }else if(isLoggedin == 1 && enrollStep == 1){
+            self.performSegueWithIdentifier("gotoEnroll", sender: self)
+        }else if(isLoggedin == 1 && enrollStep == 2){
+            self.performSegueWithIdentifier("gotoEnroll2", sender: self)
+        }else if(isLoggedin == 1 && enrollStep == 3){
+            self.performSegueWithIdentifier("gotoEnroll3", sender: self)
         }
         
         //FB login
@@ -100,7 +105,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func loginButton(FBButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        println("User Logged In")
+        print("User Logged In")
         
         if ((error) != nil)
         {
@@ -114,13 +119,13 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email")
             {
-                self.checkFacebookUser()
+                self.returnUserData()
             }
         }
     }
     
     func loginButtonDidLogOut(FBButton: FBSDKLoginButton!) {
-        println("User Logged Out")
+        print("User Logged Out")
     }
     
     func returnUserData()
@@ -131,11 +136,12 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             if ((error) != nil)
             {
                 // Process error
-                println("Error: \(error)")
+                print("Error: \(error)")
             }
             else
             {
-                println("fetched facebook user: \(result)")
+                print("fetched facebook user: \(result)")
+                // TODO skip enroll steps, register with fb credentials and profile image.
                 //                let userName : NSString = result.valueForKey("name") as! NSString
                 //                println("User name is: \(userName)")
                 //                let userEmail : NSString = result.valueForKey("email") as! NSString
@@ -147,104 +153,40 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         })
     }
     
-    func checkFacebookUser(){
-        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id,email,name,picture.width(480).height(480)"])
-        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
-            
-            if ((error) != nil)
-            {
-                // Process error
-                println("Error: \(error)")
-            }
-            else
-            {
-                println("fetched facebook user: \(result)")
-                let userName : String = result.valueForKey("name") as! String
-                let userEmail : String = result.valueForKey("email") as! String
-                
-                
-                //Validate  Facebook User
-                Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/jsonsignup.php", parameters: ["username": "\(userName)", "password" : "\(userName)", "c_password": "\(userName)", "email" : "\(userEmail)"], encoding: .JSON)
-                    .responseJSON { _, _, JSON, _ in
-                        println(JSON)
-                        let jsonResult = JSON?.valueForKey("success") as? Int
-                        if((jsonResult) != nil){
-                            var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-                            prefs.setObject(1, forKey: "ISFACEBOOKLOGGED")
-                            prefs.setObject(userName, forKey: "USERNAME")
-                            if JSON?.valueForKey("FBUserID") != nil {
-                                
-                                let SessionToken:String = JSON?.valueForKey("token") as! String
-                                let user_id:Int = JSON?.valueForKey("FBUserID") as! Int
-                                KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(userName)")
-                                
-                            }
-                            
-                            self.performSegueWithIdentifier("goApp", sender: self)
-                            
-                            var alertView:UIAlertView = UIAlertView()
-                            alertView.title = "Success!"
-                            alertView.message = "You are logged in!"
-                            alertView.delegate = self
-                            alertView.addButtonWithTitle("OK")
-                            alertView.show()
-                        }
-                        
-                        
-                        
-                        
-                }
-                
-                
-                let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-                prefs.setObject(userName, forKey: "USERNAME")
-                
-            }
-        })
-        
-        
-    }
-    
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    //    override func didReceiveMemoryWarning() {
+    //        super.didReceiveMemoryWarning()
+    //        // Dispose of any resources that can be recreated.
+    //    }
     
     
     @IBOutlet weak var signin: UIButton!
     
     @IBAction func signinTapped(sender: AnyObject?) {
-        var username:NSString = txtUsername.text
-        var password:NSString = txtPassword.text
+        let username:NSString = txtUsername.text!
+        let password:NSString = txtPassword.text!
         
         if ( username.isEqualToString("") || password.isEqualToString("") ) {
             
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Sign in Failed!"
             alertView.message = "Please enter Username and Password"
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
         } else {
-            
             //var post:NSString = "username=\(username)&password=\(password)"
-            var post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\"}"
+            let post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\",\"type\":\"simpleLogin\"}"
             
             NSLog("PostData: %@",post);
             
-            // var url:NSURL = NSURL(string: "http://uatsapp.16mb.com/register/jsonlogin2.php")!
-            // var url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonlogin1.php")!
-            var url:NSURL = NSURL(string: "http://uatsapp.tk/UatsAppWebDEV/process_user.php")!
+            let url:NSURL = NSURL(string: "http://uatsapp.tk/UatsAppWebDEV/process.php")!
             
             
-            var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
+            let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
             
-            var postLength:NSString = String( postData.length )
+            let postLength:NSString = String( postData.length )
             
-            var request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
+            let request:NSMutableURLRequest = NSMutableURLRequest(URL: url)
             request.HTTPMethod = "POST"
             request.HTTPBody = postData
             request.setValue(postLength as String, forHTTPHeaderField: "Content-Length")
@@ -255,7 +197,13 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             var reponseError: NSError?
             var response: NSURLResponse?
             
-            var urlData: NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse:&response, error:&reponseError)
+            var urlData: NSData?
+            do {
+                urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse:&response)
+            } catch let error as NSError {
+                reponseError = error
+                urlData = nil
+            }
             
             if ( urlData != nil ) {
                 let res = response as! NSHTTPURLResponse!;
@@ -264,13 +212,13 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                 
                 if (res.statusCode >= 200 && res.statusCode < 300)
                 {
-                    var responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
+                    let responseData:NSString  = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
                     
                     NSLog("Response ==> %@", responseData);
                     
-                    var error: NSError?
+                    var _: NSError?
                     
-                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers , error: &error) as! NSDictionary
+                    let jsonData:NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(urlData!, options:NSJSONReadingOptions.MutableContainers )) as! NSDictionary
                     
                     
                     let status:NSInteger = jsonData.valueForKey("status") as! NSInteger
@@ -279,25 +227,27 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                     
                     if(status == 1)
                     {
-                        var prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+                        let prefs:NSUserDefaults = NSUserDefaults.standardUserDefaults()
                         prefs.setObject(username, forKey: "USERNAME")
                         prefs.setInteger(1, forKey: "ISLOGGEDIN")
                         prefs.synchronize()
                         let user_id:Int = jsonData.valueForKey("user_id") as! Int
                         let SessionToken:String = jsonData.valueForKey("token") as! String
-                        
-                        KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
+                        try! KeyChain.saveData(["token" : "\(SessionToken)","user_id":"\(user_id)"], forUserAccount: "\(username)")
                         
                         NSLog("Login SUCCESS");
                         
-                        var alertView:UIAlertView = UIAlertView()
+                        let alertView:UIAlertView = UIAlertView()
                         alertView.title = "Success!"
                         alertView.message = "You are logged in!"
                         alertView.delegate = self
                         alertView.addButtonWithTitle("OK")
                         alertView.show()
-                        self.performSegueWithIdentifier("goApp", sender: self)
-                        
+                        if enrollStep == 1{
+                            self.performSegueWithIdentifier("gotoEnroll", sender: self)
+                        } else{
+                            self.performSegueWithIdentifier("goApp", sender: self)
+                        }
                         //  self.dismissViewControllerAnimated(true, completion: nil)
                     } else {
                         var error_msg:NSString
@@ -307,7 +257,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                         } else {
                             error_msg = "Unknown Error"
                         }
-                        var alertView:UIAlertView = UIAlertView()
+                        let alertView:UIAlertView = UIAlertView()
                         alertView.title = "Sign in Failed!"
                         alertView.message = error_msg as String
                         alertView.delegate = self
@@ -317,7 +267,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                     }
                     
                 } else {
-                    var alertView:UIAlertView = UIAlertView()
+                    let alertView:UIAlertView = UIAlertView()
                     alertView.title = "Sign in Failed!"
                     alertView.message = "Connection Failed"
                     alertView.delegate = self
@@ -325,7 +275,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
                     alertView.show()
                 }
             } else {
-                var alertView:UIAlertView = UIAlertView()
+                let alertView:UIAlertView = UIAlertView()
                 alertView.title = "Sign in Failed!"
                 alertView.message = "Connection Failure"
                 if let error = reponseError {
@@ -360,6 +310,3 @@ extension LoginVC:UITextFieldDelegate{
         return true
     }
 }
-
-
-

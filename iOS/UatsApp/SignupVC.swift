@@ -10,8 +10,6 @@ import UIKit
 
 class SignupVC: UIViewController {
     
-    
-
     @IBOutlet weak var txtUsername: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtConfrimPassword: UITextField!
@@ -25,11 +23,9 @@ class SignupVC: UIViewController {
         self.signup.layer.cornerRadius = 5.0
         self.signup.layer.borderColor = UIColor.whiteColor().CGColor
         self.signup.layer.borderWidth = 0.2
-        self.txtUsername.delegate = self
         self.txtPassword.delegate = self
         self.txtConfrimPassword.delegate = self
         self.txtEmail.delegate = self
-        self.txtNickName.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -78,7 +74,7 @@ class SignupVC: UIViewController {
     
     func isValidEmail(testStr:String) -> Bool {
         
-        println("validate emilId: \(testStr)")
+        print("validate emilId: \(testStr)")
         
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
         let range = testStr.rangeOfString(emailRegEx, options:.RegularExpressionSearch)
@@ -88,36 +84,31 @@ class SignupVC: UIViewController {
         
     }
     
-    
-    
     @IBOutlet weak var signup: UIButton!
     
 
     @IBAction func singupTapped(sender: AnyObject!){
-        var username:NSString = txtUsername.text as NSString
-        var password:NSString = txtPassword.text as NSString
-        var comfirm_password:String = txtConfrimPassword.text as String
-        var email:String = txtEmail.text as String
-        var nickname:String = txtNickName.text as String
+        let password:NSString = txtPassword.text!
+        let comfirm_password:String = txtConfrimPassword.text!
+        let email:NSString = txtEmail.text!
         
-        
-        if(username.isEqualToString("") || password.isEqualToString(""))
+        if(email.isEqualToString("") || password.isEqualToString(""))
         {
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Sign up Failed!"
-            alertView.message = "Please enter username and password"
+            alertView.message = "Please enter email and password"
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
         }else if (!password.isEqual(comfirm_password)){
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Sign up Failed!"
             alertView.message = "Passwords don't match!"
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
-        }else if (isValidEmail(txtEmail.text)){
-            var alertView:UIAlertView = UIAlertView()
+        }else if (isValidEmail(txtEmail.text!)){
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Sign up Failed!"
             alertView.message = "Invalid email!"
             alertView.delegate = self
@@ -125,14 +116,14 @@ class SignupVC: UIViewController {
             alertView.show()
         }else {
             //var post:NSString = "username=\(username)&password=\(password)&c_password=\(comfirm_password)&email=\(email)"
-            var post:String = "{\"username\":\"\(username)\",\"password\":\"\(password)\",\"c_password\":\"\(comfirm_password)\",\"email\":\"\(email)\",\"nickname\":\"\(nickname)\"}"
+            let post:String = "{\"password\":\"\(password)\",\"c_password\":\"\(comfirm_password)\",\"email\":\"\(email)\"}"
             NSLog("Post data: %@",post);
             
-            var url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonsignup.php")!
-            var postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
-            var postLength:NSString = String(postData.length)
+            let url:NSURL = NSURL(string: "http://uatsapp.tk/registerDEV/jsonsignup.php")!
+            let postData:NSData = post.dataUsingEncoding(NSASCIIStringEncoding)!
+            let postLength:NSString = String(postData.length)
             
-            var request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
+            let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
             request.HTTPMethod = ("POST")
             request.HTTPBody = postData
             request.setValue(postLength as String, forHTTPHeaderField:"Content-Length")
@@ -141,28 +132,35 @@ class SignupVC: UIViewController {
             
             var responseError: NSError?
             var response:NSURLResponse?
-            var urlData:NSData? = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &responseError)
+            var urlData:NSData?
+            do {
+                urlData = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+            } catch let error as NSError {
+                responseError = error
+                urlData = nil
+            }
             if(urlData != nil){
                 let res = response as! NSHTTPURLResponse!;
                 NSLog("Response code: %ld", res.statusCode)
                 if(res.statusCode >= 200 && res.statusCode < 300){
-                    var responseData:NSString = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
+                    let responseData:NSString = NSString(data:urlData!, encoding:NSUTF8StringEncoding)!
                     NSLog("Response ==> %@", responseData)
-                    var error:NSError?
-                    let jsonData:NSDictionary = NSJSONSerialization.JSONObjectWithData(urlData!, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
+                    let _ :NSError?
+                    let jsonData:NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(urlData!, options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
                     let success:NSInteger = jsonData.valueForKey("success") as! NSInteger
                     
                     NSLog("Success %ld", success);
                     
                     if(success == 1){
                         NSLog("Sign Up Success");
-                        var alertView:UIAlertView = UIAlertView()
+                        let alertView:UIAlertView = UIAlertView()
                         alertView.title = "Success"
                         alertView.message = "Sign Up Success!"
                         alertView.delegate = self
                         alertView.addButtonWithTitle("OK")
                         alertView.show()
-                        let data:NSArray = [username, password]
+                        let data:NSArray = [email, password]
+                        try! KeyChain.updateData(["enroll":"1"], forUserAccount: "enroll")
                         self.performSegueWithIdentifier("BackToLogin", sender: data)
                        // self.dismissViewControllerAnimated(true, completion: nil)
                     }else{
@@ -173,7 +171,7 @@ class SignupVC: UIViewController {
                         }else{
                             error_msg = "Unknown Error"
                         }
-                        var alertView:UIAlertView = UIAlertView()
+                        let alertView:UIAlertView = UIAlertView()
                         alertView.title = "Sign Up Failed!"
                         alertView.message = error_msg as String
                         alertView.delegate = self
@@ -181,7 +179,7 @@ class SignupVC: UIViewController {
                         alertView.show()
                     }
                 }else{
-                    var alertView:UIAlertView = UIAlertView()
+                    let alertView:UIAlertView = UIAlertView()
                     alertView.title = "Sign Up Faile!"
                     alertView.message = "Connection Failed"
                     alertView.delegate = self
@@ -189,7 +187,7 @@ class SignupVC: UIViewController {
                     alertView.show()
                 }
             }else{
-                var alertView:UIAlertView = UIAlertView()
+                let alertView:UIAlertView = UIAlertView()
                 alertView.title = "Sign Up Failed!"
                 alertView.message = "Connection Failure"
                 if let error = responseError{
@@ -227,14 +225,10 @@ class SignupVC: UIViewController {
 
 extension SignupVC:UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if (textField == txtUsername){
+        if (textField == txtEmail){
             txtPassword.becomeFirstResponder()
         }else if(textField == txtPassword){
             txtConfrimPassword.becomeFirstResponder()
-        }else if (textField == txtConfrimPassword){
-            txtEmail.becomeFirstResponder()
-        }else if(textField == txtEmail){
-            txtNickName.becomeFirstResponder()
         }else{
             singupTapped(nil)
         }
