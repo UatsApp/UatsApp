@@ -20,32 +20,78 @@ get {
 }
 }
 
+var userAvatar: String{
+get{
+    let KeyChainData = KeyChain.loadDataForUserAccount("profileIMG")
+    
+    if KeyChainData != nil{
+        let imagePath = KeyChainData!["userImage"]
+        //print(imagePath)
+        return imagePath as! String
+    }else{
+        let defaultImageURL = NSBundle.mainBundle().URLForResource("1024x1024", withExtension: "png")
+        return defaultImageURL!.path!
+    }
+}
+}
+
 
 var token: String {
-    get {
-        var (KeyChainData, error) = KeyChain.loadDataForUserAccount("\(myUserName)")
-        
-        if let tokenString = KeyChainData!["token"] as? String {
-            println("Tokenul sessiunii este: \(tokenString)")
-            return tokenString
-        } else {
-            println("nu exista token")
-            return "OMG"
-        }
+get {
+    var KeyChainData = KeyChain.loadDataForUserAccount("\(myUserName)")
+    if KeyChainData != nil{
+        let tokenString = KeyChainData!["token"]
+        NSLog("Tokenul sessiunii este: \(tokenString!)")
+        return tokenString as! String
+    } else {
+        deleteKeychainAccess()
+        rootVC()
+        try! KeyChain.updateData(["enroll":"1"], forUserAccount: "enroll")
+        let alertView:UIAlertView = UIAlertView(title: "Oops!", message: "Something went wrong.\nPlease log in again", delegate: nil, cancelButtonTitle: "Ok")
+        alertView.show()
+        NSLog("nu exista token")
+        return "OMG"
     }
+}
 }
 
 var userID: Int {
 get {
-    var (KeyChainData, error) = KeyChain.loadDataForUserAccount("\(myUserName)")
+    let KeyChainData = KeyChain.loadDataForUserAccount("\(myUserName)")
     
-    if let IDString = KeyChainData!["user_id"] as? String{
-        let userID:Int? = NSNumberFormatter().numberFromString(IDString)?.integerValue
-        println("Id-ul Sessiunii este: \(userID!)")
+    if KeyChainData != nil{
+        let IDString = KeyChainData!["user_id"]
+        let userID:Int? = NSNumberFormatter().numberFromString(IDString as! String)?.integerValue
+        NSLog("Id-ul Sessiunii este: \(userID!)")
         return userID!
     }else{
-        println("Nu exista USERID IN KeyChain")
+        NSLog("Nu exista USERID IN KeyChain")
         return 0
     }
-  }
+}
+}
+
+var enrollStep: Int{
+get{
+    let KeyChainData = KeyChain.loadDataForUserAccount("enroll")
+    if KeyChainData != nil{
+        let enrollmentStep = KeyChainData!["enroll"]
+        let enroll:Int? = NSNumberFormatter().numberFromString(enrollmentStep as! String)?.integerValue
+        return enroll!
+    }else{
+        NSLog("Oops, Enroll is fucked up!")
+        return 0
+    }
+}
+}
+
+func rootVC(){
+    UIApplication.sharedApplication().windows[0].rootViewController?.dismissViewControllerAnimated(true, completion: nil)
+}
+
+func deleteKeychainAccess(){
+    socketManager.sharedSocket.socket.disconnect()
+    try! KeyChain.deleteDataForUserAccount("\(myUserName)")
+    let appDomain = NSBundle.mainBundle().bundleIdentifier
+    NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain!)
 }

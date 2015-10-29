@@ -41,7 +41,7 @@ class FriendListVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentif, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentif, forIndexPath: indexPath) 
         let row = indexPath.row
         cell.textLabel?.text = testInfo[row]
         return cell
