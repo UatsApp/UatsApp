@@ -42,8 +42,14 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
        
         
         Alamofire.request(.POST, "http://uatsapp.tk/accounts/get_users.php", parameters: ["token":"\(token)", "uid":"\(userID)"], encoding: .JSON)
-            .responseJSON { _, _, JSON, _ in
-                if let jsonResult = JSON?.valueForKey("friends") as? Array<Dictionary<String,String>>{
+            .responseJSON { response in
+                
+                print(response.request)  // original URL request
+                print(response.response) // URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
+                
+                if let jsonResult = response.result.value!["friends"] as? Array<Dictionary<String,String>>{
                     var i = 0
                     for (i = 0; i < jsonResult.count; i++)
                     {
@@ -51,24 +57,16 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
                         let email = jsonResult[i]["email"]
                         let id = jsonResult[i]["id"]
                         
-                        var currentUser = Users()
+                        let currentUser = Users()
                         currentUser.username = username!
                         currentUser.email = email!
-                        currentUser.user_id = id!.toInt()!
+                        currentUser.user_id = Int(id!)!
                         self.usersList.append(currentUser)
-                        println(username)
+                        print(username)
                     }
                     self.tableView.reloadData()
                 }
-                println(JSON)
         }
-//        var alertview:UIAlertView = UIAlertView()
-//        alertview.title = "Token!"
-//        alertview.message = "\(pp!)" as String
-//        alertview.delegate = self
-//        alertview.addButtonWithTitle("OK")
-//        alertview.show()
-//        println("USERUL LOGAT ARE TOKENUL: \(pp!)")
     }
     
     
@@ -91,7 +89,7 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) 
         let row = indexPath.row
         let urr = usersList.map({$0.username})
         cell.textLabel?.text = urr[row]
@@ -107,7 +105,6 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
         let row = indexPath.row
         let user_id = usersList[row].user_id
         let username = usersList[row].username
-        
 
         let data: NSArray = [user_id, username]
         self.performSegueWithIdentifier("call", sender: data)

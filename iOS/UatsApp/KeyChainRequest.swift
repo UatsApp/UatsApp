@@ -26,7 +26,7 @@ public enum Accessible: Int {
     WhenUnlockedThisDeviceOnly, AfterFirstUnlockThisDeviceOnly, AlwaysThisDeviceOnly
 }
 
-public class KeyChainRequest: NSObject, DebugPrintable {
+public class KeyChainRequest: NSObject, CustomDebugStringConvertible {
     // Keychain Options
     // Required
     public var service: String = KeyChainDefaultService
