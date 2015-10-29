@@ -137,7 +137,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
             socketManager.sharedSocket.socket.writeString("{\"type\":\"msg\", \"message\":\"\(messageToSend)\", \"relation_id\":\(self.relation_id), \"senderID\":\(userID), \"receiverID\":\(self.partener_id), \"sender_username\":\"\(myUserName)\"}")
             
             Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/insert_message.php", parameters: ["message" : "\(messageToSend)" , "relation_id"  : "\(self.relation_id)" , "senderID" : "\(userID)", "token":"\(token)"], encoding: .JSON).responseJSON {
-                _, _, JSON in
+                response in
                 //TODO check the result from insert_message.php which is ???"string"???
             }
             
@@ -217,11 +217,16 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func checkRelation(){
         //Get History
         Alamofire.request(.POST, "http://uatsapp.tk/UatsAppWebDEV/history.php", parameters: ["identifier": "\(userInfo[0])" , "loggedUsername":"\(myUserName)", "token":"\(token)", "uid":"\(userID)"], encoding: .JSON)
-            .responseJSON { _, _, JSON in
+            .responseJSON { response in
+                
+                print(response.request)  // original URL request
+                print(response.response) // URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
         
-                var status = JSON.value!["status"] as! Int
-                self.relation_id = JSON.value!["relation_id"] as! Int
-                if let jsonResult = JSON.value!["history"] as? Array<Dictionary<String,String>>{
+                var status = response.result.value!["status"] as! Int
+                self.relation_id = response.result.value!["relation_id"] as! Int
+                if let jsonResult = response.result.value!["history"] as? Array<Dictionary<String,String>>{
                     var i = 0
                     self.history = []
                     self.cellMetas = []
@@ -238,7 +243,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         
                     }
                 }
-                print(JSON) //History JSON
+                print(response.result) //History JSON
                 if self.history.count > 0 {
                     
                     //let partnerUserName = self.userInfo[1] as! String

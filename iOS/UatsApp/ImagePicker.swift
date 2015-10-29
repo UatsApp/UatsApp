@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 
-
 class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var continueButton: UIButton!
@@ -113,12 +112,13 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
         Alamofire.upload(urlRequest.0, data: urlRequest.1)
             .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
                 print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
-            }
-            .responseJSON{request, response, JSON in
-                print("REQUEST \(request)")
-                print("RESPONSE \(response)")
-                print("JSON \(JSON)")
-                if let post = JSON.value!["status"] as? Int{
+            }.responseJSON { response in
+                print(response.request)  // original URL request
+                print(response.response) // URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
+                
+                if let post = response.result.value!["status"] as? Int{
                     NSLog("---------------------------------POST---------------------------------")
                     if post == 1{
                         print("BRAvO")
@@ -126,24 +126,27 @@ class ImagePicker: UIViewController, UIImagePickerControllerDelegate, UINavigati
                         self.performSegueWithIdentifier("enrollment2", sender: self)
                     }
                 }
-                if let status = JSON.value!["log"] as? String{
+                if let status = response.result.value!["log"] as? String{
                     NSLog(status)
                 }
-                //print("ERROR \(error)")
+                
         }
+        
+        //            .responseJSON{request, response, JSON in
+        //                                //print("ERROR \(error)")
     }
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
-    
 }
+
+/*
+// MARK: - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+// Get the new view controller using segue.destinationViewController.
+// Pass the selected object to the new view controller.
+}
+*/
+
 
 func saveImage (image: UIImage, path: String ) -> Bool{
     //let pngImageData = UIImagePNGRepresentation(image)       // if you want to save as PNG

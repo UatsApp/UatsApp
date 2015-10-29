@@ -42,8 +42,14 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
        
         
         Alamofire.request(.POST, "http://uatsapp.tk/accounts/get_users.php", parameters: ["token":"\(token)", "uid":"\(userID)"], encoding: .JSON)
-            .responseJSON { _, _, JSON in
-                if let jsonResult = JSON.value!["friends"] as? Array<Dictionary<String,String>>{
+            .responseJSON { response in
+                
+                print(response.request)  // original URL request
+                print(response.response) // URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
+                
+                if let jsonResult = response.result.value!["friends"] as? Array<Dictionary<String,String>>{
                     var i = 0
                     for (i = 0; i < jsonResult.count; i++)
                     {
@@ -60,15 +66,7 @@ class UsersListVC: UIViewController,UITableViewDataSource, UITableViewDelegate {
                     }
                     self.tableView.reloadData()
                 }
-                print(JSON)
         }
-//        var alertview:UIAlertView = UIAlertView()
-//        alertview.title = "Token!"
-//        alertview.message = "\(pp!)" as String
-//        alertview.delegate = self
-//        alertview.addButtonWithTitle("OK")
-//        alertview.show()
-//        println("USERUL LOGAT ARE TOKENUL: \(pp!)")
     }
     
     

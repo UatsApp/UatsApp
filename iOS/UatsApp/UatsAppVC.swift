@@ -34,9 +34,9 @@ class UatsAppVC: UITabBarController {
         loginManager.logOut()
         
         Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/invalidate.php", parameters: ["invalidator":"\(token)", "id":"\(userID)"], encoding: .JSON)
-            .responseJSON { _, _, JSON in
-                let status = JSON.value!["status"] as! Int
-                let log = JSON.value!["log"] as! String
+            .responseJSON { response in
+                let status = response.result.value!["status"] as! Int
+                let log = response.result.value!["log"] as! String
                 
                 if status == 1{
                     socketManager.sharedSocket.socket.disconnect()
@@ -46,10 +46,7 @@ class UatsAppVC: UITabBarController {
                 }else{
                     NSLog(log)
                 }
-                
-                print(JSON)
         }
-        
         self.performSegueWithIdentifier("goto_login", sender: logoutBtn)
     }
     

@@ -1,21 +1,21 @@
 PODS:
-  - Alamofire (2.0.0)
+  - Alamofire (3.1.0)
   - Crashlytics (3.3.4)
-  - Fabric (1.5.1):
-    - Fabric/Base (= 1.5.1)
-  - Fabric/Base (1.5.1)
-  - Starscream (0.9.6)
+  - Fabric (1.5.5):
+    - Fabric/Base (= 1.5.5)
+  - Fabric/Base (1.5.5)
+  - Starscream (1.0.1)
 
 DEPENDENCIES:
-  - Alamofire (~> 2.0)
+  - Alamofire
   - Crashlytics
   - Fabric
-  - Starscream (~> 0.9.4)
+  - Starscream
 
 SPEC CHECKSUMS:
-  Alamofire: 2f13548b29d25a58ecd91c9225fb51493e2b782b
+  Alamofire: 415bd7f56197722978759078486689f7ef913dce
   Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c
-  Fabric: 03c3b3fe77e11a2bc31421b989a9c7adaa4779a5
-  Starscream: 347fcaf3e2555e72a031ccf4a4fb483d5acad05d
+  Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
+  Starscream: 7b731637cd167ed5a059331f52c0254b1aa69095
 
 COCOAPODS: 0.38.2

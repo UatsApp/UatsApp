@@ -74,11 +74,13 @@ class namePicker: UIViewController, UITextFieldDelegate {
             let alertView:UIAlertView = UIAlertView(title: "Info!", message: "Please enter an Nickname", delegate: nil, cancelButtonTitle: "Ok")
             alertView.show()
         }else{
-            Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/enrollProcess.php", parameters: ["token":"\(token)", "id":"\(userID)", "enrollStep": "2", "name":"\(fullname)", "nickname":"\(nickname)"], encoding: .JSON) .responseJSON {
-                _, _, JSON in
-                
-                let status = JSON.value!["status"] as! Int
-                let log = JSON.value!["log"] as! String
+            Alamofire.request(.POST, "http://uatsapp.tk/registerDEV/enrollProcess.php", parameters: ["token":"\(token)", "id":"\(userID)", "enrollStep": "2", "name":"\(fullname)", "nickname":"\(nickname)"], encoding: .JSON) .responseJSON { response in
+                print(response.request)  // original URL request
+                print(response.response) // URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
+                let status = response.result.value!["status"] as! Int
+                let log = response.result.value!["log"] as! String
                 
                 if status == 1{
                     self.performSegueWithIdentifier("enrollment3", sender: self)

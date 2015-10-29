@@ -197,11 +197,11 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
         NSLog("JSON to send: \(parameters)")
         
         Alamofire.request(.POST, "http://uatsapp.tk/accounts/friendInvites.php", parameters: parameters as? [String : AnyObject], encoding: .JSON) .responseJSON {
-            _, _, result in
-            switch result {
+            response in
+            switch response.result {
             case .Success(let JSON):
                 print("Success with JSON: \(JSON)")
-                if let success = result.value!["success"] as? [[String:String]]{
+                if let success = response.result.value!["success"] as? [[String:String]]{
                     var i = 0
                     for (i = 0; i < success.count; i++){
                         
@@ -211,12 +211,8 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
                         self.contactList.reloadData()
                     }
                 }
-            case .Failure(let data, let error):
+            case .Failure(let error):
                 print("Request failed with error: \(error)")
-                
-                if let data = data {
-                    print("Response data: \(NSString(data: data, encoding: NSUTF8StringEncoding)!)")
-                }
             }
         }
     }
@@ -241,11 +237,11 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
         NSLog("JSON to send: \(parameters)")
         
         Alamofire.request(.POST, "http://uatsapp.tk/accounts/friendInvites.php", parameters: parameters as? [String : AnyObject], encoding: .JSON) .responseJSON{
-            _,_, result in
-            switch result {
+            response in
+            switch response.result {
             case .Success(let JSON):
                 print("Success with JSON: \(JSON)")
-                if let success = result.value!["success"] as? Int{
+                if let success = response.result.value!["success"] as? Int{
                     if success == 1{
                         self.performSegueWithIdentifier("goinApp", sender: self)
                         try! KeyChain.updateData(["enroll":"4"], forUserAccount: "enroll")
@@ -255,15 +251,11 @@ class ContactPicker: UIViewController, UITableViewDataSource, UITableViewDelegat
                         alertView.show()
                     }
                 }
-                if let status = result.value!["status"] as? String{
+                if let status = response.result.value!["status"] as? String{
                     NSLog(status)
                 }
-            case .Failure(let data, let error):
+            case .Failure(let error):
                 print("Request failed with error: \(error)")
-                
-                if let data = data {
-                    print("Response data: \(NSString(data: data, encoding: NSUTF8StringEncoding)!)")
-                }
             }
         }
     }
